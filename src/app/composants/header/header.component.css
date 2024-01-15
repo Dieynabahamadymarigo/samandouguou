@@ -1,0 +1,58 @@
+/* logo */
+.imglogo{
+  height: 80px;
+}
+.logo{
+  margin-left:-90px ;
+}
+
+/* noms des liens */
+.nomlien li a{
+  font-size: 25px;
+  color: #1A6060;
+  font-weight: bold;
+  margin-top: 18px;
+}
+
+/* button compte */
+.compte li a{
+  font-size: 25px;
+  background-color: #1A6060;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  margin-top: 18px;
+
+}
+
+/* tous l'entete */
+.header{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  background-attachment: fixed;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Pour téléphone */
+@media only screen and (max-width: 500px) {
+  .header {
+    float: none;
+    display: block;
+    text-align: left;
+    /* flex-direction: column;
+    align-items: center; */
+  }
+
+  .logo {
+    margin-left: 0;
+  }
+
+  .nomlien li a,.compte li a {
+    margin-top: 8px;
+    font-size: 18px;
+  }
+}

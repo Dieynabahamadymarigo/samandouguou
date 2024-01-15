@@ -1,0 +1,17 @@
+h1
+{
+  margin-top: 140px;
+  color: #1A6060;
+  font-weight: bold;
+}
+p{
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+.contenu{
+  margin: 20px;
+}
+h3{
+  font-weight: bold;
+  text-decoration: underline;
+}

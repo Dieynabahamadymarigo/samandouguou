@@ -1,0 +1,89 @@
+.contact{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 150px;
+}
+.contact i{
+  font-size: 30px;
+  color: #1A6060;
+}
+.contact p{
+  font-size: 25px;
+  margin-left: 10px;
+}
+.tel{
+  display: flex;
+}
+.email{
+  display: flex;
+}
+.localisation{
+  display: flex;
+}
+
+/* formulaire */
+form{
+  margin-top: 30px;
+  border-top:6px solid #2FA7A7;
+  border-left:6px solid #2FA7A7;
+  box-shadow: 6px 6px #1A6060;
+  border-radius: 40px;
+  background-color: white;
+  width: 55%;
+}
+h2{
+  font-size: 43px;
+  text-align: center;
+  color: #1A6060;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+/* .nomprenom
+{
+  margin-bottom: 50px;
+} */
+.nomprenom input
+{
+  background-color: #EDEDED;
+  border-radius: 50px;
+  border:2px solid #1A6060;
+  margin-bottom: 20px;
+  padding: 10px 0px;
+  width: 45%;
+  text-align: center;
+}
+.espace{
+  margin-left: 10px;
+}
+.nomprenom input:hover {
+  outline: none;
+}
+.message{
+  background-color: #EDEDED;
+  border-radius: 20px;
+  border:2px solid #1A6060;
+  margin-bottom: 20px;
+  padding: 10px 0px;
+  width: 95%;
+  margin-left: 10px;
+}
+.message{
+  outline: none;
+}
+.btn{
+  background-color:#2FA7A7;
+  color: white;
+  border-radius: 80px;
+  padding: 6px 40px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-weight: bold;
+  font-size: 23px;
+  /* border: 2px solid; */
+}
+.bton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
