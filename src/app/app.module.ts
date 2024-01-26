@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './composants/login/login.component';
 import { AccueilComponent } from './composants/accueil/accueil.component';
-import { LegumesComponent } from './composants/legumes/legumes.component';
+import { LegumesComponent } from './composants/recettes/legumes.component';
 import { BlogComponent } from './composants/blog/blog.component';
 import { ContactComponent } from './composants/contact/contact.component';
 import { PacksComponent } from './composants/packs/packs.component';
@@ -14,6 +14,7 @@ import { MentionLegalesComponent } from './composants/mention-legales/mention-le
 import { ConditionUtilisateurComponent } from './composants/condition-utilisateur/condition-utilisateur.component';
 import { HeaderComponent } from './composants/header/header.component';
 import { FooterComponent } from './composants/footer/footer.component';
+import { AproposComponent } from './composants/apropos/apropos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FooterComponent } from './composants/footer/footer.component';
     MentionLegalesComponent,
     ConditionUtilisateurComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,

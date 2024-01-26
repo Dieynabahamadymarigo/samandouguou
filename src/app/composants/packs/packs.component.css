@@ -1,0 +1,259 @@
+/* baniere */
+.banier{
+  height: 280px;
+  margin-top: 120px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-between;
+  background-color: white;
+  border: 2px solid #1A6060;
+}
+.titrebanier {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid; */
+}
+.titrebanier h1{
+  /* font-size: 35px; */
+  font-weight: bold;
+  color: #1A6060;
+}
+.banierimg1 img{
+  height: 277px;
+  margin-left: -12.5px;
+  /* border: 2px solid; */
+}
+.banierimg2 img{
+  height: 277px;
+  margin-right: -12.1px;
+  /* border: 2px solid; */
+}
+
+/* button de recherche */
+.buttonsearch{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content:end;
+}
+.buttonsearch input{
+  border-bottom: 2px none;
+  border-right: none;
+  border-top: 3px solid #1A6060;
+  border-left: 3px solid #1A6060;
+  box-shadow: 3px 3px #2FA7A7;
+  border-radius: 20px;
+  padding-left: 10px;
+  outline: none;
+}
+.search{
+  font-weight: bold;
+  color: #1A6060;
+  margin-left: -30px;
+}
+
+/* carte des packs */
+.gcarte{
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 40px;
+  justify-content: space-evenly;
+}
+.cartepacks{
+  /* height: 25rem; */
+  width: 18rem;
+  border-top:none;
+  border-bottom:none;
+  border-left:6px dashed #1A6060;
+  border-right:6px dashed #1A6060;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+.cartepacks h5 {
+  font-weight: bold;
+  /* border: 2px solid; */
+}
+.contenupacks{
+  border-top:6px solid #1A6060;
+  border-left:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-left: -6px;
+}
+.contenupacks2{
+  border-bottom:6px solid #1A6060;
+  border-right:6px solid #1A6060;
+  width: 90px;
+  height: 70px !important;
+  margin-left: 192px;
+  margin-top:-20px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.imgpacks{
+  height: 12rem;
+  width: 17rem;
+  margin-top: -40px;
+  /* border: 2px solid; */
+  border-top-right-radius: 40px;
+}
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: -30px;
+}
+button{
+  background-color: white;
+  color: #1A6060;
+  font-weight: bold;
+  font-size: 20px;
+  border-top: none;
+  border-left: none;
+  border-bottom: 3px solid #1A6060;
+  border-right: 3px solid #1A6060;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+  padding: 4px 40px;
+}
+
+ /* espace entre footer et les cartes */
+ .espace{
+  padding-bottom: 100px;
+ }
+
+  /*tablette*/
+@media screen and (max-width: 991px){
+  /* baniere */
+.banier{
+  height: 220px;
+  justify-content: space-between;
+}
+.titrebanier h1{
+  font-size: 30px;
+  font-weight: bold;
+  color: #1A6060;
+}
+.banierimg1 img{
+  height: 218px;
+  margin-left: -12.51px;
+}
+.banierimg2 img{
+  height: 218px;
+  margin-right: -12.1px;
+}
+
+/* carte des packs */
+.gcarte{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 30px;
+}
+}
+
+/* téléphone */
+@media screen and (max-width: 767px){
+  /* baniere */
+.banier{
+  height: 300px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-between;
+}
+.titrebanier {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid; */
+}
+.titrebanier h1{
+  display: none;
+  font-size: 26px;
+  font-weight: bold;
+  color: #1A6060;
+  border: 2px solid;
+}
+.banierimg1 img{
+  display: none;
+  height: 150px;
+  margin-left: 0px;
+}
+.banierimg2 img{
+  height: 296px;
+  margin-right: -12.1px;
+  /* border: 2px solid; */
+}
+
+/* carte des packs */
+.gcarte{
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: auto ;
+  gap: 40px;
+  justify-content: space-evenly;
+}
+.cartepacks{
+  width: 15rem;
+}
+.contenupacks2{
+  width: 60px;
+  margin-left: 174px;
+}
+.imgpacks{
+  height: 9rem;
+  width: 14rem;
+}
+button{
+  padding: 4px 30px;
+}
+
+/* button de recherche */
+.search{
+  margin-left: -20px;
+}
+}
+
+/* téléphone petit model */
+@media screen and (max-width: 468px){
+    /* baniere */
+.banier{
+  height: 300px;
+  width: 98%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.banierimg2 img{
+  height: 296px;
+}
+/* pagination */
+.iconpagination{
+  gap: 10px;
+  font-size: 25px;
+}
+
+/* carte des packs */
+.cartepacks{
+  width: 13rem !important;
+}
+.contenupacks2{
+  width: 60px;
+  margin-left: 142px;
+}
+.imgpacks{
+  height: 7rem;
+  width: 12rem;
+}
+button{
+  padding: 4px 25px;
+}
+/* button de recherche */
+.buttonsearch input{
+  padding-left: 6px;
+}
+.search{
+  margin-left: -20px;
+}
+}

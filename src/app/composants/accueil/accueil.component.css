@@ -1,0 +1,356 @@
+/* banier */
+.contenu{
+  margin-top: 120px;
+  background-color: #1A6060;
+  border-radius: 30px;
+  height: 280px;
+}
+.img{
+  height: 250px;
+}
+.titre{
+  margin-top: 70px;
+  color: white;
+  text-align: center;
+}
+.titre h1{
+  font-weight: bold;
+  font-size: 45px;
+}
+.titre h3{
+  color: white;
+}
+
+
+/* carte légumes */
+.titrelegumes{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  padding-bottom: 30px ;
+  padding-top: 30px ;
+  /* border: 2px solid; */
+}
+.titrelegumes h2{
+  color: #1A6060;
+  font-weight: bold;
+}
+.titrelegumes input{
+  border-bottom: 2px none;
+  border-right: none;
+  border-top: 3px solid #1A6060;
+  border-left: 3px solid #1A6060;
+  box-shadow: 3px 3px #2FA7A7;
+  border-radius: 20px;
+  padding-left: 10px;
+  outline: none;
+}
+.search{
+  font-weight: bold;
+  color: #1A6060;
+  margin-left: -30px;
+}
+.gcartelegumes{
+  display: grid;
+  grid-template-columns: auto auto auto auto  ;
+  justify-content: space-evenly ;
+  /* align-items: center; */
+  /* border: 2px solid; */
+  gap: 40px;
+  /* width: 90%; */
+}
+.gcarte{
+  /* border: 2px solid; */
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-evenly;
+  gap: 40px;
+}
+.carte{
+  border-left:none;
+  border-right:none;
+  border-top:6px solid #2FA7A7;
+  border-bottom:6px solid #2FA7A7;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+  width: 14rem;
+}
+.carte h3 {
+  font-weight: bold;
+}
+.carteimg{
+  margin-top: -55px;
+}
+.contour{
+  border-top:6px solid #1A6060;
+  border-left:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-top: -6px;
+}
+.contour2{
+  border-bottom:6px solid #1A6060;
+  border-right:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-left: 134px;
+  margin-top:-25px;
+  margin-bottom:-6px;
+}
+.contour2 i {
+  font-size: 30px;
+  color: #1A6060;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top:13px;
+  cursor: pointer;
+}
+
+/* pagination */
+.iconpagination{
+  padding-top: 50px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  color: #1A6060;
+  font-size: 30px;
+  cursor: pointer;
+}
+.un{
+  background-color: #1A6060;
+  padding: 0px 5px 0px 5px;
+  color: white;
+}
+
+
+/* témoignages */
+.temoignages{
+  color: #1A6060;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.cartetemoin{
+  border-top:none;
+  border-bottom:none;
+  border-left:6px dashed #1A6060;
+  border-right:6px dashed #1A6060;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+.cartetemoin h5 {
+  font-weight: bold;
+}
+.imgtemoin{
+  margin-top: -65px;
+}
+.imgtemoin{
+  border-top-right-radius: 40px;
+}
+.contenutemoin{
+  border-top:6px solid #1A6060;
+  border-left:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-left: -6px;
+}
+.contenutemoin2{
+  border-bottom:6px solid #1A6060;
+  border-right:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-left: 192px;
+  margin-top:-20px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+
+
+/* etapes à suivre */
+.etapes
+{
+  color: #1A6060;
+  font-weight: bold;
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+.cartetape{
+  box-shadow: 6px 6px 2px 0px #2FA7A7;
+  border-radius: 0px 0px 50px 0px;
+  border: none;
+}
+.imgetape{
+  background-color: #1A6060;
+}
+.titretape h5{
+  font-weight: bold;
+}
+ /* espace entre footer et les cartes */
+ .espace{
+  padding-bottom: 100px;
+ }
+
+
+ /*tablette*/
+@media screen and (max-width: 991px)  {
+  /* banier */
+.contenu{
+  height: 220px;
+}
+.img{
+  height: 200px;
+}
+.titre{
+  margin-top: 50px;
+}
+.titre h1{
+  font-size: 40px;
+}
+.titre h3{
+  font-size: 23px;
+}
+
+/* carte légumes */
+.titrelegumes{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.gcartelegumes{
+  display: grid;
+  grid-template-columns: auto auto auto ;
+  gap: 30px;
+}
+.gcarte{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 30px;
+}
+}
+
+/* téléphone */
+@media screen and (max-width: 767px) {
+    /* banier */
+.contenu{
+  height: 300px;
+  /* border: 2px solid; */
+}
+.img{
+  height: 150px;
+  width: 60% !important;
+  margin:0 auto;
+  /* border: 2px solid; */
+}
+.titre{
+  margin-top: 30px;
+}
+.titre h1{
+  font-size: 35px;
+}
+.titre h3{
+  font-size: 18px;
+}
+
+/* carte légumes */
+.titrelegumes{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-around;
+}
+.gcartelegumes{
+  display: grid;
+  grid-template-columns: auto auto;
+
+}
+.gcarte{
+  display: grid;
+  grid-template-columns: auto ;
+}
+.titrelegumes input{
+  width: 90%;
+}
+.carte{
+  width: 13rem !important;
+}
+.contour2{
+  width: 60px;
+  margin-left: 148px;
+}
+
+
+/* témoignages */
+.cartetemoin{
+  width: 15rem !important;
+}
+.contenutemoin2{
+  width: 60px;
+  margin-left: 174px;
+}
+
+/* etapes à suivre */
+.cartetape{
+  width: 15rem !important;
+}
+}
+
+
+/* téléphone petit model */
+@media screen and (max-width: 468px)
+{
+      /* banier */
+.contenu{
+  height: 300px;
+  /* border: 2px solid; */
+}
+.img{
+  height: 150px;
+  width: 67% !important;
+  margin:0 auto;
+  /* border: 2px solid; */
+}
+.titre{
+  margin-top: 30px;
+}
+.titre h1{
+  font-size: 30px;
+}
+.titre h3{
+  font-size: 13px;
+}
+/* carte légumes */
+.titrelegumes{
+  display: grid;
+  grid-template-columns: auto ;
+  justify-content: center;
+}
+.carte{
+  width: 10rem !important;
+}
+.contour2{
+  width: 60px;
+  margin-left: 100px;
+}
+
+/* pagination */
+.iconpagination{
+  gap: 10px;
+  font-size: 25px;
+}
+
+/* témoignages */
+.cartetemoin{
+  width: 13rem !important;
+}
+.contenutemoin2{
+  width: 60px;
+  margin-left: 142px;
+}
+
+/* etapes à suivre */
+.cartetape{
+  width: 12rem !important;
+
+}
+}

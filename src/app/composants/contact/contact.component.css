@@ -1,7 +1,11 @@
+/* contact */
 .contact{
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 150px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* gap: 10px; */
+  justify-content: space-around;
 }
 .contact i{
   font-size: 30px;
@@ -22,68 +26,195 @@
 }
 
 /* formulaire */
-form{
-  margin-top: 30px;
+.container{
+  margin-top: 150px;
+  background-color: transparent;
+  border: none;
+}
+.formulaire{
   border-top:6px solid #2FA7A7;
   border-left:6px solid #2FA7A7;
   box-shadow: 6px 6px #1A6060;
   border-radius: 40px;
   background-color: white;
-  width: 55%;
+
+}
+.image {
+  display: flex;
+  justify-content: center;
+}
+.image img{
+  height: 360px;
 }
 h2{
-  font-size: 43px;
-  text-align: center;
+  font-size: 35px;
   color: #1A6060;
   margin-top: 20px;
   margin-bottom: 30px;
   font-weight: bold;
-}
-/* .nomprenom
-{
-  margin-bottom: 50px;
-} */
-.nomprenom input
-{
-  background-color: #EDEDED;
-  border-radius: 50px;
-  border:2px solid #1A6060;
-  margin-bottom: 20px;
-  padding: 10px 0px;
-  width: 45%;
   text-align: center;
 }
-.espace{
-  margin-left: 10px;
+.nomprenom
+{
+  display: flex;
+  justify-content: center;
+  /* border: 2px solid; */
 }
-.nomprenom input:hover {
+.nomprenom input
+{
+  background-color: white;
+  border-radius: 50px;
+  border:2px solid #1A6060;
+  padding: 6px 9px;
+  text-align: left;
   outline: none;
 }
+.gmessage{
+  /* border: 2px solid; */
+  display: flex;
+  justify-content: center;
+}
 .message{
-  background-color: #EDEDED;
+  background-color: white;
   border-radius: 20px;
   border:2px solid #1A6060;
   margin-bottom: 20px;
-  padding: 10px 0px;
-  width: 95%;
-  margin-left: 10px;
-}
-.message{
+  text-align: left;
+  padding: 10px 20px;
   outline: none;
+}
+.bton{
+  /* border: 2px solid; */
+  display: flex;
+  justify-content: center;
 }
 .btn{
   background-color:#2FA7A7;
   color: white;
   border-radius: 80px;
-  padding: 6px 40px;
-  margin-top: 20px;
-  margin-bottom: 40px;
+  padding: 6px 70px;
   font-weight: bold;
-  font-size: 23px;
+  font-size: 25px;
+}
+.espace{
+  padding-bottom: 100px;
+ }
+
+ /*tablette*/
+ @media screen and (max-width: 991px) {
+  /* contact */
+.contact{
+  display: grid;
+  grid-template-columns: auto auto ;
+}
+
+/* formulaire */
+.image {
+  display: flex;
+  justify-content: start;
+}
+.image img{
+  height: 330px;
+}
+.nomprenom input
+{
+  padding: 3px 3px;
+  width: 80%;
+}
+.nomprenom
+{
+  display: flex;
+  justify-content: center;
   /* border: 2px solid; */
+}
+.gmessage{
+  /* border: 2px solid; */
+  display: flex;
+  justify-content: center;
+}
+.message{
+  width: 99%;
+  padding: 10px 1px;
+}
+.btn{
+  padding: 6px 30px;
+  font-size: 23px;
+}
+ }
+
+ /* téléphone */
+@media screen and (max-width: 767px){
+    /* contact */
+.contact{
+  display: grid;
+  grid-template-columns: auto;
+}
+
+/* formulaire */
+.formulaire{
+  width: 93%;
+}
+.image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h2{
+  text-align: center;
+}
+.nomprenom
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gmessage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .bton{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+}
+
+/* téléphone petit model */
+@media screen and (max-width: 468px){
+  /* contact */
+  .contact i{
+    font-size: 25px;
+  }
+  .contact p{
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  /* formulaire */
+.nomprenom
+{
+  display: block;
+  margin-bottom: 3px !important;
+  margin:0 auto;
+}
+.nomprenom input
+{
+  margin:0 auto;
+}
+.message{
+  width: 90%;
+  padding: 10px 20px;
+}
+.gmessage{
+  display: block;
+}
+.bton{
+  display: block;
+}
+.btn{
+  padding: 5px 27px;
+  margin-top: 1px;
+  font-size: 20px;
+  margin-left: 15px;
+}
 }

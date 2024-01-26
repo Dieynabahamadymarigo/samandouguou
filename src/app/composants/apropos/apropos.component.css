@@ -1,0 +1,343 @@
+/* baniere */
+.gcontenant{
+  margin-top: 120px;
+  background-color: #ffffff;
+  height: 290px;
+  border-radius: 2%;
+  border:5px dashed #1A6060;
+  display: flex;
+  justify-content: space-around;
+}
+.contenant{
+  background-color:transparent;
+  height: 180px;
+  width: 180px;
+  transform: rotate(45deg);
+  margin: 3.5%;
+  box-shadow: 7px 7px 4px 3px #2FA7A7;
+  border-radius: 10%;
+  border-top: 10px solid  #1A6060;
+  border-left: 10px solid  #1A6060;
+}
+.contenant1{
+  background-color: #2FA7A7;
+  height: 80px;
+  width: 190px;
+  margin-top: 45px;
+  margin-left: -15px;
+}
+.ecrit{
+  transform: rotate(-45deg);
+  font-size: 35px;
+  color: #1A6060;
+  font-weight: bold;
+  text-align: center;
+  margin-top: -90px;
+  text-shadow: 2px 2px black;
+}
+.imdcontenant{
+  height: 250px;
+}
+.gimg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* la présentation */
+.espacebaniereimgtext{
+  padding-top: 60px;
+}
+.textimg{
+  border: none;
+  box-shadow:8px 8px #2FA7A7;
+  border-top-right-radius: 60px;
+  border-bottom-left-radius: 60px;
+}
+.image{
+  height: 420px;
+}
+.textimg h5{
+  font-size: 35px;
+  font-weight: bold;
+  color: #1A6060;
+}
+.textimg p{
+  font-size: 30px;
+}
+
+/* texte */
+.texte h3{
+  padding-top: 35px;
+  color: #1A6060;
+  font-size: 30px;
+  font-weight: bold;
+}
+.texte p{
+  font-size: 25px;
+}
+
+/* texte + groupe img */
+.gtexteimg{
+  display: flex;
+  justify-content: space-evenly;
+}
+.imgtexte{
+  background-color: white;
+  /* width: 70%; */
+  font-size: 25px;
+  border-radius: 40px;
+  padding: 23px;
+  border-bottom:10px solid #1A6060;
+  box-shadow: 3px 3px 4px 7px #2FA7A7;
+}
+.imagetxt{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imagetxt img{
+  height:250px;
+}
+
+/* le team */
+.team{
+  display: flex;
+  justify-content: space-evenly;
+}
+.titreteam{
+  color: #1A6060;
+  font-weight: bold;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+.team img{
+  height: 240px;
+}
+
+.espacefooter{
+  padding-bottom: 100px;
+}
+
+
+ /*tablette*/
+ @media screen and (max-width: 991px){
+  /* baniere */
+  .gcontenant{
+    height: 290px;
+    border:5px dashed #1A6060;
+    display: flex;
+    justify-content: space-around;
+  }
+  .contenant{
+    height: 150px;
+    width: 150px;
+    margin: 8%;
+  }
+  .contenant1{
+    height: 50px;
+    width: 160px;
+  }
+  .ecrit{
+    font-size: 31px;
+    margin-top: -72px;
+  }
+  .imdcontenant{
+    height: 200px;
+  }
+
+  /* la présentation */
+.image{
+  height: 410px;
+}
+.textimg h5{
+  font-size: 30px;
+}
+.textimg p{
+  font-size: 25px;
+}
+
+/* texte */
+.texte h3{
+  font-size: 30px;
+}
+
+/* texte + groupe img */
+.gtexteimg{
+  display: flex;
+  gap: 40px;
+}
+.imgtexte{
+  font-size: 24px;
+}
+.imagetxt img{
+  height:220px;
+}
+
+/* le team */
+.team{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 40px;
+  /* justify-content: space-evenly; */
+}
+.team img{
+  height: 230px;
+}
+
+ }
+
+/* téléphone */
+@media screen and (max-width: 767px) {
+   /* baniere */
+   .gcontenant{
+    height: 300px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .contenant{
+    height: 120px;
+    width: 120px;
+    margin: 10%;
+  }
+  .contenant1{
+    height: 35px;
+    width: 130px;
+    margin-top: 35px;
+  }
+  .ecrit{
+    font-size: 25px;
+    margin-top: -52px;
+  }
+  .imdcontenant{
+    height: 150px;
+  }
+
+  /* la présentation */
+  .textimg{
+    width: 90%;
+  }
+  .divimage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:0px 2px 0px 0px #2FA7A7;
+  }
+  .image{
+    height: 360px;
+    /* box-shadow:0px 4px 0px 0px #2FA7A7; */
+  }
+  .textimg h5{
+    font-size: 25px;
+  }
+  .textimg p{
+    font-size: 20px;
+  }
+
+  /* texte */
+  .texte h3{
+    font-size: 25px;
+  }
+  .texte p{
+    font-size: 20px;
+  }
+
+  /* texte + groupe img */
+  .gtexteimg{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 40px;
+  }
+  .imgtexte{
+    font-size: 20px;
+    border-bottom:6px solid #1A6060;
+    box-shadow: 2px 2px 3px 5px #2FA7A7;
+  }
+  .imagetxt img{
+    height:220px;
+  }
+
+  /* le team */
+  .team{
+    display: grid;
+    grid-template-columns: auto ;
+    gap: 40px;
+    /* justify-content: space-evenly; */
+  }
+  .team img{
+    height: 200px;
+  }
+}
+
+/* téléphone petit model */
+@media screen and (max-width: 468px){
+   /* baniere */
+   .gcontenant{
+    width: 90%;
+    height: 300px;
+    padding-top: 30px;
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: space-evenly;
+  }
+  .contenant{
+    height: 90px;
+    width: 90px;
+    margin:0 auto;
+    box-shadow: 6px 6px 3px 2px #2FA7A7;
+    border-radius: 10%;
+    border-top: 8px solid  #1A6060;
+    border-left: 8px solid  #1A6060;
+  }
+  .contenant1{
+    height: 25px;
+    width: 100px;
+    margin-top: 27px;
+  }
+  .ecrit{
+    font-size: 18px;
+    text-shadow: 1px 1px black;
+    margin-top: -37px;
+  }
+  .imdcontenant{
+    height: 130px;
+  }
+
+  /* la présentation */
+  .textimg{
+    width: 90%;
+    box-shadow:6px 6px #2FA7A7;
+    border-top-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+  }
+  .divimage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:0px 2px 0px 0px #2FA7A7;
+  }
+  .image{
+    height: 300px;
+  }
+
+  /* texte + groupe img */
+  .gtexteimg{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 40px;
+  }
+  .imgtexte{
+    width: 98%;
+    font-size: 20px;
+    border-bottom:6px solid #1A6060;
+    box-shadow: 2px 2px 3px 4px #2FA7A7;
+  }
+  .imagetxt img{
+    height:200px;
+  }
+
+  /* le team */
+  .team img{
+    height: 170px;
+  }
+}

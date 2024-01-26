@@ -1,10 +1,12 @@
+/* inscription */
+.top{
+  margin-top: 120px;
+}
 h2{
   color: #1A6060;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 35px;
   text-align: center;
-  margin-top: 25px;
-  margin-bottom: 30px;
 }
 .contenu{
   background-color: white;
@@ -12,28 +14,42 @@ h2{
   border-left: 6px solid #2FA7A7;
   box-shadow: 6px 6px #1A6060;
   border-radius: 60px;
-  width: 75%;
-  margin:0 auto;
+  padding: 15px 20px;
+
+}
+.gimg{
+  display: flex;
   justify-content: center;
-  /* justify-content: space-evenly; */
-  align-items: center;
+}
+.img{
+  height: 300px;
 }
 .info{
-  /* border: 2px solid; */
-  width: 45%;
   justify-content: center;
-  align-items: center;
+}
+.champs{
+  display: flex;
+  justify-content: center;
 }
 .info input{
   background-color: #EDEDED;
   justify-content: center;
   border:2px solid #1A6060;
-  text-align: center;
   border-radius: 40px;
-  padding: 6px 70px;
-  display: flex;
-  /* justify-content: center;
-  align-items: center; */
+  padding: 10px 30px;
+  outline: none;
+  width: 90%;
+}
+.info select{
+  background-color: #EDEDED;
+  justify-content: center;
+  border:2px solid #1A6060;
+  border-radius: 40px;
+  padding: 10px 30px;
+  outline: none;
+  height: 48px;
+  width: 90%;
+  /* border: 2px solid; */
 }
 button{
   background-color: #2FA7A7;
@@ -45,6 +61,7 @@ button{
   font-size: 23px;
 }
 .btn{
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,8 +77,96 @@ a{
 }
 .lien{
   margin-top: -18px;
-
 }
-.img{
-  height: 500px;
+
+
+/* connexion */
+label{
+  font-weight: bold;
+  font-size: 25px;
+}
+.bouton{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ /*tablette*/
+ @media screen and (max-width: 991px){
+  .gimg{
+    display: flex;
+    justify-content: left;
+  }
+  .img{
+    height: 250px;
+  }
+  .info{
+    justify-content: left;
+
+  }
+  .info input{
+    padding: 7px 25px;
+    width: 90%;
+  }
+  .info select{
+    padding: 7px 20px;
+    height: 41.1px;
+    width: 90%;
+  }
+  button{
+    padding: 6px 35px;
+    font-size: 21px;
+  }
+  p{
+    text-align: center;
+    font-size: 20px;
+  }
+  .lien{
+    text-align: center;
+    margin-top: -18px;
+  }
+ }
+
+ /* téléphone */
+@media screen and (max-width: 767px) {
+  .gimg{
+    display: flex;
+    justify-content: center;
+  }
+  .champs{
+    width: 100%;
+  }
+}
+
+/* téléphone petit model */
+@media screen and (max-width: 468px) {
+  .gimg{
+    display: flex;
+    justify-content: center;
+  }
+  .img{
+    height: 250px;
+  }
+  .champs{
+    /* border: 2px solid; */
+    display: block;
+    width: 100%;
+    margin-left:auto;
+    margin-right: auto;
+  }
+  .info input{
+    width: 100%;
+    margin:0 auto;
+    margin-right: auto;
+  }
+  .info select{
+    padding: 7px 20px;
+    height: 41.1px;
+    width: 100%;
+  }
+  button{
+    padding: 6px 30px;
+  }
+
 }

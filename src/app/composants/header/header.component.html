@@ -1,22 +1,26 @@
-<div class="header">
+<!-- <div class="header">
   <div>
     <ul class="nav logo">
       <li class="nav-item">
         <a class="nav-link" href="#"> <img src="../../../assets/logo.png" alt="" class="imglogo">  </a>
       </li>
     </ul>
+
   </div>
+
   <div>
-    <!-- <ul class="nav justify-content-center"> -->
       <ul class="nav nomlien">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+          <a class="nav-link active" aria-current="page" href="/">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Légumes</a>
+          <a class="nav-link" href="#">Packs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Blog</a>
+          <a class="nav-link" href="#">Recettes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/a propos">A propos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact">Contact</a>
@@ -24,14 +28,54 @@
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="bi bi-cart3"></i></a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li> -->
     </ul>
   </div>
+
   <div>
     <ul class="nav compte">
       <li class="nav-item" > <a class="nav-link" routerLink="/connexion">Compte</a> </li>
     </ul>
   </div>
-</div>
+</div> -->
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary header">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="#"><img src="../../../assets/logo.png" alt="" class="imglogo"> </a>
+
+    <button class="navbar-toggler toogle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon "></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 nomlien">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/packs">Packs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/recettes">Recettes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/a propos">A propos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-cart3"></i></a>
+        </li>
+      </ul>
+
+      <div>
+        <ul class="nav compte">
+          <li class="nav-item" > <a class="nav-link" href="/connexion">Compte</a> </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>

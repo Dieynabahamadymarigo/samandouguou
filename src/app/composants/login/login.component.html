@@ -1,28 +1,84 @@
-<h2>Page d'inscription</h2>
-<div class=" mb-3 container" >
-  <div class="row g-0 contenu">
-    <div class="col-md-8 info">
-        <input type="text" class="mt-5" placeholder="Votre nom"> <br>
-        <input type="text" placeholder="Votre prénom"><br>
-        <input type="email" placeholder="Votre email"><br>
-        <input type="text" placeholder="mot de passe"><br>
-        <input type="text" placeholder="confirmation"><br>
-        <!-- <option value="">
-          <section>admin</section>
-          <section>admin</section>
-          <section>admin</section>
-        </option> -->
-        <div class="btn">
-          <button>S'inscrire</button>
-        </div>
-        <!-- <h5 class="card-title"> </h5> -->
-        <p class="card-text">Vous avez déjà un compte ?</p>
-        <div class="lien">
-          <a href="">Connecter</a>
-        </div>
+<app-header></app-header>
+
+<!-- Page inscription -->
+<div class="top">
+  <form class=" mb-3 container" >
+    <div class="row g-0 contenu">
+      <h2>Page d'inscription</h2>
+
+      <div class="col-md-5 mt-5 gimg">
+        <img src="../../../assets/baniere/compte.png" class="img-fluid img" alt="">
+      </div>
+
+      <div class="col-md-7 mt-5 info">
+
+          <div class="champs">
+            <input type="text" class="mb-3 me-3" placeholder="Votre nom">
+            <input type="text" class="mb-3" placeholder="Votre prénom">
+          </div>
+
+          <div class="champs">
+            <input type="email" class="mb-3 me-3" placeholder="Votre email">
+            <input type="text" class="mb-3" placeholder="mot de passe">
+          </div>
+
+          <div class="champs">
+            <input type="text" class="mb-3 me-3" placeholder="confirmation">
+            <select name="" id="">
+              <option value=""></option>
+              <option value="">admin</option>
+              <option value="">client</option>
+              <option value="">livreur</option>
+            </select>
+          </div>
+
+          <div class="btn mt-3">
+            <button>S'inscrire</button>
+          </div>
+
+            <p class="card-text">Vous avez déjà un compte ?</p>
+            <div class="lien mb-3">
+              <a href="">Connecter</a>
+            </div>
+      </div>
+
     </div>
-    <div class="col-md-4">
-      <img src="../../../assets/compte.png" class="img-fluid img" alt="...">
-    </div>
-  </div>
+  </form>
 </div>
+
+
+
+<!-- Page de connexion -->
+<div class="top">
+  <form class=" mb-3 container" >
+    <div class="row g-0 contenu">
+      <h2>Page de connexion</h2>
+
+      <div class="col-md-5 mt-5 gimg">
+        <img src="../../../assets/baniere/compte.png" class="img-fluid img" alt="">
+      </div>
+
+      <div class="col-md-7 mt-5 info">
+
+          <div class="champs">
+            <input type="email" class="mb-3" placeholder="Votre email">
+          </div>
+
+          <div class="champs">
+            <input type="text" class="mb-3" placeholder="mot de passe">
+          </div>
+
+          <div class="btn mt-3">
+            <button>Se connecter</button>
+          </div>
+
+            <p class="card-text">Vous n'avez pas de compte ?</p>
+            <div class="lien mb-3">
+              <a href="">S'inscrire</a>
+            </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
