@@ -27,9 +27,15 @@ h2{
 .info{
   justify-content: center;
 }
+.champs p{
+  /* border: 2px solid; */
+  font-size: 15px;
+}
 .champs{
+  /* border: 2px solid; */
   display: flex;
   justify-content: center;
+  gap: 30px;
 }
 .info input{
   background-color: #EDEDED;
@@ -38,7 +44,7 @@ h2{
   border-radius: 40px;
   padding: 10px 30px;
   outline: none;
-  width: 90%;
+  width: 100%;
 }
 .info select{
   background-color: #EDEDED;
@@ -48,7 +54,7 @@ h2{
   padding: 10px 30px;
   outline: none;
   height: 48px;
-  width: 90%;
+  width: 246px;
   /* border: 2px solid; */
 }
 button{
@@ -69,7 +75,7 @@ button{
 p{
   font-size: 20px;
 }
-a{
+.lien a{
   text-decoration: none;
   color: #1A6060;
   font-size: 20px;
@@ -105,14 +111,18 @@ label{
     justify-content: left;
 
   }
+  .champs p{
+    /* border: 2px solid; */
+    font-size: 10px;
+  }
   .info input{
     padding: 7px 25px;
-    width: 90%;
+    width: 100%;
   }
   .info select{
-    padding: 7px 20px;
+    padding: 7px 10px;
     height: 41.1px;
-    width: 90%;
+    width: 167px;
   }
   button{
     padding: 6px 35px;
@@ -136,6 +146,11 @@ label{
   }
   .champs{
     width: 100%;
+  }
+  .info select{
+    padding: 7px 10px;
+    height: 41.1px;
+    width: 210px;
   }
 }
 

@@ -1,0 +1,56 @@
+/* banier */
+.contenu{
+  margin-top: 120px;
+  background-color: #1A6060;
+  border-top: 15px solid #2FA7A7;
+  border-radius: 30px;
+  height: 280px;
+}
+.img{
+  height: 265px;
+}
+.titre{
+  margin-top: 70px;
+  color: white;
+  text-align: center;
+}
+.titre h1{
+  text-shadow: 2.5px 2.5px black;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+/* tableau */
+table{
+  border-collapse: collapse;
+  margin-bottom: 150px;
+  margin-top: 50px;
+}
+
+th {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+  font-size: 25px;
+}
+td{
+  border: 1px solid black;
+  padding: 8px;
+  font-size: 23px;
+  text-align: center;
+}
+.tabimg{
+  height: 80px;
+  /* border: 2px solid; */
+}
+.decremente{
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+}
+.delete{
+  background-color: transparent;
+  color: #1A6060;
+  border: none;
+  font-size: 30px;
+}

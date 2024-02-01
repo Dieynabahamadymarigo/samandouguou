@@ -1,0 +1,331 @@
+<app-headerdashboard></app-headerdashboard>
+<!-- catégories -->
+<div class="catégorie">
+
+  <!-- les différents nombres -->
+  <div class="difnombre">
+    <div class="nombre">
+      <h3>Nombre de légumes</h3>
+      <h3>100</h3>
+    </div>
+    <div class="nombre">
+      <h3>Nombre de packs</h3>
+      <h3>30</h3>
+    </div>
+    <div class="nombre">
+      <h3>Liste des utilissteurs</h3>
+      <h3>40</h3>
+    </div>
+  </div>
+
+  <!-- les différentes catégories -->
+  <div class="gcategories">
+    <div class="difcategories" (click)=" afficheProduits()">
+      <img src="../../../assets/twemoji_basket.png" alt="">
+      <h3 style="cursor: pointer;" >Produits</h3>
+    </div>
+    <div class="difcategories" (click)="affichePacks()">
+      <img src="../../../assets/twemoji_basket.png" alt="">
+      <h3 style="cursor: pointer;">Packs</h3>
+    </div>
+    <div class="difcategories" (click)=" afficheClients()">
+      <img src="../../../assets/bi_person.png" alt="">
+      <h3 style="cursor: pointer;">Clients</h3>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- différentes catégories -->
+<div class="catégorie">
+
+  <!-- carte de légumes -->
+  <div *ngIf="tabProduits">
+    <!-- button ajouter et search  -->
+    <div class="gbutton">
+      <div class="ajout me-5">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
+      </div>
+      <div class="recherche">
+        <input type="search" placeholder="Recherche"><i class="bi bi-search"></i>
+      </div>
+    </div>
+
+    <div class="gcarte">
+
+      <div class="card cartepacks" *ngFor=" let produit of tabListProduit" >
+        <div class="contenupacks"></div>
+        <img src={{produit.image}} class="img-top imglegumes" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : {{produit.nomProduit}} </h4>
+          <p>Prix : {{produit.prix}} fr</p>
+        </div>
+
+        <div class="iconproduits">
+          <i class="bi bi-eye-fill me-3"></i>
+          <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i>
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+    </div>
+
+    <!-- pagination -->
+    <div class="iconpagination">
+
+      <div class="chevron">
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div class="un">
+        <i class="bi bi-1-square"></i>
+      </div>
+      <div class="deux">
+        <i class="bi bi-2-square"></i>
+      </div>
+      <div class="trois">
+        <i class="bi bi-3-square"></i>
+      </div>
+      <div class="">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- carte de packs -->
+  <div *ngIf="tabPacks">
+       <!-- button ajouter et search  -->
+       <div class="gbutton">
+        <div class="ajout me-5">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#packs">Ajouter</button>
+        </div>
+        <div class="recherche">
+          <input type="search" placeholder="Recherche" ><i class="bi bi-search"></i>
+        </div>
+      </div>
+    <div class="gcarte">
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="../../../assets/plats/thip dieunne.png" class="img-top imgpacks" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Thiep bou dieune </h4>
+          <!-- <p>Prix : 300fr</p> -->
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-eye-fill me-3"></i>
+          <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i>
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="../../../assets/plats/YASSAG-1-scaled-removebg-preview.png" class="img-top imgpacks" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Yassa poulet </h4>
+          <!-- <p>Prix : 300fr</p> -->
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-eye-fill me-3"></i>
+          <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i>
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="../../../assets/plats/deukhine.png" class="img-top imgpacks" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Deukhine </h4>
+          <!-- <p>Prix : 300fr</p> -->
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-eye-fill me-3"></i>
+          <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i>
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+
+
+    </div>
+
+    <!-- pagination -->
+    <div class="iconpagination">
+
+      <div class="chevron">
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div class="un">
+        <i class="bi bi-1-square"></i>
+      </div>
+      <div class="deux">
+        <i class="bi bi-2-square"></i>
+      </div>
+      <div class="trois">
+        <i class="bi bi-3-square"></i>
+      </div>
+      <div class="">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- carte des personnes -->
+  <div *ngIf="tabClients">
+
+    <div class="gcarte">
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-eye-fill me-3"></i>
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-eye-fill me-3"></i>
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-eye-fill me-3"></i>
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+    </div>
+
+    <!-- pagination -->
+    <div class="iconpagination">
+
+      <div class="chevron">
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div class="un">
+        <i class="bi bi-1-square"></i>
+      </div>
+      <div class="deux">
+        <i class="bi bi-2-square"></i>
+      </div>
+      <div class="trois">
+        <i class="bi bi-3-square"></i>
+      </div>
+      <div class="">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<!-- Modal produits -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Ajout</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text" name="nomProduit" [(ngModel)]="nomProduit" name="nomProduit" required>
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prix : </label>
+          <input type="text" [(ngModel)]="prix" name="prix" required>
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nombre : </label>
+          <input type="number" [(ngModel)]="quantiteTotale" name="quantiteTotale" required>
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">description : </label>
+          <input type="text"  [(ngModel)]="description" name="description" required>
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">image : </label>
+          <input type="file" (change)="getFile($event)" name="image" required>
+        </div>
+        <!-- <div class="mb-3 inputmodal">
+          <label for="" class="me-3">image : </label>
+          <input type="file"  [(ngModel)]="image" name="image" required>
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" (click)="ajout()" class="btn ajoutelemnt ">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal packs -->
+<div class="modal fade" id="packs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Ajout</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 ">
+          <input type="file">
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prix : </label>
+          <input type="text">
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nombre : </label>
+          <input type="number">
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Date : </label>
+          <input type="text">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn ajoutelemnt ">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>

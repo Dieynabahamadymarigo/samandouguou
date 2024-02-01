@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,16 @@ import { ConditionUtilisateurComponent } from './composants/condition-utilisateu
 import { HeaderComponent } from './composants/header/header.component';
 import { FooterComponent } from './composants/footer/footer.component';
 import { AproposComponent } from './composants/apropos/apropos.component';
+import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './composants/admin/dashboard/dashboard.component';
+import { HeaderdashboardComponent } from './composants/admin/headerdashboard/headerdashboard.component';
+import { RecettesdashboardComponent } from './composants/admin/recettesdashboard/recettesdashboard.component';
+import { CommandesdashboardComponent } from './composants/admin/commandesdashboard/commandesdashboard.component';
+import { LivreursdashboardComponent } from './composants/admin/livreursdashboard/livreursdashboard.component';
+import { HeaderclientComponent } from './composants/client/headerclient/headerclient.component';
+import { DeconnexionclientComponent } from './composants/client/deconnexionclient/deconnexionclient.component'
+import { CommandeclientComponent } from './composants/client/commandeclient/commandeclient.component';
+import { ProfilclientComponent } from './composants/client/profilclient/profilclient.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +41,23 @@ import { AproposComponent } from './composants/apropos/apropos.component';
     ConditionUtilisateurComponent,
     HeaderComponent,
     FooterComponent,
-    AproposComponent
+    AproposComponent,
+    DashboardComponent,
+    HeaderdashboardComponent,
+    RecettesdashboardComponent,
+    CommandesdashboardComponent,
+    LivreursdashboardComponent,
+    HeaderclientComponent,
+    CommandeclientComponent,
+    DeconnexionclientComponent,
+    ProfilclientComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

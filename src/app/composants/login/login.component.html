@@ -1,8 +1,8 @@
 <app-header></app-header>
 
 <!-- Page inscription -->
-<div class="top">
-  <form class=" mb-3 container" >
+<div class="top" *ngIf="!showFrmConnexion">
+  <form (ngSubmit)="onInscrire()" enctype="multipart/form-data" class=" container" >
     <div class="row g-0 contenu">
       <h2>Page d'inscription</h2>
 
@@ -13,32 +13,63 @@
       <div class="col-md-7 mt-5 info">
 
           <div class="champs">
-            <input type="text" class="mb-3 me-3" placeholder="Votre nom">
-            <input type="text" class="mb-3" placeholder="Votre prénom">
+            <div class="d-block">
+              <input type="text" class="me-3" id="nom" placeholder="Votre nom" [(ngModel)]="nom"  name="nom" required><br>
+            </div>
+
+            <div class="d-block">
+              <input type="text" class="" placeholder="Votre prénom" [(ngModel)]="prenom" name="prenom" required>
+            </div>
           </div>
 
           <div class="champs">
-            <input type="email" class="mb-3 me-3" placeholder="Votre email">
-            <input type="text" class="mb-3" placeholder="mot de passe">
+            <div class="block">
+              <input type="email" class="me-3" placeholder="Votre email" [(ngModel)]="email" name="email" required>
+            </div>
+            <div class="block">
+              <input type="password" class="" placeholder="mot de passe" [(ngModel)]="password" name="password" required>
+            </div>
           </div>
 
           <div class="champs">
-            <input type="text" class="mb-3 me-3" placeholder="confirmation">
-            <select name="" id="">
-              <option value=""></option>
-              <option value="">admin</option>
-              <option value="">client</option>
-              <option value="">livreur</option>
-            </select>
+            <div class="block">
+              <input type="tel" class="me-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse" required>
+            </div>
+            <div class="block">
+              <input type="tel" class="" placeholder="votre télephone" [(ngModel)]="telephone" name="telephone" required>
+            </div>
           </div>
+
+          <div class="champs">
+            <div class="block">
+              <input type="file" (change)="getFile($event)" class="me-3" placeholder="image"  name="image" required>
+              <!-- <p class="text-danger" *ngIf="!exactPasswordConf">{{verifPasswordConf}}</p>
+              <p class="text-success" *ngIf="exactPasswordConf"><i class="bi bi-check2-all"></i> Exact !</p> -->
+            </div>
+            <!-- <div>
+              <select name="role" id="role" [(ngModel)]="role" (change)="roles()" required > -->
+                <!-- <option *ngFor="let roles of role" [value]="role">{{roles}}</option> -->
+                <!-- <option value="client">Client</option>
+                <option value="livreur">Livreur</option>
+              </select> -->
+              <!-- <p class="text-danger" *ngIf="!exactRole">{{verifRole}}</p>
+              <p class="text-success" *ngIf="exactRole"><i class="bi bi-check2-all"></i> Exact !</p> -->
+            <!-- </div> -->
+          </div>
+<!--
+          <div class="block" >
+            <input type="text"  placeholder="votre statut" [(ngModel)]="statut" name="statut" required>
+            <p class="text-danger" *ngIf="!exactPassword">{{verifPassword}}</p>
+            <p class="text-success" *ngIf="exactPassword"><i class="bi bi-check2-all"></i> Exact !</p>
+          </div> -->
 
           <div class="btn mt-3">
-            <button>S'inscrire</button>
+            <button type="submit">S'inscrire</button>
           </div>
 
             <p class="card-text">Vous avez déjà un compte ?</p>
-            <div class="lien mb-3">
-              <a href="">Connecter</a>
+            <div class="lien "  (click)="afficherFrmConnexion()">
+              <a style="cursor: pointer;"> Connecter</a>
             </div>
       </div>
 
@@ -49,8 +80,8 @@
 
 
 <!-- Page de connexion -->
-<div class="top">
-  <form class=" mb-3 container" >
+<div class="top" *ngIf="showFrmConnexion">
+  <form class=" container" (ngSubmit)="onSubmit()" >
     <div class="row g-0 contenu">
       <h2>Page de connexion</h2>
 
@@ -61,20 +92,20 @@
       <div class="col-md-7 mt-5 info">
 
           <div class="champs">
-            <input type="email" class="mb-3" placeholder="Votre email">
+            <input type="email" class="mb-3" name="email" [(ngModel)]="formDate.email" placeholder="Votre email" required>
           </div>
 
           <div class="champs">
-            <input type="text" class="mb-3" placeholder="mot de passe">
+            <input type="password" class="" name="password" [(ngModel)]="formDate.password" placeholder="mot de passe" required>
           </div>
 
           <div class="btn mt-3">
-            <button>Se connecter</button>
+            <button type="submit" >Se connecter</button>
           </div>
 
             <p class="card-text">Vous n'avez pas de compte ?</p>
-            <div class="lien mb-3">
-              <a href="">S'inscrire</a>
+            <div class="lien mb-3" (click)="afficherFrmConnexion()">
+              <a style="cursor: pointer;">S'inscrire</a>
             </div>
       </div>
 

@@ -10,6 +10,16 @@ import { FooterComponent } from './composants/footer/footer.component';
 import { AproposComponent } from './composants/apropos/apropos.component';
 import { PacksComponent } from './composants/packs/packs.component';
 import { LegumesComponent } from './composants/recettes/legumes.component';
+import { DashboardComponent } from './composants/admin/dashboard/dashboard.component';
+import { HeaderdashboardComponent } from './composants/admin/headerdashboard/headerdashboard.component';
+import { CommandesdashboardComponent } from './composants/admin/commandesdashboard/commandesdashboard.component';
+import { LivreursdashboardComponent } from './composants/admin/livreursdashboard/livreursdashboard.component';
+import { RecettesdashboardComponent } from './composants/admin/recettesdashboard/recettesdashboard.component';
+import { ProfilclientComponent } from './composants/client/profilclient/profilclient.component';
+import { HeaderclientComponent } from './composants/client/headerclient/headerclient.component';
+import { CommandeclientComponent } from './composants/client/commandeclient/commandeclient.component';
+import { PanierComponent } from './composants/panier/panier.component';
+// import { DeconnexionclientComponent } from './composants/client/deconnexionclient/deconnexionclient.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/accueil', pathMatch: 'full' },
@@ -22,11 +32,20 @@ const routes: Routes = [
   {path: 'foter', component:FooterComponent},
   {path: 'a propos', component:AproposComponent},
   {path: 'packs', component:PacksComponent},
+  {path: 'panier', component:PanierComponent},
   {path: 'recettes', component:LegumesComponent},
+  {path: 'admin', component:DashboardComponent},
+  {path: 'admin/recettes', component:RecettesdashboardComponent},
+  {path: 'admin/commandes', component:CommandesdashboardComponent},
+  {path: 'admin/livreurs', component:LivreursdashboardComponent},
+  {path: 'client', component:ProfilclientComponent},
+  {path: 'client/commande', component:CommandeclientComponent},
+  // {path: 'client', component:HeaderclientComponent},
+  // {path: 'client/deconnecter', component:DeconnexionclientComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

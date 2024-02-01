@@ -41,47 +41,17 @@
       </div>
     </div>
 
-  <div class="container">
-    <div class=" gcartelegumes">
+  <div>
+    <div class="gcartelegumes">
 
-      <div class="card carte">
+      <div class="card carte" *ngFor=" let produit of tabListProduit" >
         <div class="contour"></div>
-        <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="...">
+        <img src={{produit.image}} class="card-img-top carteimg" alt="...">
         <div class="card-body">
-          <h3 class="card-title">Tomate</h3>
-          <p class="card-text">500 fr</p>
+          <h3 class="card-title">Nom : {{produit.nomProduit}}</h3>
+          <p class="card-text">{{produit.prix}} fr</p>
         </div>
-        <div class="contour2"><i class="bi bi-cart3"></i></div>
-      </div>
-
-      <div class="card carte">
-        <div class="contour"></div>
-        <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="...">
-        <div class="card-body">
-          <h3 class="card-title">Tomate</h3>
-          <p class="card-text">500 fr</p>
-        </div>
-        <div class="contour2"><i class="bi bi-cart3"></i></div>
-      </div>
-
-      <div class="card carte">
-        <div class="contour"></div>
-        <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="...">
-        <div class="card-body">
-          <h3 class="card-title">Tomate</h3>
-          <p class="card-text">500 fr</p>
-        </div>
-        <div class="contour2"><i class="bi bi-cart3"></i></div>
-      </div>
-
-      <div class="card carte">
-        <div class="contour"></div>
-        <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="...">
-        <div class="card-body">
-          <h3 class="card-title">Tomate</h3>
-          <p class="card-text">500 fr</p>
-        </div>
-        <div class="contour2"><i class="bi bi-cart3"></i></div>
+        <div class="contour2"><i class="bi bi-cart3" (click)="addPanier(produit)"></i></div>
       </div>
 
     </div>

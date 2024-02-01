@@ -1,0 +1,90 @@
+.catégorie{
+  padding-top: 50px;
+  padding-left: 275px;
+}
+.card{
+  border: none;
+  background-color: transparent;
+  /* height: ; */
+  padding-top: 130px;
+  /* padding-bottom: auto ; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid; */
+}
+/* carte */
+.carte{
+  background-color: white;
+  padding: 20px 10px;
+  border-top: 3px solid #2FA7A7;
+  border-left: 3px solid #2FA7A7;
+  border-right: none;
+  border-bottom: none;
+  box-shadow: 4px 4px #1A6060;
+  border-bottom-left-radius: 30px;
+  border-top-right-radius: 30px;
+  margin: 0 auto;
+  /* border: 2px solid; */
+}
+.titre {
+  justify-content: center;
+  align-items: center;
+}
+.titre h4{
+  font-weight: bold;
+  font-size: 20px;
+}
+.ajout{
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  /* width: 80%; */
+  /* border: 2px solid; */
+}
+.ajout button{
+  background-color: white;
+  color: #1A6060;
+  font-weight: bold;
+  border-bottom: none;
+  border-right: none;
+  border-top: 3px solid #1A6060;
+  border-left: 3px solid #1A6060;
+  box-shadow: 2px 2px 0px 1px #2FA7A7;
+  border-radius: 30px;
+  padding: 4px 30px;
+}
+.imgcartre{
+  height: 180px;
+}
+
+
+/* téléphone petit model */
+@media screen and (max-width: 468px){
+  .catégorie{
+    padding-top: 50px;
+    padding-left: 150px;
+  }
+  /* body{border: 20px solid ;} */
+  .carte{
+    background-color: white;
+    padding: 20px 10px;
+    border-top: 3px solid #2FA7A7;
+    border-left: 3px solid #2FA7A7;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: 4px 4px #1A6060;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    margin: 0 auto;
+    /* border: 2px solid; */
+  }
+  .titre h4{
+    font-weight: bold;
+    font-size: 17px;
+  }
+  .imgcartre{
+    height: 130px;
+  }
+
+}

@@ -1,1 +1,48 @@
-<p>panier works!</p>
+<app-header></app-header>
+<!-- banier -->
+<div class=" mb-3 container" >
+  <div class="row g-0 contenu">
+    <!-- titre -->
+    <div class="col-md-6 titre">
+      <h1>Vos courses, livrées chez vous</h1>
+    </div>
+    <!-- image slide -->
+    <div class="col-md-6">
+      <img src="../../../assets/baniere/panier.png" class=" img" alt="...">
+    </div>
+  </div>
+</div>
+
+<!-- tableau -->
+<div *ngFor="let produit of tabListProduit">
+  <table class="table container">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Produits</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">PU</th>
+        <th scope="col">Total</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{produit.id}}</th>
+        <td><img src={{produit.image}} class="tabimg" alt=""></td>
+        <td class="me-5">
+          <button class="decremente"><i class="bi bi-dash-circle" (click)="retirerPanier(produit)"></i></button>
+          <p>{{produit.quantitite}}</p>
+          <button class="decremente"><i class="bi bi-plus-circle" (click)="addPanier(produit)"></i></button>
+        </td>
+        <td>{{produit.prix}} fr</td>
+        <td>{{produit.total}} fr</td> <!-- Ajoutez le champ total -->
+        <td><button class="delete"><i class="bi bi-trash-fill"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<app-footer></app-footer>

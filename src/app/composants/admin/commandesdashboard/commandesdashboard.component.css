@@ -1,0 +1,127 @@
+/* catégories */
+.catégorie{
+  padding-top: 50px;
+  padding-left: 275px;
+}
+/* categories */
+.gcategories{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-content: space-evenly;
+  padding: 20px 10px;
+}
+.difcategories{
+  border: none;
+  display: flex;
+  justify-content: center;
+  padding: 15px 5px;
+  gap: 10px;
+  width: 165px;
+  border-radius: 20px;
+  box-shadow: 4px 4px #2FA7A7;
+  background-color: white;
+}
+.difcategories h3{
+  color: #1A6060;
+  font-weight: bold;
+  font-size: 20px;
+}
+.difcategories i{
+  /* height: 60px; */
+  font-size: 22px;
+  color: #1A6060;
+  /* border: 2px solid; */
+}
+.difcategories img{
+  height: 28px;
+}
+
+/* carte des personnes */
+.gcarte{
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 40px;
+  justify-content: space-evenly;
+}
+.cartepacks{
+  /* height: 25rem; */
+  width: 16rem;
+  border-top:none;
+  border-bottom:none;
+  border-left:6px dashed #1A6060;
+  border-right:6px dashed #1A6060;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+.cartepacks h5 {
+  font-weight: bold;
+  /* border: 2px solid; */
+}
+.contenupacks{
+  border-top:6px solid #1A6060;
+  border-left:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-left: -6px;
+}
+.contenupacks2{
+  border-bottom:6px solid #1A6060;
+  border-right:6px solid #1A6060;
+  width: 90px;
+  height: 70px !important;
+  margin-left: 160px;
+  margin-top:-20px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.imgperson{
+  width: 14rem;
+  border-top-right-radius: 40px;
+  margin:0 auto;
+  margin-top: -55px;
+  /* border: 2px solid; */
+}
+.titreproduits{
+  font-weight: bold;
+}
+ .titreproduits h4{
+  font-weight: bold;
+  /* border: 2px solid; */
+}
+.titreproduits p{
+  font-size: 20px;
+  /* border: 2px solid; */
+}
+.iconproduits{
+  color: #1A6060;
+  font-size: 25px;
+  padding: 0px 10px;
+  display: flex;
+  justify-content: end;
+  margin-top: -10px;
+  /* border: 2px solid; */
+}
+
+/* pagination */
+.iconpagination{
+  padding-top: 50px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  color: #1A6060;
+  font-size: 30px;
+  cursor: pointer;
+}
+.un{
+  background-color: #1A6060;
+  padding: 0px 5px 0px 5px;
+  color: white;
+}
+
+/* desactiver carte */
+.cartepacks[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}

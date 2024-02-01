@@ -13,6 +13,9 @@
   font-weight: bold;
   text-align: center;
 }
+.active{
+  border-bottom: 2px solid #1A6060;
+}
 
 /* button compte */
 .compte li a{

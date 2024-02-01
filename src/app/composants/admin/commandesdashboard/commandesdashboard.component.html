@@ -1,0 +1,322 @@
+<app-headerdashboard></app-headerdashboard>
+<!-- catégories -->
+<div class="catégorie">
+
+  <!-- les différentes catégories -->
+  <div class="gcategories">
+    <div class="difcategories" (click)="afficheLoading()">
+      <img src="../../../../assets/cours.png" alt="">
+      <h3 style="cursor: pointer;" >En cours</h3>
+    </div>
+    <div class="difcategories" (click)=" afficheConfirm()">
+      <img src="../../../../assets/confirm-circle.png" alt="">
+      <h3 style="cursor: pointer;">Confirmer</h3>
+    </div>
+    <div class="difcategories" (click)="afficheReceveid()">
+      <img src="../../../../assets/reçus.png" alt="">
+      <h3 style="cursor: pointer;">Reçues</h3>
+    </div>
+    <div class="difcategories" (click)="afficheClose()" >
+      <i class="bi bi-x-circle"></i>
+      <h3 style="cursor: pointer;">Annuler</h3>
+    </div>
+
+  </div>
+
+    <!-- carte des personnes en cours -->
+  <div *ngIf="tabEnCours">
+
+    <div class="gcarte">
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <i class="bi bi-eye-fill me-3"></i>
+          <!-- <i class="bi bi-pencil-square me-3"></i> -->
+          <!-- <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <i class="bi bi-eye-fill me-3"></i>
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <i class="bi bi-eye-fill me-3"></i>
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+    </div>
+
+    <!-- pagination -->
+    <div class="iconpagination">
+
+      <div class="chevron">
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div class="un">
+        <i class="bi bi-1-square"></i>
+      </div>
+      <div class="deux">
+        <i class="bi bi-2-square"></i>
+      </div>
+      <div class="trois">
+        <i class="bi bi-3-square"></i>
+      </div>
+      <div class="">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- carte des personnes confirmées -->
+  <div *ngIf="tabConfirmer">
+
+    <div class="gcarte">
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <!-- <i class="bi bi-eye-fill me-3"></i> -->
+          <!-- <i class="bi bi-pencil-square me-3"></i> -->
+          <!-- <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <!-- <i class="bi bi-eye-fill me-3"></i> -->
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <!-- <i class="bi bi-eye-fill me-3"></i> -->
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+    </div>
+
+    <!-- pagination -->
+    <div class="iconpagination">
+
+      <div class="chevron">
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div class="un">
+        <i class="bi bi-1-square"></i>
+      </div>
+      <div class="deux">
+        <i class="bi bi-2-square"></i>
+      </div>
+      <div class="trois">
+        <i class="bi bi-3-square"></i>
+      </div>
+      <div class="">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- carte des personnes reçues -->
+  <div *ngIf="tabRecues">
+
+    <div class="gcarte">
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <!-- <i class="bi bi-eye-fill me-3"></i> -->
+          <!-- <i class="bi bi-pencil-square me-3"></i> -->
+          <!-- <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <!-- <i class="bi bi-eye-fill me-3"></i> -->
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+      <div class="card cartepacks" >
+        <div class="contenupacks"></div>
+        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <div class="card-body titreproduits">
+          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+        </div>
+        <div class="iconproduits">
+          <i class="bi bi-check2-all me-3"></i>
+          <!-- <i class="bi bi-eye-fill me-3"></i> -->
+          <!-- <i class="bi bi-pencil-square me-3"></i>
+          <i class="bi bi-trash-fill me-3"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+    </div>
+
+    <!-- pagination -->
+    <div class="iconpagination">
+
+      <div class="chevron">
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div class="un">
+        <i class="bi bi-1-square"></i>
+      </div>
+      <div class="deux">
+        <i class="bi bi-2-square"></i>
+      </div>
+      <div class="trois">
+        <i class="bi bi-3-square"></i>
+      </div>
+      <div class="">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </div>
+
+  </div>
+
+    <!-- carte des personnes annuler -->
+    <div *ngIf="tabAnnuler">
+
+      <div class="gcarte" >
+
+        <div class="card cartepacks" aria-disabled="true" >
+          <div class="contenupacks"></div>
+          <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="..." >
+          <div class="card-body titreproduits">
+            <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+          </div>
+          <div class="iconproduits">
+            <i class="bi bi-check2-all me-3"></i>
+            <!-- <i class="bi bi-eye-fill me-3"></i> -->
+            <!-- <i class="bi bi-pencil-square me-3"></i> -->
+            <!-- <i class="bi bi-trash-fill me-3"></i> -->
+          </div>
+          <div class="contenupacks2" ></div>
+        </div>
+
+        <div class="card cartepacks" aria-disabled="true">
+          <div class="contenupacks"></div>
+          <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+          <div class="card-body titreproduits">
+            <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+          </div>
+          <div class="iconproduits">
+            <i class="bi bi-check2-all me-3"></i>
+            <!-- <i class="bi bi-eye-fill me-3"></i> -->
+            <!-- <i class="bi bi-pencil-square me-3"></i>
+            <i class="bi bi-trash-fill me-3"></i> -->
+          </div>
+          <div class="contenupacks2" ></div>
+        </div>
+
+        <div class="card cartepacks" aria-disabled="true">
+          <div class="contenupacks"></div>
+          <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+          <div class="card-body titreproduits">
+            <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+          </div>
+          <div class="iconproduits">
+            <i class="bi bi-check2-all me-3"></i>
+            <!-- <i class="bi bi-eye-fill me-3"></i> -->
+            <!-- <i class="bi bi-pencil-square me-3"></i>
+            <i class="bi bi-trash-fill me-3"></i> -->
+          </div>
+          <div class="contenupacks2" ></div>
+        </div>
+
+      </div>
+
+      <!-- pagination -->
+      <div class="iconpagination">
+
+        <div class="chevron">
+          <i class="bi bi-chevron-left"></i>
+        </div>
+        <div class="un">
+          <i class="bi bi-1-square"></i>
+        </div>
+        <div class="deux">
+          <i class="bi bi-2-square"></i>
+        </div>
+        <div class="trois">
+          <i class="bi bi-3-square"></i>
+        </div>
+        <div class="">
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </div>
+
+    </div>
+
+</div>

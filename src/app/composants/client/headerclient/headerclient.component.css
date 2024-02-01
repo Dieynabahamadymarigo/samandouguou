@@ -1,0 +1,104 @@
+.header{
+  padding: 0px 30px;
+  background-color: white;
+  height: 45px;
+  border-bottom: 2px solid #1A6060;
+  display: flex;
+  justify-content: end;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
+.header h3{
+  padding-top: 4px;
+  font-size: 23px;
+  font-weight: bold;
+  color: #1A6060;
+
+}
+.titrecategorie{
+  position: fixed;
+  padding: 100px 0px;
+  background-color: #1A6060;
+  z-index: 1;
+}
+.toogle{
+  color: #ffffff;
+}
+.imgheader img{
+  border-top-right-radius: 45px;
+  border-bottom-left-radius: 45px;
+  height: 150px;
+}
+.titrecategorie ul{
+  padding-top: 15px;
+  display: block;
+  font-weight: bold;
+}
+.titrecategorie li{
+  font-size: 17px;
+  width: 100%;
+  background-color: #2FA7A7;
+  border-radius: 0px 50px 50px 0px;
+  margin-left: -12px;
+  /* border: 2px solid; */
+}
+.titrecategorie a{
+  font-size: 25px;
+  color: white ;
+  /* border: 2px solid; */
+}
+.iconsheader{
+  height: 20px;
+}
+
+
+ /*tablette*/
+ @media screen and (max-width: 991px){
+  .titrecategorie{
+  background-color: transparent;
+  padding: 90px 0px;
+  height: auto;
+  /* border: 2px solid; */
+}
+  .toogle{
+    color: transparent;
+  }
+  .titrecategorie li{
+    font-size: 17px;
+    width: 80%;
+    background-color: #2FA7A7;
+    border-radius: 0px 50px 50px 0px;
+    margin-left: -12px;
+    /* border: 2px solid; */
+  }
+  .titrecategorie a{
+    font-size: 23px;
+    color: white ;
+    /* border: 2px solid; */
+  }
+  .imgheader img{
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    height: 150px;
+  }
+
+ }
+
+ /* téléphone petit model */
+@media screen and (max-width: 468px){
+    .titrecategorie li{
+      width: 65%;
+      border-radius: 0px 40px 40px 0px;
+    }
+    .titrecategorie a{
+      font-size: 15px;
+    }
+    .imgheader img{
+      border-top-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+      height: 100px;
+    }
+
+}
