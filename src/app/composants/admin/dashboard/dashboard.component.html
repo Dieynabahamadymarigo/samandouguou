@@ -48,31 +48,50 @@
         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
       </div>
       <div class="recherche">
-        <input type="search" placeholder="Recherche"><i class="bi bi-search"></i>
+        <input type="search" placeholder="Recherche"  [(ngModel)]="filterValue" (input)="onSearch()"><i class="bi bi-search"></i>
       </div>
     </div>
 
     <div class="gcarte">
 
-      <div class="card cartepacks" *ngFor=" let produit of tabListProduit" >
+      <div class="card cartepacks" *ngFor=" let produit of tabListProduit ">
         <div class="contenupacks"></div>
-        <img src={{produit.image}} class="img-top imglegumes" alt="...">
+        <img src="http://127.0.0.1:8000/storage/{{produit.image}}" class="img-top imglegumes" alt="...">
         <div class="card-body titreproduits">
           <h4 class="card-title"> Nom : {{produit.nomProduit}} </h4>
           <p>Prix : {{produit.prix}} fr</p>
         </div>
 
         <div class="iconproduits">
-          <i class="bi bi-eye-fill me-3"></i>
-          <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i>
+          <i class="bi bi-eye-fill me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#details" (click)="getProduit(produit)"></i>
+          <i class="bi bi-pencil-square me-3" style="cursor: pointer;" (click)="chargerInfosProduit(produit)" data-bs-toggle="modal" data-bs-target="#modification" ></i>
+          <i class="bi bi-trash-fill me-3" style="cursor: pointer;" (click)=" supprimerProduit(produit.id)" ></i>
         </div>
         <div class="contenupacks2" ></div>
       </div>
     </div>
+  </div>
+
+    <!-- Pagination  -->
+    <!-- <div *ngIf="getItemsPage().length">
+    <div class="d-flex justify-content-end mb-2">
+    <button class="rounded-2 btnColor  mx-2" [disabled]="pageActuelle === 1"
+        (click)="pageActuelle = pageActuelle - 1">
+        <i class="bi bi-caret-left-fill fs-4"></i>
+    </button>
+    <button class=" mx-2 page" *ngFor="let page of pages" (click)="pageActuelle = page">
+        <span class="pageActuelle fs-5" *ngIf="page===pageActuelle">{{page}}</span>
+        <span *ngIf="page != pageActuelle">{{page}}</span>
+    </button>
+    <button class="rounded-2 btnColor mx-2" [disabled]="pageActuelle === totalPages"
+        (click)="pageActuelle = pageActuelle + 1">
+        <i class="bi bi-caret-right-fill fs-4"></i>
+    </button>
+    </div>
+    </div> -->
 
     <!-- pagination -->
-    <div class="iconpagination">
+    <!-- <div class="iconpagination">
 
       <div class="chevron">
         <i class="bi bi-chevron-left"></i>
@@ -91,9 +110,9 @@
       </div>
     </div>
 
-  </div>
-
+  </div> -->
   <!-- carte de packs -->
+
   <div *ngIf="tabPacks">
        <!-- button ajouter et search  -->
        <div class="gbutton">
@@ -104,6 +123,7 @@
           <input type="search" placeholder="Recherche" ><i class="bi bi-search"></i>
         </div>
       </div>
+
     <div class="gcarte">
 
       <div class="card cartepacks" >
@@ -329,3 +349,90 @@
     </div>
   </div>
 </div>
+
+<!-- Modal produits details -->
+<div class="modal fade" id="details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Voir detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : {{produitSelectionner.nomProduit}} </label>
+          <!-- <input type="text" name="nomProduit" [(ngModel)]="nomProduit" name="nomProduit" required> -->
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prix : {{produitSelectionner.prix}} fr </label>
+          <!-- <input type="text" [(ngModel)]="prix" name="prix" required> -->
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nombre : {{produitSelectionner.quantiteTotale}} fr</label>
+          <!-- <input type="number" [(ngModel)]="quantiteTotale" name="quantiteTotale" required> -->
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">description : {{produitSelectionner.description}} </label>
+          <!-- <input type="text"  [(ngModel)]="description" name="description" required> -->
+        </div>
+        <div class="mb-3 inputmodal">
+          <!-- <label for="" class="me-3">image :  </label> -->
+        <img src="http://localhost:8000/storage/{{produitSelectionner.image}}" class="img-top imglegumesdetail" alt="...">
+          <!-- <input type="file" (change)="getFile($event)" name="image" required> -->
+        </div>
+        <!-- <div class="mb-3 inputmodal">
+          <label for="" class="me-3">image : </label>
+          <input type="file"  [(ngModel)]="image" name="image" required>
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <!-- <button type="submit" (click)="ajout()" class="btn ajoutelemnt ">Ajouter</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal produits mofidifier -->
+<div class="modal fade" id="modification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Modification</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text" name="nomProduit" [(ngModel)]="nomProduit"  >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prix :  </label>
+          <input type="text" [(ngModel)]="prix" name="prix" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nombre : </label>
+          <input type="number" [(ngModel)]="quantiteTotale" name="quantiteTotale" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">description : </label>
+          <input type="text"  [(ngModel)]="description" name="description" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <!-- <label for="" class="me-3">image :  </label> -->
+        <img src="" class="img-top imglegumesdetail" alt="...">
+          <input type="file" (change)="getFile($event)" name="image" >
+        </div>
+        <!-- <div class="mb-3 inputmodal">
+          <label for="" class="me-3">image : </label>
+          <input type="file"  [(ngModel)]="image" name="image" required>
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" data-bs-dismiss="modal" (click)="modifierProduit()" class="btn ajoutelemnt ">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+

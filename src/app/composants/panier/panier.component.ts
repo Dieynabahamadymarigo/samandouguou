@@ -10,50 +10,155 @@ import { LegumesService } from 'src/app/services/legumes/legumes.service';
   styleUrls: ['./panier.component.css']
 })
 export class PanierComponent implements OnInit {
-
   // produit: any[];
 
   produits: Panier = new Panier();
   nom: string = "";
   prix:number =0;
   image: string = "";
-  quantite: number= 0;
+  // quantite: number= 0;
   total: number= 0;
+
+  public quantite = 1;
+  public panier: any = [];
+  public nombreLegumes = 0;
+  public sommeLegumes = 0;
+  public prixLivraion = this.panierService.prixLivraion;
   // produit: any[];
 
+  //
+
   tabListProduit: any[] = [];
-  produitsPanier: any[] = [];
+
+  // produitsPanier: any[] = [];
+
+  //
+  connectUser: boolean = false;
+
 
   constructor(private panierService: PanierService,private LegumesService:LegumesService) {}
   ngOnInit(): void {
+
     this.listerDesProduits();
-    this.produitsPanier = this.panierService.getLegumes();
+    // this.produitsPanier = this.panierService.getLegumes();
+    this.panier = this.panierService.getFromPanier();
+    this.totalProduit();
+    this.panierService.isAuthenticated$.subscribe((isAuthenticated) => {
+      if ( this.connectUser = isAuthenticated) {
+     this.panierService.message('Oop\'s', "error", "La connexion est requise pour cette action");
+    } else {
+        this.panierService.message('Commande envoiée', "success", "Merci pour la confiance");
+      }
+    });
+
+
   }
 
 
-  addPanier(legume: any) {
-    this.panierService.ajouterAuPanier(legume);
-    this.produitsPanier = this.panierService.getLegumes();
+  upOrDownQuantity(type: string, id: any) {
+    // if (this.quantite<1) {
+    //   this.quantite=1;
+    // }
+    let panierProduit = this.panierService.getFromPanier();
+    panierProduit.forEach((element: any) => {
+      console.log('ajout', panierProduit)
+      if (element.produit.id == id) {
+        if (type == 'up') {
+          this.quantite++;
+          element.quantitePanier++;
+          if (element.quantitePanier>element.produit.quantite) {
+            element.quantitePanier--;
+            this.panierService.message("Oops","warning",`il n'en reste que ${element.produit.quantite} produit en stock`);
+          }
+        } else {
+          // this.quantite--;
+          element.quantitePanier--;
+          if (element.quantitePanier < 1) {
+            element.quantitePanier = 1;
+          }
+        }
+      }
+      console.log('increment',this.upOrDownQuantity)
+    });
+    localStorage.setItem("panier", JSON.stringify(panierProduit));
+    this.totalProduit();
+    this.panier = this.panierService.getFromPanier();
   }
 
-  retirerPanier(legume: any) {
-    this.panierService.retirerDuPanier(legume);
-    this.produitsPanier = this.panierService.getLegumes();
+  totalProduit() {
+    this.nombreLegumes = 0;
+    this.sommeLegumes = 0;
+    let panierProduit = this.panierService.getFromPanier();
+    panierProduit.forEach((element: any) => {
+    this.nombreLegumes += element.quantitePanier;
+    this.sommeLegumes += element.quantitePanier * element.produit.prix;
+    });
+    console.log('total',this.totalProduit)
+
+  }
+
+  // methode pour incermenter
+  increment( quantite = 1) {
+    this.panierService.incrementerQuantite(quantite);
+    console.log('svpppp',quantite)
+    // this.produitsPanier = this.panierService.getLegumes();
+  }
+  // methode supprimer
+  deleteFromPanier(id: any) {
+    let tab: any = [];
+    tab = this.panierService.getFromPanier();
+    tab.forEach((element: any, index: any) => {
+      if (element.produit.id == id) {
+        tab.splice(index, 1);
+      }
+    });
+    localStorage.setItem('panier', JSON.stringify(tab));
+    this.panier = this.panierService.getFromPanier();
+    this.panierService.message("Parfait", "success", "produit retiré du panier");
+    this.totalProduit();
+
+  }
+
+  isOnline() {
+    let a = JSON.parse(localStorage.getItem('panier') ?? '[]');
+    // console.log(a.length);
+    if (a.length == 0) {
+
+      this.panierService.message('Oop\'s', "warning", "Le panier est vide veuillez le remplir d'abord");
+    }else{}
   }
 
 
+  // this.produitsPanier = this.panierService.getLegumes();
+  // addPanier(legume: any) {
+  //   this.panierService.ajouterAuPanier(legume);
+  // }
+
+  // retirerPanier(legume: any) {
+  //   this.panierService.retirerDuPanier(legume);
+  //   this.produitsPanier = this.panierService.getLegumes();
+  // }
+
+
+    //  pour recuperer un produit
+    produitSelectionner: any = {};
+
+    getProduit(produit: any) {
+      this.produitSelectionner = produit;
+    }
 
    // le tableau
   listerDesProduits(){
     this.LegumesService.listerDesProduits().subscribe((data) => {
-      console.log("listeProduits", data.listeProduits);
-    this.tabListProduit = data.listeProduits;
+      console.log("listeProduits", data.ListeProduit);
+    this.tabListProduit = data.ListeProduit;
      } ) }
 
-  envoiBd() {
-    // Effacer le panier après avoir passé la commande
-    this.panierService.clearLegumes();
-    this.produitsPanier = [];
-  }
+
+     // Effacer le panier après avoir passé la commande
+  // envoiBd() {
+  //   this.panierService.clearLegumes();
+  //   this.produitsPanier = [];
+  // }
 
 }

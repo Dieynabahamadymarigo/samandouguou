@@ -133,6 +133,9 @@
   margin-top: -60px;
   /* border: 2px solid; */
 }
+.imglegumesdetail{
+  height: 150px;
+}
 .imgperson{
   width: 14rem;
   border-top-right-radius: 40px;

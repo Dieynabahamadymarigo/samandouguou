@@ -14,7 +14,7 @@
 </div>
 
 <!-- tableau -->
-<div *ngFor="let produit of tabListProduit">
+<div>
   <table class="table container">
     <thead>
       <tr>
@@ -26,23 +26,75 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <th scope="row">{{produit.id}}</th>
-        <td><img src={{produit.image}} class="tabimg" alt=""></td>
-        <td class="me-5">
-          <button class="decremente"><i class="bi bi-dash-circle" (click)="retirerPanier(produit)"></i></button>
-          <p>{{produit.quantitite}}</p>
-          <button class="decremente"><i class="bi bi-plus-circle" (click)="addPanier(produit)"></i></button>
+
+    <tbody *ngFor="let produit of panier; let index=index" >
+      <tr >
+        <!-- <th scope="row">2</th> -->
+        <th scope="row">{{index+1}}</th>
+        <td><img src="http://127.0.0.1:8000/storage/{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt=""></td>
+        <td class="me-5 input">
+          <button class="decremente"><i class="bi bi-dash-circle" (click)="upOrDownQuantity('down',produit.produit.id)"></i></button>
+          <input tyte="number" [value]="produit.quantitePanier"> {{produit.produit.quantite}}
+          <button class="decremente"><i class="bi bi-plus-circle" (click)="upOrDownQuantity('up',produit.produit.id)"></i></button>
         </td>
-        <td>{{produit.prix}} fr</td>
-        <td>{{produit.total}} fr</td> <!-- Ajoutez le champ total -->
-        <td><button class="delete"><i class="bi bi-trash-fill"></i></button></td>
+        <!-- <td>10 fr </td> -->
+        <td>{{produit.produit.prix}}fr </td>
+        <td> {{produit.produit.prix*produit.quantitePanier}} fr </td>
+        <td><button class="delete"><i class="bi bi-trash-fill"  (click)="deleteFromPanier(produit.produit.id)"></i></button></td>
+
       </tr>
+
     </tbody>
   </table>
+
+  <!-- total et commande -->
+  <div class="somme container">
+    <div class="d-flex total">
+      <h3 class="me-3">Total : {{this.sommeLegumes}} fr </h3>
+    </div>
+    <div>
+      <h3 class="commande" style="cursor: pointer;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" >Commander</h3>
+    </div>
+  </div>
+
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Livraison  partout 2000 fr</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4>Récapitulatif</h4>
+        <div class="d-flex">
+          <h5 class="me-5">Montant de votre commande</h5>
+          <h5>{{sommeLegumes}} fr</h5>
+        </div>
+        <div class="d-flex">
+          <h5 class="me-5">Livraison</h5>
+          <h5>{{prixLivraion}}fr</h5>
+        </div>
+        <div class="d-flex">
+          <h3 class="me-5">Total</h3>
+          <!-- <h3>{{prixLivraion+this.sommeLegumes}} fr</h3> -->
+          <h3>{{prixLivraion+this.sommeLegumes}} fr</h3>
+        </div>
+        <div>
+          <h6 class="text-center pt-3 fw-bold"><i class="bi bi-info-square text-black" style="font-size: 16px;"></i> NB </h6>
+          <p><span>*</span>On annule pas une commander validée</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  class="btn ajoutelemnt me-4">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="isOnline()"  class="btn ajoutelemnt">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="padding-bottom:150px;"></div>
 
 
 <app-footer></app-footer>

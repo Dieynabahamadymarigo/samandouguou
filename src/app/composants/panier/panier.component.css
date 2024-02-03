@@ -45,6 +45,7 @@ td{
 }
 .decremente{
   background-color: transparent;
+  /* border: 2px solid; */
   border: none;
   font-size: 25px;
 }
@@ -53,4 +54,47 @@ td{
   color: #1A6060;
   border: none;
   font-size: 30px;
+}
+.input input{
+  border: none;
+  /* border: 2px solid; */
+  text-align: center;
+  width: 10%;
+}
+
+/* total et commande  */
+.somme{
+  display: flex;
+  justify-content: space-between;
+  color: #1A6060;
+  /* border: 2px solid; */
+}
+.somme h3{
+  font-size: 30px;
+  background-color: white;
+  padding: 13px 20px;
+  border-top: 4px solid #1A6060;
+  border-left: 4px solid #1A6060;
+  box-shadow: 2px 2px 2px 2px #2FA7A7;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  font-weight: bold;
+}
+/* modal */
+.ajoutelemnt{
+  background-color: white;
+  color: #1A6060;
+  font-weight: bold;
+  border-bottom: none;
+  border-right: none;
+  border-top: 3px solid #1A6060;
+  border-left: 3px solid #1A6060;
+  box-shadow: 3px 3px 0px 1px #2FA7A7;
+  border-radius: 30px;
+  padding: 4px 20px;
+}
+.ajoutelemnt:hover {
+  border-top: 3px solid #1A6060;
+  border-left: 3px solid #1A6060;
+  color: #1A6060;
 }

@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit  {
     adresse : string = "";
     telephone : string = "";
     image : any = "";
-    // statut : boolean = false;
-    role : string[] = ['admin','client','livreur'];
 
     // variables pour se connecter
     formDate:any = {
@@ -36,44 +34,65 @@ export class LoginComponent implements OnInit  {
       createAt: new Date(),
       updateAt: "",
     }
+
+    // variable pour gérer la déconnexion
+    connectUser: boolean = false;
+    userName: string = '';
+    
     constructor (private router: Router, private authService : LoginService){}
 
     ngOnInit(): void {
-      // this.inscritClient();
-      }
+         // S'abonner aux observables pour mettre à jour les propriétés du composant en fonction de l'état d'authentification
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.connectUser = isAuthenticated;
+    });
+
+    this.authService.userName$.subscribe((userName) => {
+      this.userName = userName;
+    });
+    }
+
+
 
     //methode pour se connecter
-    onSubmit() : void{
+  onSubmit() : void{
 
-        console.log("merci", this.formDate)
-        this.authService.connection(this.formDate).subscribe(
-          (rep)=>{
-            console.log('réussi',rep)
-            localStorage.setItem('userConnect',rep.token)
+      console.log("merci", this.formDate)
+      this.authService.connection(this.formDate).subscribe(
+        (rep)=>{
+          console.log('réussi',rep)
+          localStorage.setItem('userConnect',rep.token)
+          if(rep.user.role_id=='1'){
             this.router.navigate(['/admin']);
-            // if (this.email==='aicha8420@gmail.com' && this.password==='passer123') {
-            // }
-            // else {
-            //   if (this.role === 'client') {
-            //     this.router.navigate(['/profil']);
-            //   }
-              // else {
-              //   this.router.navigate(['/client']);
-              // }
-            // }
-          },
-        (error) => {
-          console.error('erreur',error);
+            alert('voux etes admin')
+          }
+          else if (rep.user.role_id=='2')
+          {
+            this.router.navigate(['/client']);
+            alert('voux etes client')
+          }
+          else
+          {
+            this.router.navigate(['']);
+          alert('voux etes livreur')
         }
-        );
-        // if (this.email=="" || this.password =="") {
-        //   this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
-        //   }
-        //  else {
-        //    this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
-        //   }
-      this.viderChamps();
+        },
+      (error) => {
+        console.error('erreur',error);
+      }
+      );
+    this.viderChamps();
+  }
+
+  onLoginClick() {
+    if (this.connectUser) {
+      // Gérer la déconnexion
+      this.authService.deconnect().subscribe(() => {
+        this.router.navigate(['/']);
+        alert ('deconnecter')
+      });
     }
+  }
 
 
 

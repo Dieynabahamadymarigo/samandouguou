@@ -5,43 +5,41 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LegumesService {
+export class PacksService {
 
   url = "http://127.0.0.1:8000/api";
 
   constructor(private http:HttpClient) {}
 
-  // methode pour produits
-  ajoutProduit (produit:any): Observable<any>{
+  // methode pour packs
+  ajoutProduit (packs:any): Observable<any>{
     const accessToken = localStorage.getItem('userConnect');
     return accessToken ?
-    this.http.post<any>('http://127.0.0.1:8000/api/createProduit',produit, {
+    this.http.post<any>('http://127.0.0.1:8000/api/createCategorieProduits',packs, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
     }): of (null);
   }
 
-  // lister produits
+  // lister packs
   listerDesProduits(): Observable<any>{
     return this.http.get('http://127.0.0.1:8000/api/indexProduit');
   }
 
-  // modifier produit
-    updateProduit(id: number, produit:any): Observable<any> {
+  // modifier packs
+    updateProduit(id: number, packs:any): Observable<any> {
     const accessToken = localStorage.getItem('userConnect');
       return accessToken ?
-        this.http.post<any>(`http://127.0.0.1:8000/api/updateProduit/${id}`, produit, {
+        this.http.post<any>(`http://127.0.0.1:8000/api/updateProduit/${id}`, packs, {
         headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
       }) : of(null);}
 
 
-  // supprimer un produit
+  // supprimer un packs
   deleteProduit(id: number): Observable<any> {
     const accessToken = localStorage.getItem('userConnect');
       return accessToken ?
         this.http.delete<any>(`http://127.0.0.1:8000/api/deleteProduit/` + id, {
         headers: new HttpHeaders ({ 'Authorization': `Bearer ${accessToken}` })
       }) : of(null);}
-
-
 
 }

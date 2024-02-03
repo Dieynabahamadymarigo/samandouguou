@@ -100,7 +100,8 @@
           </div>
 
           <div class="btn mt-3">
-            <button type="submit" >Se connecter</button>
+            <button type="submit" (click)="onLoginClick()" >{{ connectUser ? 'Déconnexion' : 'Connexion' }}</button>
+            <span *ngIf="connectUser"></span>
           </div>
 
             <p class="card-text">Vous n'avez pas de compte ?</p>

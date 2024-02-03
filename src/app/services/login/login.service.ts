@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +10,50 @@ export class LoginService {
 
   constructor(private http:HttpClient) {}
 
-  //methode pour se connecter
-  connection (users: any): Observable <any> {
-    return this.http.post('http://127.0.0.1:8000/api/login',users);
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private userNameSubject = new BehaviorSubject<string>('');
+
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  userName$ = this.userNameSubject.asObservable();
+
+  // constructor(private http: HttpClient) {}
+
+  // Méthode pour se connecter
+  connection(users: any): Observable<any> {
+    return this.http.post(`${this.url}/login`, users).pipe(
+      tap((response: any) => {
+        // Si la connexion est réussie, mettez à jour l'état de l'authentification et le nom d'utilisateur
+        this.isAuthenticatedSubject.next(true);
+        this.userNameSubject.next(response.userName); // Assurez-vous que votre API renvoie le nom d'utilisateur
+      })
+    );
   }
 
-  //methode pour choisir le role
-  role (userRole: any): Observable <any>{
-    return this.http.post('http://127.0.0.1:8000/api/ajouterRole',userRole)
+  // Méthode pour choisir le rôle
+  role(userRole: any): Observable<any> {
+    return this.http.post(`${this.url}/ajouterRole`, userRole);
   }
+
+  // Méthode pour déconnecter
+  deconnect(): Observable<any> {
+    return this.http.post(`${this.url}/deconnect`, {}).pipe(
+      tap(() => {
+        // Si la déconnexion est réussie, mettez à jour l'état de l'authentification et le nom d'utilisateur
+        this.isAuthenticatedSubject.next(false);
+        this.userNameSubject.next('');
+      })
+    );
+  }
+
+  //methode pour se connecter
+  // connection (users: any): Observable <any> {
+  //   return this.http.post('http://127.0.0.1:8000/api/login',users);
+  // }
+
+  //methode pour choisir le role
+  // role (userRole: any): Observable <any>{
+  //   return this.http.post('http://127.0.0.1:8000/api/ajouterRole',userRole)
+  // }
 
   //methode pour inscription client
   inscritClient (user: any): Observable <any>{
@@ -31,27 +66,10 @@ export class LoginService {
   }
 
   //methode pour deconnecter
-  deconnect (user: any): Observable <any>{
-    return this.http.post('http://127.0.0.1:8000/api/deconnect',user)
-  }
+  // deconnect (user: any): Observable <any>{
+  //   return this.http.post('http://127.0.0.1:8000/api/deconnect',user)
+  // }
 
-
-
-    // const accessToken = localStorage.getItem('userConnect');
-    // return accessToken ?
-    // {
-    //   headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
-    // }): of(null);
-
-
-  // updateDemande(id: number, demande:any): Observable<any> {
-
-  //   const accessToken = localStorage.getItem('access_token');
-
-  //     return accessToken ?
-  //     this.http.post<any>(`${this.url}/demandes/update/${id}`, demande, {
-  //       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
-  //     }) : of(null);}
 
 
 }
