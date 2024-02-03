@@ -19,7 +19,7 @@ export class PanierService {
   // auth avant de commander
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-  
+
 
   post(path: string, dataToSend: any, onSuccess: Function) {
     const httpOptions = {
@@ -56,32 +56,32 @@ export class PanierService {
     });
   }
 
-  whoIsOnline() {
-    if (localStorage.getItem("onlineUser") != null || localStorage.getItem("onlineUser") != undefined) {
-      let data = JSON.parse(localStorage.getItem("onlineUser") ?? '{}');
-      return data.type;
-    } else {
-      return null;
-    }
-  }
+  // whoIsOnline() {
+  //   if (localStorage.getItem("onlineUser") != null || localStorage.getItem("onlineUser") != undefined) {
+  //     let data = JSON.parse(localStorage.getItem("onlineUser") ?? '{}');
+  //     return data.type;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
-  idOnline() {
-    if (localStorage.getItem("onlineUser") != null || localStorage.getItem("onlineUser") != undefined) {
-      let data = JSON.parse(localStorage.getItem("onlineUser") ?? '{}');
-      return data.id;
-    } else {
-      return null;
-    }
-  }
+  // idOnline() {
+  //   if (localStorage.getItem("onlineUser") != null || localStorage.getItem("onlineUser") != undefined) {
+  //     let data = JSON.parse(localStorage.getItem("onlineUser") ?? '{}');
+  //     return data.id;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
-  IsOnline() {
-    if (localStorage.getItem("onlineUser") != null || localStorage.getItem("onlineUser") != undefined) {
-      let data = JSON.parse(localStorage.getItem("onlineUser") ?? '{}');
-      return data;
-    } else {
-      return null;
-    }
-  }
+  // IsOnline() {
+  //   if (localStorage.getItem("onlineUser") != null || localStorage.getItem("onlineUser") != undefined) {
+  //     let data = JSON.parse(localStorage.getItem("onlineUser") ?? '{}');
+  //     return data;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
 
 

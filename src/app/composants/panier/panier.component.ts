@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Route } from '@angular/router';
 import { Panier } from 'src/app/models/login';
 import { PanierService } from 'src/app/services/panier/panier.service';
@@ -20,6 +20,7 @@ export class PanierComponent implements OnInit {
   total: number= 0;
 
   public quantite = 1;
+  public nbpanier=0;
   public panier: any = [];
   public nombreLegumes = 0;
   public sommeLegumes = 0;
@@ -36,32 +37,20 @@ export class PanierComponent implements OnInit {
   connectUser: boolean = false;
 
 
-  constructor(private panierService: PanierService,private LegumesService:LegumesService) {}
+  constructor(private panierService: PanierService,private LegumesService:LegumesService,  private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
 
     this.listerDesProduits();
     // this.produitsPanier = this.panierService.getLegumes();
     this.panier = this.panierService.getFromPanier();
     this.totalProduit();
-    this.panierService.isAuthenticated$.subscribe((isAuthenticated) => {
-      if ( this.connectUser = isAuthenticated) {
-     this.panierService.message('Oop\'s', "error", "La connexion est requise pour cette action");
-    } else {
-        this.panierService.message('Commande envoiée', "success", "Merci pour la confiance");
-      }
-    });
-
-
   }
 
 
   upOrDownQuantity(type: string, id: any) {
-    // if (this.quantite<1) {
-    //   this.quantite=1;
-    // }
     let panierProduit = this.panierService.getFromPanier();
     panierProduit.forEach((element: any) => {
-      console.log('ajout', panierProduit)
+      // console.log('ajout', panierProduit)
       if (element.produit.id == id) {
         if (type == 'up') {
           this.quantite++;
@@ -78,11 +67,14 @@ export class PanierComponent implements OnInit {
           }
         }
       }
-      console.log('increment',this.upOrDownQuantity)
+      // console.log('increment',this.upOrDownQuantity)
     });
     localStorage.setItem("panier", JSON.stringify(panierProduit));
     this.totalProduit();
     this.panier = this.panierService.getFromPanier();
+    this.nbpanier= (panierProduit.length);
+    this.cdr.detectChanges();
+    console.log('nombbre',this.nbpanier)
   }
 
   totalProduit() {
@@ -93,7 +85,7 @@ export class PanierComponent implements OnInit {
     this.nombreLegumes += element.quantitePanier;
     this.sommeLegumes += element.quantitePanier * element.produit.prix;
     });
-    console.log('total',this.totalProduit)
+    // console.log('total',this.totalProduit)
 
   }
 
@@ -119,13 +111,37 @@ export class PanierComponent implements OnInit {
 
   }
 
+  deleteAllPanier() {
+    let tab: any = [];
+    tab = this.panierService.getFromPanier();
+
+    // Vider le tableau
+    tab = [];
+
+    localStorage.setItem('panier', JSON.stringify(tab));
+    this.panier = this.panierService.getFromPanier();
+    this.panierService.message("Parfait", "success", "Panier vidé avec succès");
+    this.totalProduit();
+  }
+
+
   isOnline() {
     let a = JSON.parse(localStorage.getItem('panier') ?? '[]');
     // console.log(a.length);
     if (a.length == 0) {
 
       this.panierService.message('Oop\'s', "warning", "Le panier est vide veuillez le remplir d'abord");
-    }else{}
+    }else{
+      this.panierService.isAuthenticated$.subscribe((isAuthenticated) => {
+        if (!isAuthenticated) {
+          this.panierService.message('Oop\'s', 'error', 'La connexion est requise pour cette action');
+        } else {
+          // L'utilisateur est connecté, vous pouvez maintenant procéder à la commande
+          this.panierService.message('Commande envoyée', 'success', 'Merci pour la confiance');
+          // Ajoutez ici le code pour effectuer la commande
+        }
+      });
+    }
   }
 
 
@@ -150,7 +166,7 @@ export class PanierComponent implements OnInit {
    // le tableau
   listerDesProduits(){
     this.LegumesService.listerDesProduits().subscribe((data) => {
-      console.log("listeProduits", data.ListeProduit);
+    // console.log("listeProduits", data.ListeProduit);
     this.tabListProduit = data.ListeProduit;
      } ) }
 

@@ -44,29 +44,6 @@
   <div>
     <div class="gcartelegumes">
 
-      <!-- @for (legume of panier; track $index) { -->
-
-        <!-- <div class="panier-item" *ngFor="let legume of panier && tabListProduit; track $index">
-          <img src="http://localhost:8000/storage/{{legume.produit.image}}" alt="" [routerLink]="['/panier',legume.produit.id]" />
-          <p class="nom_prix" [routerLink]="['/panier',legume.produit.id]">
-            {{legume.produit.nomProduit}} <br />
-            <span>{{legume.produit.prix}} fcfa</span>
-          </p>
-          <p>
-            <i
-              class="bi bi-caret-down-fill"
-              (click)="upOrDownQuantity('down',legume.produit.id)"
-            ></i>
-            <input type="text" [value]="legume.quantitePanier" />
-            <i class="bi bi-caret-up-fill" (click)="upOrDownQuantity('up',legume.produit.id)"></i>
-          </p>
-          <span class="som-prix">{{legume.produit.prix*legume.quantitePanier}} fcfa</span>
-          <i class="bi bi-trash3" (click)="deleteFromPanier(legume.produit.id)"></i>
-        </div> -->
-      <!-- } -->
-
-      <!-- @for (legume of panier; track $index) { -->
-
       <div class="card carte" *ngFor=" let produit of tabListProduit" >
         <div class="contour"></div>
         <img src="http://127.0.0.1:8000/storage/{{produit.image}}" class="card-img-top carteimg" alt="..." >
@@ -76,7 +53,6 @@
         </div>
         <div class="contour2"><i class="bi bi-cart3" (click)="addPanier(produit)"></i></div>
       </div>
-     <!-- } -->
 
 
     </div>

@@ -65,9 +65,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.listerDesProduits();
-    // this.filteredProduit=this.tabListProduit
-    // this.modifierProduit();
-    // this.ajout();
   }
 
   //methode pour ajouter des prduits
@@ -94,9 +91,9 @@ export class DashboardComponent implements OnInit {
     this.verifierChamps('Félicitation!', 'Produit ajouté', 'success');
 
     this.viderChamps();
+    this.ajout();
   }
 
-  /** fonction pour lister les produits */
 
 
 
@@ -110,7 +107,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // categorie_id: this.categorie_id,
 
   //  pour recuperer un produit
   produitSelectionner: any = {};
@@ -118,10 +114,6 @@ export class DashboardComponent implements OnInit {
   getProduit(produit: any) {
     this.produitSelectionner = produit;
   }
-
-  // fonction pour modifier
-  //  variable
-  // modifProduit: any;
 
   modifierProduit() {
     let formData = new FormData();
@@ -212,6 +204,8 @@ export class DashboardComponent implements OnInit {
   // }
 
   // Methode pour vider les champs
+
+
   viderChamps() {
     this.nomProduit = '';
     this.prix = '';
@@ -230,8 +224,3 @@ export class DashboardComponent implements OnInit {
   }
 }
 
-// bienSelectionner:any = "";
-// console.log(this.bienSelectionner);
-// console.log(data)
-
-// this.getAllBiens();

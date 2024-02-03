@@ -16,24 +16,15 @@ export class AccueilComponent {
   nom: string = "";
   prenom: string = "";
   image: string = "";
-  // produit: any[];
 
-
-  // produits: Panier = new Panier();
-  // nom: string = "";
-  // prix:number =0;
-  // image: string = "";
-  // // quantite: number= 0;
-  // total: number= 0;
 
   public quantite = 1;
+  public nbpanier=0;
   public panier: any = [];
   public nombreLegumes = 0;
   public sommeLegumes = 0;
   public prixLivraion = this.panierService.prixLivraion;
-  // produit: any[];
 
-  // tabListProduit: any[] = [];
   produitsPanier: any[] = [];
 
   constructor(private panierService: PanierService,private LegumesService:LegumesService) {}
@@ -45,9 +36,6 @@ export class AccueilComponent {
   }
 
   upOrDownQuantity(type: string, id: any) {
-    // if (this.quantite<1) {
-    //   this.quantite=1;
-    // }
     let panierProduit = this.panierService.getFromPanier();
     panierProduit.forEach((element: any) => {
       if (element.produit.id == id) {
@@ -70,6 +58,9 @@ export class AccueilComponent {
     localStorage.setItem("panier", JSON.stringify(panierProduit));
     this.totalProduit();
     this.panier = this.panierService.getFromPanier();
+    this.nbpanier= (panierProduit.length);
+    // this.cdr.detectChanges();
+    console.log('nombbre',this.nbpanier)
   }
 
   totalProduit() {
@@ -97,19 +88,22 @@ export class AccueilComponent {
     this.totalProduit();
   }
 
+  connectUser: boolean = false;
+
   isOnline() {
-    let a = JSON.parse(localStorage.getItem('panier') ?? '[]');
-    // console.log(a.length);
-    if (a.length == 0) {
+    let panier = JSON.parse(localStorage.getItem('panier') ?? '[]');
+    console.log(panier.length);
+    if (panier.length == 0) {
 
       this.panierService.message('Oop\'s', "warning", "Le panier est vide veuillez le remplir d'abord");
     }else{
-
-      if (this.panierService.IsOnline()) {
-        // this.router.navigate(['/confirmCommand']);
+      this.panierService.isAuthenticated$.subscribe((isAuthenticated) => {
+        if ( this.connectUser == isAuthenticated) {
+       this.panierService.message('Oop\'s', "error", "La connexion est requise pour cette action");
       } else {
-        this.panierService.message('Oop\'s', "error", "La connexion est requise pour cette action");
-      }
+          this.panierService.message('Commande envoié', "success", "Merci pour la confiance");
+        }
+      });
     }
   }
 
@@ -117,7 +111,7 @@ export class AccueilComponent {
     this.panierService.ajouterAuPanier(legume);
     // this.produitsPanier = this.panierService.getLegumes();
   }
- 
+
 
 
 

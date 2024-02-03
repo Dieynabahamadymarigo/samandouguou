@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit  {
     adresse : string = "";
     telephone : string = "";
     image : any = "";
+    existEmail : string = "";
+    existPassword : string = "";
+
 
     // variables pour se connecter
     formDate:any = {
@@ -38,7 +41,7 @@ export class LoginComponent implements OnInit  {
     // variable pour gérer la déconnexion
     connectUser: boolean = false;
     userName: string = '';
-    
+
     constructor (private router: Router, private authService : LoginService){}
 
     ngOnInit(): void {
@@ -52,6 +55,14 @@ export class LoginComponent implements OnInit  {
     });
     }
 
+        // Méthode pour afficher un sweetalert2 apres vérification
+   verifierChamps(title:any, text:any, icon:any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon
+    });
+  }
 
 
     //methode pour se connecter
@@ -81,7 +92,13 @@ export class LoginComponent implements OnInit  {
         console.error('erreur',error);
       }
       );
-    this.viderChamps();
+    //   if (this.email=="" && this.password=="" ) {
+    //     this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
+    //     }
+    //      else {
+    //         this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
+    //     }
+    // this.viderChamps();
   }
 
   onLoginClick() {
@@ -144,14 +161,6 @@ export class LoginComponent implements OnInit  {
     this.telephone = "";
     this.image = "";
     this.formDate = "";
-  }
-    // Méthode pour afficher un sweetalert2 apres vérification
-   verifierChamps(title:any, text:any, icon:any) {
-    Swal.fire({
-      title: title,
-      text: text,
-      icon: icon
-    });
   }
 
 
