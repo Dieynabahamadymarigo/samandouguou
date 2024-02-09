@@ -38,9 +38,16 @@ export class LoginComponent implements OnInit  {
       updateAt: "",
     }
 
+    formDateExiste:any = {
+      emailExiste : '',
+      passwordvExiste : '',
+      createAt: new Date(),
+      updateAt: "",
+    }
     // variable pour gérer la déconnexion
     connectUser: boolean = false;
     userName: string = '';
+    userClient: any [] = [];
 
     constructor (private router: Router, private authService : LoginService){}
 
@@ -53,6 +60,15 @@ export class LoginComponent implements OnInit  {
     this.authService.userName$.subscribe((userName) => {
       this.userName = userName;
     });
+
+    this.authService.user$.subscribe((user) => {
+      this.userClient = user;
+      // console.log('userNgonit',user)
+    });
+
+      // this.afficherFrmConnexion();
+      this.onLoginClick();
+    // this.formDate()
     }
 
         // Méthode pour afficher un sweetalert2 apres vérification
@@ -65,40 +81,63 @@ export class LoginComponent implements OnInit  {
   }
 
 
+
     //methode pour se connecter
   onSubmit() : void{
 
       console.log("merci", this.formDate)
       this.authService.connection(this.formDate).subscribe(
         (rep)=>{
-          console.log('réussi',rep)
-          localStorage.setItem('userConnect',rep.token)
+        // console.log('le nom client',rep.user)
+        let userClient = rep.user;
+        // console.log('userClient', userClient);
+        localStorage.setItem('userConnect',rep.token)
+        console.log('user',rep.token)
+          // Utilisez la réponse pour obtenir le nom d'utilisateur
+          let userName = rep.user.nom;
+          // Émettez le nom d'utilisateur à travers l'observable userName$
+          this.authService.userNameSubject.next(userName);
+          this.authService.userSubject.next(userClient);
+          // console.log('réussi',rep)
+          // localStorage.setItem('userConnect',rep.token)
           if(rep.user.role_id=='1'){
             this.router.navigate(['/admin']);
-            alert('voux etes admin')
+            // alert('voux etes admin')
           }
           else if (rep.user.role_id=='2')
           {
             this.router.navigate(['/client']);
-            alert('voux etes client')
+            // alert('voux etes client')
           }
           else
           {
             this.router.navigate(['']);
-          alert('voux etes livreur')
+          // alert('voux etes livreur')
         }
-        },
-      (error) => {
-        console.error('erreur',error);
-      }
+
+      },
       );
-    //   if (this.email=="" && this.password=="" ) {
-    //     this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
-    //     }
-    //      else {
-    //         this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
-    //     }
-    // this.viderChamps();
+
+    // if (!this.formDate.email || !this.formDate.password ) {
+    //   this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
+    //   }
+    //   else {
+    //     this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
+    //   }
+
+      // if (!this.formDate.email || !this.formDate.password ) {
+      //   this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
+      //   }
+      //  else {
+      //   if (this.formDate.email != this.formDateExiste.emailExiste || this.formDate.password != this.formDateExiste.passwordvExiste){
+      //     this.verifierChamps('Email ou mot de passe incorrect', 'Veuillez saisir le bon email ou mot de passe', 'error');}
+      //     else{
+      //       this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
+      //     }
+      //   }
+      // this.onSubmit();
+    this.viderChamps();
+
   }
 
   onLoginClick() {
@@ -106,13 +145,11 @@ export class LoginComponent implements OnInit  {
       // Gérer la déconnexion
       this.authService.deconnect().subscribe(() => {
         this.router.navigate(['/']);
-        alert ('deconnecter')
+        // alert ('deconnecter')
+        console.log('deconnectdgddgg',this.connectUser)
       });
     }
   }
-
-
-
     // inserer l'image
     getFile(event: any) {
       console.log('img',this.image)
@@ -163,35 +200,10 @@ export class LoginComponent implements OnInit  {
     this.formDate = "";
   }
 
+  // methode pour inscrire livreur
 
 
-    // Methode pour valider l'inscription
-    validerInscription(){
-      // Si les champs sont exacts, on ajoute le compte dans le tableau localStorage
-      // if(this.exactNom && this.exactPrenom && this.exactEmail && this.exactPassword  && this.exactRole){
-      //   let user = {
-      //     idUser:  this.idLastUser + 1,
-      //     nom: this.nom,
-      //     prenom: this.prenom,
-      //     email: this.email,
-      //     password:  this.password,
-      //     // role:this.role
-      //   }
-      //   let userExist = this.tabUsers.find((elemt:any)=> elemt.email == this.email);
 
-      // Est executé que si l'on trouve un compte avce le meme email que celui qui a été renseigné
-        // if (userExist){
-        //   this.verifierChamps('Erreur!', 'Cet email est déjà utilisé', 'error');
-        // }
-      //   else {
-      //     this.tabUsers.push(user);
-      //     localStorage.setItem("Users", JSON.stringify(this.tabUsers));
-      //     this.verifierChamps('Felicitation!', 'Inscription reuissie', 'success');
-      //     this.viderChamps();
-      //   }
-      // }
-
-    }
 
 
     // choix formulaire

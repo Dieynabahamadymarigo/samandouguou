@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { ContactComponent } from './composants/contact/contact.component';
 import { AccueilComponent } from './composants/accueil/accueil.component';
 import { HeaderComponent } from './composants/header/header.component';
@@ -19,6 +19,7 @@ import { ProfilclientComponent } from './composants/client/profilclient/profilcl
 import { HeaderclientComponent } from './composants/client/headerclient/headerclient.component';
 import { CommandeclientComponent } from './composants/client/commandeclient/commandeclient.component';
 import { PanierComponent } from './composants/panier/panier.component';
+import { GuardService } from './services/guard/guard.service';
 // import { DeconnexionclientComponent } from './composants/client/deconnexionclient/deconnexionclient.component';
 
 const routes: Routes = [
@@ -34,14 +35,15 @@ const routes: Routes = [
   {path: 'packs', component:PacksComponent},
   {path: 'panier', component:PanierComponent},
   {path: 'recettes', component:LegumesComponent},
-  {path: 'admin', component:DashboardComponent},
+  {path: 'admin', component:DashboardComponent, canActivate: [GuardService]},
   {path: 'admin/recettes', component:RecettesdashboardComponent},
   {path: 'admin/commandes', component:CommandesdashboardComponent},
   {path: 'admin/livreurs', component:LivreursdashboardComponent},
-  {path: 'client', component:ProfilclientComponent},
+  {path: 'client', component:ProfilclientComponent, canActivate: [GuardService]},
   {path: 'client/commande', component:CommandeclientComponent},
   // {path: 'client', component:HeaderclientComponent},
   // {path: 'client/deconnecter', component:DeconnexionclientComponent},
+  // canActivate: [MonGarde],
 ];
 
 @NgModule({

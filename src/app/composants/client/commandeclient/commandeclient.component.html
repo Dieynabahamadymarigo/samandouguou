@@ -1,1 +1,63 @@
-<p>commandeclient works!</p>
+<app-headerclient></app-headerclient>
+<div class="catégorie">
+
+  <!-- les différentes catégories -->
+  <div class="gcategories">
+    <div class="difcategories" (click)=" afficheProduits()">
+      <img src="../../../../assets/Vector.png" alt="">
+      <h3 style="cursor: pointer;" >Commande validée</h3>
+    </div>
+    <div class="difcategories" (click)="affichePacks()">
+      <img src="../../../../assets/cours.png" alt="">
+      <h3 style="cursor: pointer;">Commande en cours</h3>
+    </div>
+    <div class="difcategories" (click)=" afficheClients()">
+      <img src="../../../../assets/annule.png" alt="">
+      <h3 style="cursor: pointer;">Commande annulée </h3>
+    </div>
+
+  </div>
+
+  <div class="catégorie">
+
+    <div *ngIf="tabProduits">
+      <!-- button ajouter et search  -->
+      <div class="gbutton">
+        <div class="ajout me-5">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
+        </div>
+        <div class="recherche">
+          <input type="search" placeholder="Recherche"  [(ngModel)]="filterValue" (input)="onSearch()"><i class="bi bi-search"></i>
+        </div>
+      </div>
+
+      <div class="gcarte">
+
+        <div class="card cartepacks" *ngFor=" let produit of visibleProduits ">
+          <div class="contenupacks"></div>
+          <img src="http://127.0.0.1:8000/images/{{produit.image}}" class="img-top imglegumes" alt="...">
+          <div class="card-body titreproduits">
+            <h4 class="card-title"> Nom : {{produit.nomProduit}} </h4>
+            <p>Prix : {{produit.prix}} fr</p>
+          </div>
+
+          <div class="iconproduits">
+            <i class="bi bi-eye-fill me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#details" (click)="getProduit(produit)"></i>
+            <i class="bi bi-pencil-square me-3" style="cursor: pointer;" (click)="chargerInfosProduit(produit)" data-bs-toggle="modal" data-bs-target="#modification" ></i>
+            <i class="bi bi-trash-fill me-3" style="cursor: pointer;" (click)=" supprimerProduit(produit.id)" ></i>
+          </div>
+          <div class="contenupacks2" ></div>
+        </div>
+
+      </div>
+
+      <div class="iconpagination">
+        <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button>
+    </div>
+
+    </div>
+
+
+  </div>
+
+</div>

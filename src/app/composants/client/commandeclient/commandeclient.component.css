@@ -1,0 +1,31 @@
+/* catégories */
+.catégorie{
+  padding-top: 50px;
+  padding-left: 275px;
+}
+/* categories */
+.gcategories{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-evenly;
+  padding: 20px 10px;
+}
+.difcategories{
+  border: 2px solid #1A6060;
+  display: flex;
+  justify-content: center;
+  padding: 15px 5px;
+  gap: 10px;
+  width: 265px;
+  border-radius: 20px;
+  box-shadow: 4px 4px #2FA7A7;
+  background-color: white;
+}
+.difcategories h3{
+  color: #1A6060;
+  font-weight: bold;
+  font-size: 25px;
+}
+.difcategories img{
+  height: 35px;
+}

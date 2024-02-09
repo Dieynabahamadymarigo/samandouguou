@@ -17,6 +17,11 @@ export class HeaderComponent {
       // variable pour gérer la déconnexion
       connectUser: boolean = false;
       userName: string = '';
+      userRole: string = '';
+
+      // le survol du profil
+      showDropdown: boolean = false;
+
 
       constructor (private router: Router,private panierService : PanierService , private authService : LoginService, private cdr: ChangeDetectorRef){}
 
@@ -24,23 +29,84 @@ export class HeaderComponent {
            // S'abonner aux observables pour mettre à jour les propriétés du composant en fonction de l'état d'authentification
       this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
         this.connectUser = isAuthenticated;
+        console.log('user',this.connectUser)
         // this.quantitePanier = this.panierService.ajouterAuPanier(this);
       });
 
       this.authService.userName$.subscribe((userName) => {
         this.userName = userName;
       });
+
+      this.authService.userRole$.subscribe((userRole) => {
+        this.userRole = userRole;
+      });
+
+
+      // this.panierSize = this.panierService.getCart().reduce((total, item) => total + item.quantity, 0);
+      // this.panierService.iconePanier$.subscribe((cart) => {
+      //   this.panierSize = cart.reduce((total, item) => total + item.quantity, 0);
+      // });
+
+      // Mettez à jour le nombre d'articles lorsque le panier change
+    this.panierService.iconePanier$.subscribe((count) => {
+      this.nbpanier = count;
+      this.cdr.detectChanges();
+    });
+    this.onLoginClick();
       }
 
-      onLoginClick() {
-        if (this.connectUser) {
-          // Gérer la déconnexion
-          this.authService.deconnect().subscribe(() => {
-            this.router.navigate(['/']);
-            alert ('deconnecter')
-          });
-        } else {}
+     // effet de survol quand l'utilisateur se connect
+      toggleDropdown() {
+        this.showDropdown = !this.showDropdown;
       }
+      // navigateToProfile() {
+        //naviguer vers la page de profil
+      //   this.router.navigate(['/client']);
+      //   console.log('Naviguer vers le profil');
+      // }
+
+      // navigateToProfile() {
+      //   if (!this.connectUser) {
+      //     this.authService.role(this.connectUser).subscribe((userRole) => {
+
+      //       this.authService.userRoleSubject.next(userRole);
+
+      //       if(userRole.role_id=='1'){
+      //         this.router.navigate(['/admin']);
+      //         alert('voux etes admin')
+      //       }
+      //       else if (userRole.role_id=='2')
+      //       {
+      //         this.router.navigate(['/client']);
+      //         alert('voux etes client')
+      //       }
+      //       else
+      //       {
+      //         this.router.navigate(['/livreur']);
+      //       alert('voux etes livreur')
+      //     }
+
+      //       this.router.navigate([userRole]);
+      //       console.log('Naviguer vers le profil',userRole);
+      //     });
+      //   }
+      // }
+
+
+
+      // Gérer la déconnexion
+      // if (this.connectUser) {
+      onLoginClick() {
+          this.authService.deconnect().subscribe(() => {
+            this.router.navigate(['/accueil']);
+            // alert ('deconnecter');
+            console.log('deconnect',this.connectUser)
+          });
+        // } else {}
+      }
+
+
+
 
   public quantite = 1;
   public nbpanier=0;
@@ -73,9 +139,10 @@ export class HeaderComponent {
         this.totalProduit();
         this.panier = this.panierService.getFromPanier();
         this.nbpanier= panierProduit.length;
-        this.cdr.detectChanges();
+        this.panierService.updateIncrementePanier(this.nbpanier);
+        // this.cdr.detectChanges();
         console.log('nombbre',this.nbpanier)
-        console.log('Nombre de produits dans le panier :', this.nbpanier);
+        // console.log('Nombre de produits dans le panier :', this.nbpanier);
 
       }
 

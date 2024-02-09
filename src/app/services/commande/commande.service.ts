@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,19 @@ export class CommandeService {
 
   constructor(private http: HttpClient) {}
 
-  // Envoyer la commande à la base de données
-  envoiBd(produit: any[]): Observable<any> {
-    return this.http.post("http://127.0.0.1:8000/api/", { produit });
-  }}
+  // liste des commandes
+  // submitCommande(listeCommande: any): Observable<any> {
+  //   const accessToken = localStorage.getItem('userConnect');
+  //   return accessToken ?
+  //   this.http.post<any>('http://127.0.0.1:8000/api/indexCommande',listeCommande, {
+  //     headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
+  //   }): of (null);
+  // }
+  // return this.http.get<any>(`${this.url}/ ajouterAuPanier`, listeCommande);
+
+  // lister commandes
+  submitCommande(): Observable<any>{
+    return this.http.get('http://127.0.0.1:8000/api/listeCommandeEnAttente  ');
+  }
+
+}

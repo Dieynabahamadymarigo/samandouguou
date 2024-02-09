@@ -1,4 +1,4 @@
-<div class="header" (click)="onLoginClick()">{{ connectUser ? 'Déconnexion' : 'Connexion' }}<h3 *ngIf="connectUser">Bonjour, {{ userName }}</h3></div>
+<div class="header"><h3 *ngIf="connectUser">Nom: {{ userName }}</h3></div>
 
 <div class="  titrecategorie">
   <div class="navbar navbar-expand-lg ">
@@ -11,7 +11,7 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
           <!-- <li class="nav-item" routerLinkActive="active" > -->
-            <a class="nav-link imgheader mb-5" aria-current="page" routerLink="/"><img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5"  alt=""></a>
+            <a class="nav-link imgheader mb-5" aria-current="page" routerLink="/"><img src="http://127.0.0.1:8000/images/{{userClient.image}}"  alt=""></a>
           <!-- </li> -->
           <li class="nav-item mb-3" routerLinkActive="active">
             <a class="nav-link" routerLink="/client"><img src="../../../../assets/bi_person-blanc.png" class="iconsheader"> Profil</a>
@@ -23,14 +23,8 @@
 
           <li class="nav-item mb-3" routerLinkActive="active">
             <a class="nav-link" routerLink="/">
-            <i class="bi bi-box-arrow-right iconsheader"></i> Deconnexion</a>
+              <i class="bi bi-house"></i> Accueil</a>
           </li>
-          <!-- <li class="nav-item mb-3" routerLinkActive="active">
-            <a class="nav-link" routerLink="/admin/livreurs"><img src="../../../assets/carbon_delivery.png" class="iconsheader"> Livreur</a>
-          </li> -->
-          <!-- <li class="nav-item mb-2" routerLinkActive="active">
-            <a class="nav-link" routerLink="/deukhine">Deukhine</a>
-          </li> -->
         </ul>
 
       </div>

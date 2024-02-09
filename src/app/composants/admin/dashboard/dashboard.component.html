@@ -48,15 +48,15 @@
         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
       </div>
       <div class="recherche">
-        <input type="search" placeholder="Recherche"  [(ngModel)]="filterValue" (input)="onSearch()"><i class="bi bi-search"></i>
+        <input type="search" placeholder="Recherche" [(ngModel)]="filterValue" (input)="onSearch()">
       </div>
     </div>
 
     <div class="gcarte">
 
-      <div class="card cartepacks" *ngFor=" let produit of tabListProduit ">
+      <div class="card cartepacks" *ngFor=" let produit of visibleProduits ">
         <div class="contenupacks"></div>
-        <img src="http://127.0.0.1:8000/storage/{{produit.image}}" class="img-top imglegumes" alt="...">
+        <img src="http://127.0.0.1:8000/images/{{produit.image}}" class="img-top imglegumes" alt="...">
         <div class="card-body titreproduits">
           <h4 class="card-title"> Nom : {{produit.nomProduit}} </h4>
           <p>Prix : {{produit.prix}} fr</p>
@@ -69,46 +69,14 @@
         </div>
         <div class="contenupacks2" ></div>
       </div>
+
     </div>
+
+    <div class="iconpagination">
+      <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button>
+    </div>
+
   </div>
-
-    <!-- Pagination
-    <div *ngIf="getItemsPage().length">
-    <div class="d-flex justify-content-end mb-2">
-    <button class="rounded-2 btnColor  mx-2" [disabled]="pageActuelle === 1"
-        (click)="pageActuelle = pageActuelle - 1">
-        <i class="bi bi-caret-left-fill fs-4"></i>
-    </button>
-    <button class=" mx-2 page" *ngFor="let page of pages" (click)="pageActuelle = page">
-        <span class="pageActuelle fs-5" *ngIf="page===pageActuelle">{{page}}</span>
-        <span *ngIf="page != pageActuelle">{{page}}</span>
-    </button>
-    <button class="rounded-2 btnColor mx-2" [disabled]="pageActuelle === totalPages"
-        (click)="pageActuelle = pageActuelle + 1">
-        <i class="bi bi-caret-right-fill fs-4"></i>
-    </button>
-    </div>
-    </div> -->
-
-    <!-- pagination -->
-    <!-- <div class="iconpagination">
-
-      <div class="chevron">
-        <i class="bi bi-chevron-left"></i>
-      </div>
-      <div class="un">
-        <i class="bi bi-1-square"></i>
-      </div>
-      <div class="deux">
-        <i class="bi bi-2-square"></i>
-      </div>
-      <div class="trois">
-        <i class="bi bi-3-square"></i>
-      </div>
-      <div class="">
-        <i class="bi bi-chevron-right"></i>
-      </div>
-    </div> -->
 
   <!-- carte de packs -->
 
@@ -201,76 +169,31 @@
 
     <div class="gcarte">
 
-      <div class="card cartepacks" >
+      <div class="card cartepacks" *ngFor=" let user of visibleUsers">
         <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <img src="http://127.0.0.1:8000/images/{{user.image}}" class="img-top imgperson" alt="...">
         <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+          <h4 class="card-title"> Nom : {{user.nom}} {{user.prenom}} </h4>
         </div>
         <div class="iconproduits">
-          <i class="bi bi-eye-fill me-3"></i>
-          <!-- <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i> -->
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
-
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-eye-fill me-3"></i>
-          <!-- <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i> -->
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
-
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-eye-fill me-3"></i>
-          <!-- <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i> -->
+          <i class="bi bi-eye-fill me-3" style="cursor: pointer;" (click)="getUser (user)" data-bs-toggle="modal" data-bs-target="#detailUsers"></i>
         </div>
         <div class="contenupacks2" ></div>
       </div>
 
     </div>
 
-    <!-- pagination -->
     <div class="iconpagination">
-
-      <div class="chevron">
-        <i class="bi bi-chevron-left"></i>
-      </div>
-      <div class="un">
-        <i class="bi bi-1-square"></i>
-      </div>
-      <div class="deux">
-        <i class="bi bi-2-square"></i>
-      </div>
-      <div class="trois">
-        <i class="bi bi-3-square"></i>
-      </div>
-      <div class="">
-        <i class="bi bi-chevron-right"></i>
-      </div>
+      <button *ngFor="let page of totalPageArray()" (click)="setPages(page)"> {{ page }}</button>
     </div>
+
 
   </div>
 
 
 </div>
 
-<!-- Modal produits -->
+<!-- Modal ajout produits -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -312,7 +235,7 @@
   </div>
 </div>
 
-<!-- Modal packs -->
+<!-- Modal ajout packs -->
 <div class="modal fade" id="packs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -367,7 +290,7 @@
           <!-- <input type="text" [(ngModel)]="prix" name="prix" required> -->
         </div>
         <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Nombre : {{produitSelectionner.quantiteTotale}} fr</label>
+          <label for="" class="me-3">Nombre : {{produitSelectionner.quantiteTotale}} </label>
           <!-- <input type="number" [(ngModel)]="quantiteTotale" name="quantiteTotale" required> -->
         </div>
         <div class="mb-3 inputmodal">
@@ -376,7 +299,7 @@
         </div>
         <div class="mb-3 inputmodal">
           <!-- <label for="" class="me-3">image :  </label> -->
-        <img src="http://localhost:8000/storage/{{produitSelectionner.image}}" class="img-top imglegumesdetail" alt="...">
+        <img src="http://localhost:8000/images/{{produitSelectionner.image}}" class="img-top imglegumesdetail" alt="...">
           <!-- <input type="file" (change)="getFile($event)" name="image" required> -->
         </div>
         <!-- <div class="mb-3 inputmodal">
@@ -431,6 +354,49 @@
         <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
         <button type="submit" data-bs-dismiss="modal" (click)="modifierProduit()" class="btn ajoutelemnt ">Modifier</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal clients details -->
+<div class="modal fade" id="detailUsers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Voir detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : {{userSelectionner.nom}} </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prenom : {{userSelectionner.prenom}}  </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Email : {{userSelectionner.email}} </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Adresse : {{userSelectionner.adresse}} </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Telephone : {{userSelectionner.telephone}} </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+        <img src="http://localhost:8000/images/{{userSelectionner.image}}" class="img-top imglegumesdetail" alt="...">
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+      </div>
+
     </div>
   </div>
 </div>

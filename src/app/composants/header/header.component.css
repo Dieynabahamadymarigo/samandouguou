@@ -1,11 +1,15 @@
 /* logo */
 .imglogo{
   height: 70px;
+  /* border: 2px solid black; */
+
 }
 
 /* noms des liens */
 .nomlien{
   margin:0 auto;
+  /* border: 2px solid black; */
+
 }
 .nomlien li a{
   font-size: 20px;
@@ -18,7 +22,20 @@
 }
 
 /* button compte */
+/* .compte{
+  margin-left: -70px ;
+  border: 2px solid black;
+} */
 .compte li a{
+  font-size: 20px;
+  background-color: #1A6060;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+
+}
+.compte button{
   font-size: 20px;
   background-color: #1A6060;
   border-radius: 20px;
@@ -34,8 +51,50 @@
   width: 100%;
   top: 0;
   z-index: 1000;
+  padding: 10px 40px;
 }
 
 .toogle{
   color: #1A6060;
+}
+
+/* survol profil */
+.dropbtn {
+  border: none;
+  cursor: pointer;
+  /* padding: 16px; */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  padding: 5px 4px;
+  background-color: #f9f9f9;
+  /* min-width: 160px; */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  /* color: black; */
+  font-size: 13px;
+  padding: 5px 4px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
 }

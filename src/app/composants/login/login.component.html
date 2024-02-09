@@ -12,7 +12,7 @@
 
       <div class="col-md-7 mt-5 info">
 
-          <div class="champs">
+          <div class="champs mb-3">
             <div class="d-block">
               <input type="text" class="me-3" id="nom" placeholder="Votre nom" [(ngModel)]="nom"  name="nom" required><br>
             </div>
@@ -22,7 +22,7 @@
             </div>
           </div>
 
-          <div class="champs">
+          <div class="champs mb-3">
             <div class="block">
               <input type="email" class="me-3" placeholder="Votre email" [(ngModel)]="email" name="email" required>
             </div>
@@ -31,7 +31,7 @@
             </div>
           </div>
 
-          <div class="champs">
+          <div class="champs mb-3">
             <div class="block">
               <input type="tel" class="me-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse" required>
             </div>
@@ -41,27 +41,14 @@
           </div>
 
           <div class="champs">
-            <div class="block">
-              <input type="file" (change)="getFile($event)" class="me-3" placeholder="image"  name="image" required>
-              <!-- <p class="text-danger" *ngIf="!exactPasswordConf">{{verifPasswordConf}}</p>
-              <p class="text-success" *ngIf="exactPasswordConf"><i class="bi bi-check2-all"></i> Exact !</p> -->
+            <!-- <div class="block" >
+              <input type="text"  placeholder="votre statut" class="me-3" [(ngModel)]="nom" name="statut" required>
+            </div> -->
+            <div class="block file-input">
+              <input type="file"  (change)="getFile($event)"  placeholder="image"  name="image" required>
             </div>
-            <!-- <div>
-              <select name="role" id="role" [(ngModel)]="role" (change)="roles()" required > -->
-                <!-- <option *ngFor="let roles of role" [value]="role">{{roles}}</option> -->
-                <!-- <option value="client">Client</option>
-                <option value="livreur">Livreur</option>
-              </select> -->
-              <!-- <p class="text-danger" *ngIf="!exactRole">{{verifRole}}</p>
-              <p class="text-success" *ngIf="exactRole"><i class="bi bi-check2-all"></i> Exact !</p> -->
-            <!-- </div> -->
           </div>
-<!--
-          <div class="block" >
-            <input type="text"  placeholder="votre statut" [(ngModel)]="statut" name="statut" required>
-            <p class="text-danger" *ngIf="!exactPassword">{{verifPassword}}</p>
-            <p class="text-success" *ngIf="exactPassword"><i class="bi bi-check2-all"></i> Exact !</p>
-          </div> -->
+
 
           <div class="btn mt-3">
             <button type="submit">S'inscrire</button>

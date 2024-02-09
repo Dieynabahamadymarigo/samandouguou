@@ -114,10 +114,49 @@ export class AccueilComponent {
 
 
 
-
+    //Pour faire la recherche
+    filterValue = '';
+    filteredProduit: any;
 
    // le tableau
    tabListProduit : any []=[];
+
+   itemsPerPage = 8;
+   currentPage = 1;
+
+   onSearch() {
+    this.currentPage = 1; // Réinitialiser la page à 1 lorsqu'une recherche est effectuée
+
+    // Recherche se fait selon le nom du produit
+    this.filteredProduit = this.tabListProduit.filter((elt: any) =>
+      elt?.nomProduit.toLowerCase().includes(this.filterValue.toLowerCase())
+    );
+  }
+
+  get visibleProduits() {
+    // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+    const sourceArray = this.filteredProduit ? this.filteredProduit : this.tabListProduit;
+
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+
+    return sourceArray.slice(startIndex, endIndex);
+  }
+
+  totalPagesArray(): number[] {
+    // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+    const sourceArray = this.filteredProduit ? this.filteredProduit : this.tabListProduit;
+
+    return Array.from({ length: Math.ceil(sourceArray.length / this.itemsPerPage) }, (_, i) => i + 1);
+  }
+
+  setPage(page: number) {
+    // Vérifiez si la page est valide en fonction du nombre total de pages
+    if (page >= 1 && page <= this.totalPagesArray().length) {
+      this.currentPage = page;
+    }
+  }
+  
 
   listerDesProduits(){
     // console.log(this.tabListProduit);

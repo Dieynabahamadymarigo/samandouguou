@@ -8,88 +8,42 @@
       <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
     </div>
     <div class="recherche">
-      <input type="search" placeholder="Recherche"><i class="bi bi-search"></i>
+      <input type="search" placeholder="Recherche" [(ngModel)]="filterValue" (input)="onSearch()">
     </div>
   </div>
 
 
     <!-- carte des livreures -->
-  <div >
+  <!-- <div > -->
 
     <div class="gcarte">
 
-      <div class="card cartepacks" >
+      <div class="card cartepacks" *ngFor="let livreur of visibleLivreurs" >
         <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/attractive-young-african-american-male-dressed-casually-looking-camera_273609-9402.jpg?w=740&t=st=1706492602~exp=1706493202~hmac=16bad4d070a32d38c5f4796009677a36121173e20ec82447d9c1f4726944a2a4" class="img-top imgperson" alt="...">
+        <img src="http://127.0.0.1:8000/images/{{livreur.image}}" alt="...">
         <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Moussa NDIAYE</h4>
+          <h4 class="card-title"> Nom : {{livreur.nom}} {{livreur.prenom}} </h4>
         </div>
         <div class="iconproduits">
           <!-- <i class="bi bi-check2-all me-3"></i> -->
-          <i class="bi bi-eye-fill me-3"></i>
-          <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i>
+          <i class="bi bi-eye-fill me-3" style="cursor: pointer;" (click)="getLivreur (livreur)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i>
+          <i class="bi bi-pencil-square me-3" style="cursor: pointer;" (click)="chargerInfosLivreur (livreur)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i>
+          <i class="bi bi-trash-fill me-3" style="cursor: pointer;" (click)="supprimerLivreur(livreur.id)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i>
         </div>
         <div class="contenupacks2" ></div>
       </div>
 
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/attractive-young-african-american-male-dressed-casually-looking-camera_273609-9402.jpg?w=740&t=st=1706492602~exp=1706493202~hmac=16bad4d070a32d38c5f4796009677a36121173e20ec82447d9c1f4726944a2a4" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Moussa NDIAYE</h4>
-        </div>
-        <div class="iconproduits">
-          <!-- <i class="bi bi-check2-all me-3"></i> -->
-          <i class="bi bi-eye-fill me-3"></i>
-          <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i>
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
-
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/attractive-young-african-american-male-dressed-casually-looking-camera_273609-9402.jpg?w=740&t=st=1706492602~exp=1706493202~hmac=16bad4d070a32d38c5f4796009677a36121173e20ec82447d9c1f4726944a2a4" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Moussa NDIAYE</h4>
-        </div>
-        <div class="iconproduits">
-          <!-- <i class="bi bi-check2-all me-3"></i> -->
-          <i class="bi bi-eye-fill me-3"></i>
-          <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i>
-        </div>
-        <div class="contenupacks2" ></div>
+      <div class="iconpagination">
+        <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button>
       </div>
 
     </div>
 
-    <!-- pagination -->
-    <div class="iconpagination">
-
-      <div class="chevron">
-        <i class="bi bi-chevron-left"></i>
-      </div>
-      <div class="un">
-        <i class="bi bi-1-square"></i>
-      </div>
-      <div class="deux">
-        <i class="bi bi-2-square"></i>
-      </div>
-      <div class="trois">
-        <i class="bi bi-3-square"></i>
-      </div>
-      <div class="">
-        <i class="bi bi-chevron-right"></i>
-      </div>
-    </div>
-
-  </div>
+  <!-- </div> -->
 
 </div>
 
-<!-- Modal livreur -->
+<!-- Modal ajout livreur -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -98,29 +52,158 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body ">
-        <div class="mb-3 ">
-          <input type="file">
+        <form (ngSubmit)="onInscrire()" enctype="multipart/form-data" class=" container" >
+          <div class="row g-0 contenu">
+            <!-- <h2>Page d'inscription</h2> -->
+
+            <div class="col-md-5 mt-5 gimg">
+              <img src="../../../assets/baniere/compte.png" class="img-fluid img" alt="">
+            </div>
+
+            <div class="col-md-7 mt-5 info">
+
+                <div class="champs mb-3">
+                  <div class="d-block">
+                    <input type="text" class="me-3 mb-3" id="nom" placeholder="Votre nom" [(ngModel)]="nom"  name="nom" required><br>
+                  </div>
+
+                  <div class="d-block">
+                    <input type="text" class="" placeholder="Votre prénom" [(ngModel)]="prenom" name="prenom" required>
+                  </div>
+                </div>
+
+                <div class="champs mb-3">
+                  <div class="block">
+                    <input type="email" class="me-3 mb-3" placeholder="Votre email" [(ngModel)]="email" name="email" required>
+                  </div>
+                  <div class="block">
+                    <input type="password" class="" placeholder="mot de passe" [(ngModel)]="password" name="password" required>
+                  </div>
+                </div>
+
+                <div class="champs mb-3">
+                  <div class="block">
+                    <input type="tel" class="me-3 mb-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse" required>
+                  </div>
+                  <div class="block">
+                    <input type="tel" class="" placeholder="votre télephone" [(ngModel)]="telephone" name="telephone" required>
+                  </div>
+                </div>
+
+                <div class="champs">
+                  <div class="block" >
+                    <input type="text"  placeholder="votre statut" class="me-3 mb-3" [(ngModel)]="statut" name="statut" required>
+                  </div>
+                  <div class="block file-input">
+                    <input type="file"  (change)="getFile($event)"  placeholder="image"  name="image" required>
+                  </div>
+                </div>
+                  <div class="modal-footer mt-3">
+                    <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn ajoutelemnt ">Ajouter</button>
+                  </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal livreur details -->
+<div class="modal fade" id="detailLivreurs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Voir detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : {{userSelectionner.nom}} </label>
         </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prenom : {{userSelectionner.prenom}}  </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Email : {{userSelectionner.email}} </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Adresse : {{userSelectionner.adresse}} </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Telephone : {{userSelectionner.telephone}} </label>
+        </div>
+
+        <div class="mb-3 inputmodal">
+        <img src="http://localhost:8000/images/{{userSelectionner.image}}" class="img-top imglegumesdetail" alt="...">
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal livreur mofidifier -->
+<div class="modal fade" id="modification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Modification</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
         <div class="mb-3 inputmodal">
           <label for="" class="me-3">Nom : </label>
-          <input type="text" >
+          <input type="text" name="nom" [(ngModel)]="nom"  >
         </div>
         <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Prénom : </label>
-          <input type="text">
+          <label for="" class="me-3">Prenom :  </label>
+          <input type="text" [(ngModel)]="prenom" name="prenom" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Email : </label>
+          <input type="email" class="me-3 mb-3" placeholder="Votre email" [(ngModel)]="email" name="email" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Mot de passe : </label>
+          <input type="password" class="" placeholder="mot de passe" [(ngModel)]="password" name="password" >
         </div>
         <!-- <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Nombre : </label>
-          <input type="number">
+          <label for="" class="me-3">Adresse : </label>
+          <input type="text" class="me-3 mb-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse">
         </div> -->
         <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Membre : </label>
-          <input type="text">
+          <label for="" class="me-3">Telephone : </label>
+          <input type="tel" class="" placeholder="votre télephone" [(ngModel)]="telephone" name="telephone">
         </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Adresse : </label>
+          <input type="text" class="me-3 mb-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse">
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Image :  </label>
+        <img src="" class="img-top imglegumesdetail" alt="...">
+          <input type="file" (change)="getFile($event)" name="image" >
+        </div>
+        <!-- <div class="mb-3 inputmodal">
+          <label for="" class="me-3">image : </label>
+          <input type="file"  [(ngModel)]="image" name="image" required>
+        </div> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn ajoutelemnt ">Ajouter</button>
+        <button type="submit" data-bs-dismiss="modal" (click)="modifierLivreur()" class="btn ajoutelemnt ">Modifier</button>
       </div>
     </div>
   </div>

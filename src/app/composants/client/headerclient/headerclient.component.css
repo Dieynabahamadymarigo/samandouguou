@@ -21,6 +21,7 @@
   position: fixed;
   padding: 100px 0px;
   background-color: #1A6060;
+  height: auto;
   z-index: 1;
 }
 .toogle{
@@ -29,10 +30,10 @@
 .imgheader img{
   border-top-right-radius: 45px;
   border-bottom-left-radius: 45px;
-  height: 150px;
+  height: 200px;
 }
 .titrecategorie ul{
-  padding-top: 15px;
+  padding-top: 20px;
   display: block;
   font-weight: bold;
 }

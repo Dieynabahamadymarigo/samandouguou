@@ -131,13 +131,15 @@
 }
 .imglegumes{
   margin-top: -60px;
-  /* border: 2px solid; */
+  height: 13rem;
+  /* border: 2px solid black; */
 }
 .imglegumesdetail{
   height: 150px;
 }
 .imgperson{
   width: 14rem;
+  height: 14rem;
   border-top-right-radius: 40px;
   margin:0 auto;
   margin-top: -55px;
@@ -171,6 +173,7 @@
 }
 
 /* pagination */
+/* pagination */
 .iconpagination{
   padding-top: 50px;
   padding-bottom: 30px;
@@ -178,8 +181,12 @@
   justify-content: center;
   gap: 15px;
   color: #1A6060;
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
+}
+.iconpagination button{
+  border: 2px solid #1A6060;
+  color: #1A6060;
 }
 .un{
   background-color: #1A6060;

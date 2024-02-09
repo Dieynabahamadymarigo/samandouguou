@@ -3,19 +3,20 @@
 
   <div class="container ">
     <div class="card mb-3 " >
-      <div class="row g-0 carte">
-        <div class="col-md-6">
-          <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-fluid imgcartre " alt="...">
+      <div class="row g-0 carte" *ngIf="userClient">
+        <div class="col-md-5">
+          <img src="http://127.0.0.1:8000/images/{{userClient.image}}" class="img-fluid imgcartre" alt="" >
+          <!-- <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-fluid imgcartre " alt="..."> -->
         </div>
-        <div class="col-md-6 titre ">
+        <div class="col-md-7 titre ">
           <div class="card-body">
-            <h4 class="card-title">Nom : NDIAYE</h4>
-            <h4 class="card-title">Prenom : Aîcha</h4>
-            <h4 class="card-title">Membre : 00/00/24</h4>
-            <h4 class="card-title">Téléphone : 776543210</h4>
-            <div class="ajout">
+            <h4 class="card-title">Nom : {{userClient.nom}} </h4>
+            <h4 class="card-title">Prenom : {{userClient.prenom}} </h4>
+            <h4 class="card-title">Membre : {{ userClient.created_at | date:'mediumDate' }}</h4>
+            <h4 class="card-title">Téléphone : {{userClient.telephone}}</h4>
+            <!-- <div class="ajout">
               <button>Modifier</button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

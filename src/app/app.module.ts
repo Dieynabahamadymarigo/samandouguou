@@ -26,6 +26,7 @@ import { HeaderclientComponent } from './composants/client/headerclient/headercl
 import { DeconnexionclientComponent } from './composants/client/deconnexionclient/deconnexionclient.component'
 import { CommandeclientComponent } from './composants/client/commandeclient/commandeclient.component';
 import { ProfilclientComponent } from './composants/client/profilclient/profilclient.component';
+import { CardPaginationComponent } from './card-pagination/card-pagination.component';
 
 @NgModule({
   declarations: [
@@ -50,14 +51,15 @@ import { ProfilclientComponent } from './composants/client/profilclient/profilcl
     HeaderclientComponent,
     CommandeclientComponent,
     DeconnexionclientComponent,
-    ProfilclientComponent
+    ProfilclientComponent,
+    CardPaginationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FormsModule,
     HttpClientModule,
+    // FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

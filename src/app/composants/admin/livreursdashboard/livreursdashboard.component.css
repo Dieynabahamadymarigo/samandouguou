@@ -177,3 +177,83 @@
   border-left: 3px solid #1A6060;
   color: #1A6060;
 }
+
+.contenu{
+  background-color: white;
+  /* padding: 15px 20px; */
+}
+.gimg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img{
+  height: 200px;
+}
+.info{
+  justify-content: center;
+}
+.champs p{
+  /* border: 2px solid; */
+  font-size: 15px;
+}
+.champs{
+  /* border: 2px solid; */
+  display: block;
+  justify-content: center;
+  gap: 30px;
+}
+.info input{
+  background-color: #EDEDED;
+  justify-content: center;
+  border:2px solid #1A6060;
+  border-radius: 40px;
+  padding: 7px 15px;
+  outline: none;
+  width: 100%;
+}
+.file-input input[type="file"]{
+  background-color: none ;
+  justify-content: center;
+  border:none;
+  border-radius: 40px;
+  padding: 7px 9px;
+  outline: none;
+  width: 236px;
+}
+.button{
+  background-color: #2FA7A7;
+  color: white;
+  border: none;
+  padding: 6px 40px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 23px;
+}
+.modal-content
+{
+  /* border: 4px solid black; */
+  width: 600px;
+  /* height: 500px; */
+}
+
+/* pagination */
+.iconpagination{
+  padding-top: 50px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  color: #1A6060;
+  font-size: 25px;
+  cursor: pointer;
+}
+.iconpagination button{
+  border: 2px solid #1A6060;
+  color: #1A6060;
+}
+
+/* img modal */
+.imglegumesdetail{
+  height: 150px;
+}

@@ -1,8 +1,11 @@
+import { GuardService } from './../../services/guard/guard.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { Panier } from 'src/app/models/login';
 import { PanierService } from 'src/app/services/panier/panier.service';
 import { LegumesService } from 'src/app/services/legumes/legumes.service';
+import { LoginService } from 'src/app/services/login/login.service';
+import { CommandeService } from 'src/app/services/commande/commande.service';
 
 @Component({
   selector: 'app-panier',
@@ -16,7 +19,6 @@ export class PanierComponent implements OnInit {
   nom: string = "";
   prix:number =0;
   image: string = "";
-  // quantite: number= 0;
   total: number= 0;
 
   public quantite = 1;
@@ -25,25 +27,25 @@ export class PanierComponent implements OnInit {
   public nombreLegumes = 0;
   public sommeLegumes = 0;
   public prixLivraion = this.panierService.prixLivraion;
-  // produit: any[];
-
-  //
 
   tabListProduit: any[] = [];
-
-  // produitsPanier: any[] = [];
 
   //
   connectUser: boolean = false;
 
 
-  constructor(private panierService: PanierService,private LegumesService:LegumesService,  private cdr: ChangeDetectorRef) {}
+  constructor(private authService : LoginService, private router: Router, private panierService: PanierService,private LegumesService:LegumesService,  private cdr: ChangeDetectorRef, private commande: CommandeService) {}
   ngOnInit(): void {
+
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.connectUser = isAuthenticated;
+    });
 
     this.listerDesProduits();
     // this.produitsPanier = this.panierService.getLegumes();
     this.panier = this.panierService.getFromPanier();
     this.totalProduit();
+    // this.isOnline();
   }
 
 
@@ -124,37 +126,79 @@ export class PanierComponent implements OnInit {
     this.totalProduit();
   }
 
+  commandeAllPanier() {
+    let tab: any = [];
+    tab = this.panierService.getFromPanier();
+
+    // Vider le tableau
+    tab = [];
+
+    localStorage.setItem('panier', JSON.stringify(tab));
+    this.panier = this.panierService.getFromPanier();
+    // this.panierService.message("Parfait", "success", "Panier vidé avec succès");
+    this.totalProduit();
+  }
+
+      // variables pour se connecter
+      formDate:any = {
+        email : '',
+        password : '',
+        createAt: new Date(),
+        updateAt: "",
+      }
 
   isOnline() {
-    let a = JSON.parse(localStorage.getItem('panier') ?? '[]');
-    // console.log(a.length);
-    if (a.length == 0) {
+    let panier = JSON.parse(localStorage.getItem('panier') ?? '[]');
+    if (panier.length == 0) {
 
       this.panierService.message('Oop\'s', "warning", "Le panier est vide veuillez le remplir d'abord");
-    }else{
+    }
+    else{
       this.panierService.isAuthenticated$.subscribe((isAuthenticated) => {
-        if (!isAuthenticated) {
-          this.panierService.message('Oop\'s', 'error', 'La connexion est requise pour cette action');
-        } else {
-          // L'utilisateur est connecté, vous pouvez maintenant procéder à la commande
-          this.panierService.message('Commande envoyée', 'success', 'Merci pour la confiance');
-          // Ajoutez ici le code pour effectuer la commande
+        if (this.connectUser == isAuthenticated) {
+          // this.router.navigate(['/connexion']);
+            // alert('La connexion est requise pour cette action')
+            console.log(this.connectUser);
+            this.panierService.message('Oop\'s', 'error', 'La connexion est requise pour cette action');
+        }
+        else {
+          this.commande.submitCommande().subscribe(
+            (rep) => {
+              console.log('commande', rep);
+              localStorage.setItem('userConnect', rep.token);
+            },
+
+            )
+            this.panierService.message('Commande envoyée', 'success', 'Merci pour la confiance');
+          this.commandeAllPanier();
         }
       });
+
     }
   }
 
+  // evoie dans la base de données 
+  // payer() {
+  //   // let panier = this.LegumesService.getFromPanier();
+  //   let panier : any = [] ;
+  //   let panierProduit: any[] = [];
 
-  // this.produitsPanier = this.panierService.getLegumes();
-  // addPanier(legume: any) {
-  //   this.panierService.ajouterAuPanier(legume);
+  //   panier.forEach((element: any) => {
+  //     panierProduit.push({
+  //       produit_id: element.produit.id,
+  //       nombre_produit: element.quantitePanier,
+  //       montant: element.produit.prix*element.quantitePanier
+  //     });
+  //   });
+  //   let panierToSend = {
+  //     panier: panierProduit
+  //   }
+  //   console.log(panierToSend);
+
+  //   this.service.post("api/passerCommande", panierToSend, ((reponse: any) => {
+  //     window.open(reponse.payment_url,"_self");
+  //   }));
   // }
-
-  // retirerPanier(legume: any) {
-  //   this.panierService.retirerDuPanier(legume);
-  //   this.produitsPanier = this.panierService.getLegumes();
-  // }
-
 
     //  pour recuperer un produit
     produitSelectionner: any = {};
@@ -170,11 +214,5 @@ export class PanierComponent implements OnInit {
     this.tabListProduit = data.ListeProduit;
      } ) }
 
-
-     // Effacer le panier après avoir passé la commande
-  // envoiBd() {
-  //   this.panierService.clearLegumes();
-  //   this.produitsPanier = [];
-  // }
 
 }

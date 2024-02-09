@@ -28,11 +28,11 @@
 
     <div class="gcarte">
 
-      <div class="card cartepacks" >
+      <div class="card cartepacks" *ngFor="let produit of commandes" >
         <div class="contenupacks"></div>
         <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
         <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+          <h4 class="card-title"> Nom : {{produit}}  </h4>
         </div>
         <div class="iconproduits">
           <i class="bi bi-check2-all me-3"></i>
@@ -47,7 +47,7 @@
         <div class="contenupacks"></div>
         <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
         <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+          <h4 class="card-title"> Nom : Aîcha NDIAYE </h4>
         </div>
         <div class="iconproduits">
           <i class="bi bi-check2-all me-3"></i>

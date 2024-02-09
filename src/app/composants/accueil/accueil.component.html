@@ -37,28 +37,32 @@
     <div class="container titrelegumes">
       <h2>Nos légumes</h2>
       <div>
-        <input type="search" placeholder="Recherche"><i class="bi bi-search search"></i>
+        <input type="search" placeholder="Recherche" [(ngModel)]="filterValue" (input)="onSearch()">
       </div>
     </div>
 
   <div>
     <div class="gcartelegumes">
 
-      <div class="card carte" *ngFor=" let produit of tabListProduit" >
+      <div class="card carte" *ngFor=" let produit of visibleProduits" >
         <div class="contour"></div>
-        <img src="http://127.0.0.1:8000/storage/{{produit.image}}" class="card-img-top carteimg" alt="..." >
+        <img src="http://127.0.0.1:8000/images/{{produit.image}}" class="card-img-top carteimg" alt="..." >
         <div class="card-body">
-          <h3 class="card-title" >Nom : {{produit.nomProduit}}</h3>
-          <p class="card-text">{{produit.prix}} fr</p>
+          <h4 class="card-title" >Nom : {{produit.nomProduit}}</h4>
+          <h5 class="card-text">{{produit.prix}} fr</h5>
         </div>
         <div class="contour2"><i class="bi bi-cart3" (click)="addPanier(produit)"></i></div>
       </div>
-
-
     </div>
+
+    <div class="iconpagination">
+        <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button>
+    </div>
+
+
   </div>
     <!-- pagination -->
-    <div class="iconpagination">
+    <!-- <div class="iconpagination">
 
       <div class="chevron">
         <i class="bi bi-chevron-left"></i>
@@ -75,7 +79,7 @@
       <div class="">
         <i class="bi bi-chevron-right"></i>
       </div>
-    </div>
+    </div> -->
 
 
     <br>
@@ -124,27 +128,55 @@
     <div class="card cartetape" style="width: 17rem;">
       <img src="../../../assets/Search.png" class="img-top imgetape" alt="...">
       <div class="card-body titretape">
-        <h5 class="card-title">Etape 1 </h5>
-        <h5 class="card-title">La recherche</h5>
-        <p class="card-text">Vous pouvez parcourir notre site et utilise le module de recherche afin de découvrir  les offres disponibles.</p>
+        <h4 class="card-title">Etape 1 </h4>
+        <h4 class="card-title">La recherche</h4>
+        <h5 class="card-text">Vous pouvez parcourir notre site et utilise le module de recherche afin de découvrir  les offres disponibles.</h5>
       </div>
     </div>
 
     <div class="card cartetape" style="width: 17rem;">
-      <img src="../../../assets/Search.png" class="img-top imgetape" alt="...">
+      <img src="../../../assets/Forms-pana.png" class="img-top imgetape" alt="...">
       <div class="card-body titretape">
-        <h5 class="card-title">Etape 1 </h5>
-        <h5 class="card-title">La recherche</h5>
-        <p class="card-text">Vous pouvez parcourir notre site et utilise le module de recherche afin de découvrir  les offres disponibles.</p>
+        <h4 class="card-title">Etape 2 </h4>
+        <h4 class="card-title">La création d’un compte</h4>
+        <h5 class="card-text"> Vous devez créer un compte ou connectez-vous si vous en avez  pour pouvoir faire vos achats.</h5>
       </div>
     </div>
 
     <div class="card cartetape" style="width: 17rem;">
-      <img src="../../../assets/Search.png" class="img-top imgetape" alt="...">
+      <img src="../../../assets/Add to Cart-amico.png" class="img-top imgetape" alt="...">
       <div class="card-body titretape">
-        <h5 class="card-title">Etape 1 </h5>
-        <h5 class="card-title">La recherche</h5>
-        <p class="card-text">Vous pouvez parcourir notre site et utilise le module de recherche afin de découvrir  les offres disponibles.</p>
+        <h4 class="card-title">Etape 3 </h4>
+        <h4 class="card-title">L’ajout au panier </h4>
+        <h5 class="card-text">Vous pouvez choisir de poursuivre vos recherches et ajouter davantage de produits ou bien de s’arrêter là</h5>
+      </div>
+    </div>
+
+    <div class="card cartetape" style="width: 17rem;">
+      <img src="../../../assets/Online Groceries-amico.png" class="img-top imgetape" alt="...">
+      <div class="card-body titretape">
+        <h4 class="card-title">Etape 4 </h4>
+        <h4 class="card-title">La confirmation de l’achat</h4>
+        <h5 class="card-text"> Si vous avez finalisé vos achats, vous devez les confirmés</h5>
+      </div>
+    </div>
+
+    <div class="card cartetape" style="width: 17rem;">
+      <img src="../../../assets/In no time-pana.png" class="img-top imgetape" alt="...">
+      <div class="card-body titretape">
+        <h4 class="card-title">Etape 5 </h4>
+        <h4 class="card-title">Mode de livraison et mode de paiement</h4>
+        <h5 class="card-text"> On vous livre là ou vous voulez et vous devez payer à la livraison </h5>
+      </div>
+    </div>
+
+    <div class="card cartetape" style="width: 17rem;">
+      <img src="../../../assets/Successful purchase-pana.png" class="img-top imgetape" alt="...">
+      <div class="card-body titretape">
+        <!-- <h4 class="card-title">Etape 6 </h4> -->
+        <h4 class="card-title">Thiono dém marché diékh na
+          Sama Ndouguou est la pour vous satisfaire</h4>
+        <!-- <h5 class="card-text">Vous pouvez choisir de poursuivre vos recherches et ajouter davantage de produits ou bien de s’arrêter là</h5> -->
       </div>
     </div>
 

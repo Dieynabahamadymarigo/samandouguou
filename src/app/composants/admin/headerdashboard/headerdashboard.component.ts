@@ -31,7 +31,7 @@ export class HeaderdashboardComponent {
          this.router.navigate(['/']);
          alert ('deconnecter')
        });
-     } 
+     }
    }
 
 }

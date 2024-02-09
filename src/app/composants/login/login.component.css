@@ -46,16 +46,14 @@ h2{
   outline: none;
   width: 100%;
 }
-.info select{
-  background-color: #EDEDED;
+.file-input input[type="file"]{
+  background-color: none ;
   justify-content: center;
-  border:2px solid #1A6060;
+  border:none;
   border-radius: 40px;
-  padding: 10px 30px;
+  padding: 10px 9px;
   outline: none;
-  height: 48px;
-  width: 246px;
-  /* border: 2px solid; */
+  width: 236px;
 }
 button{
   background-color: #2FA7A7;

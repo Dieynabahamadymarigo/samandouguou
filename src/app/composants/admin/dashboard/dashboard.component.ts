@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { Produits } from './../../../models/login';
+import { Produits, User } from './../../../models/login';
 import { Component, OnInit } from '@angular/core';
 // import { LoginService } from 'src/app/services/login/login.service';
 import { LegumesService } from 'src/app/services/legumes/legumes.service';
@@ -10,7 +10,8 @@ import { LegumesService } from 'src/app/services/legumes/legumes.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  // variables pour les noms des variables
+
+  // variables pour les noms des produits
   produits: Produits = new Produits();
 
   nomProduit: string = '';
@@ -22,8 +23,23 @@ export class DashboardComponent implements OnInit {
   creatAt = '';
   updateAt = '';
 
+  // variables pour les noms des clients
+  // user: User = new User();
+  // // idUser : number = 0;
+  // nomUser : string = "";
+  // prenomUser : string = "";
+  // emailUser : string = "";
+  // passwordUser : string = "";
+  // adresseUser : string = "";
+  // telephoneUser : string = "";
+  // imageUser : any = "";
+  // // statut : boolean = false;
+  // // role : string= "";
+  // create_At = '';
+
   // le tableau
   tabListProduit: any[] = [];
+  tabListUser: any[] = [];
 
   // variables choix de produits
   tabProduits: boolean = true;
@@ -65,6 +81,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.listerDesProduits();
+    this.listerUsers();
   }
 
   //methode pour ajouter des prduits
@@ -80,7 +97,10 @@ export class DashboardComponent implements OnInit {
 
       this.authService.ajoutProduit(formData).subscribe(
         (rep) => {
-          console.log('réussi', rep);
+          // console.log('réussi',formData )
+          // console.log('prix', rep.this.prix);
+          // console.log('quatite', rep.quantiteTotale);
+          // console.log('image', this.image);
           localStorage.setItem('userConnect', rep.token);
         },
         (error) => {
@@ -90,20 +110,17 @@ export class DashboardComponent implements OnInit {
     }
     this.verifierChamps('Félicitation!', 'Produit ajouté', 'success');
 
+    // this.ajout();
     this.viderChamps();
-    this.ajout();
   }
-
-
-
 
   // lister  produits
   listerDesProduits() {
     // console.log(this.tabListProduit);
     this.LegumesService.listerDesProduits().subscribe((data) => {
-      console.log('listeProduits', data.ListeProduit);
+      // console.log('listeProduits', data.ListeProduit);
       this.tabListProduit = data.ListeProduit;
-      console.log('tab', this.tabListProduit);
+      console.log('tab', data.ListeProduit[0].nomProduit);
     });
   }
 
@@ -113,6 +130,12 @@ export class DashboardComponent implements OnInit {
 
   getProduit(produit: any) {
     this.produitSelectionner = produit;
+  }
+  //  pour recuperer un produit
+  userSelectionner: any = {};
+
+  getUser(user: any) {
+    this.userSelectionner = user;
   }
 
   modifierProduit() {
@@ -126,6 +149,7 @@ export class DashboardComponent implements OnInit {
         console.log('modifProduit', response);
       });
   }
+  
   // declare id
   id: number = 0;
   chargerInfosProduit(produit: any) {
@@ -160,50 +184,89 @@ export class DashboardComponent implements OnInit {
       }
     });
 }
-  //Pour faire la recherche
-  filterValue = '';
-  filteredProduit: any;
 
-  onSearch() {
-    // Recherche se fait selon le nom ou le prenom
+  // lister  des clients
+  listerUsers() {
+    // console.log(this.tabListUser);
+    this.LegumesService.listerDesUsers().subscribe((data) => {
+      console.log('listeDesUser', data);
+      this.tabListUser = data;
+      console.log('listeUser', this.tabListUser);
+    });
+    // console.log('user',this.listerUsers)
+  }
+
+
+
+    //Pour faire la recherche
+    filterValue = '';
+    filteredProduit: any;
+
+   // le tableau
+  //  tabListProduit : any []=[];
+
+   itemsPerPage = 6;
+   currentPage = 1;
+
+   onSearch() {
+    this.currentPage = 1; // Réinitialiser la page à 1 lorsqu'une recherche est effectuée
+
+    // Recherche se fait selon le nom du produit
     this.filteredProduit = this.tabListProduit.filter((elt: any) =>
       elt?.nomProduit.toLowerCase().includes(this.filterValue.toLowerCase())
     );
   }
 
+  get visibleProduits() {
+    // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+    const sourceArray = this.filteredProduit ? this.filteredProduit : this.tabListProduit;
 
-  // Pagination
-     // Attribut pour la pagination
-    //  itemsParPage = 3;
-     // Nombre d'articles par page
-    //  pageActuelle = 1;
-      // Page actuelle
-    //  tabMessages: any[] = [];
-    //  tabMessagesFilter: any[] = [];
-  // Méthode pour déterminer les articles à afficher sur la page actuelle
-  //   getItemsPage(): any[] {
-  //     console.log('pagi',this.getItemsPage)
-  //     if (Array.isArray(this.tabMessagesFilter)) {
-  //     const indexDebut = (this.pageActuelle - 1) * this.itemsParPage;
-  //     const indexFin = indexDebut + this.itemsParPage;
-  //     return this.tabMessagesFilter.slice(indexDebut, indexFin);
-  //   } else {
-  //     return [];
-  //   }
-  // }
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
 
-  // Méthode pour générer la liste des pages
-  // get pages(): number[] {
-  //   const totalPages = Math.ceil(this.tabMessagesFilter.length / this.itemsParPage);
-  //   return Array(totalPages).fill(0).map((_, index) => index + 1);
-  // }
+    return sourceArray.slice(startIndex, endIndex);
+  }
 
-  // Méthode pour obtenir le nombre total de pages
-  // get totalPages(): number {
-  //   return Math.ceil(this.tabMessagesFilter.length / this.itemsParPage);
-  // }
+  totalPagesArray(): number[] {
+    // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+    const sourceArray = this.filteredProduit ? this.filteredProduit : this.tabListProduit;
 
-  // Methode pour vider les champs
+    return Array.from({ length: Math.ceil(sourceArray.length / this.itemsPerPage) }, (_, i) => i + 1);
+  }
+
+  setPage(page: number) {
+    // Vérifiez si la page est valide en fonction du nombre total de pages
+    if (page >= 1 && page <= this.totalPagesArray().length) {
+      this.currentPage = page;
+    }
+  }
+
+  // pagination des users
+  get visibleUsers() {
+    // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+    // const sourceArray = this.filteredProduit ? this.filteredProduit : this.tabListProduit;
+
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+
+    return this.tabListUser.slice(startIndex, endIndex);
+  }
+
+  totalPageArray(): number[] {
+    // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+    // const tabListUser = this.filteredProduit ? this.filteredProduit : this.tabListProduit;
+
+    return Array.from({ length: Math.ceil(this.tabListUser.length / this.itemsPerPage) }, (_, i) => i + 1);
+  }
+
+  setPages(page: number) {
+    // Vérifiez si la page est valide en fonction du nombre total de pages
+    if (page >= 1 && page <= this.totalPagesArray().length) {
+      this.currentPage = page;
+    }
+  }
+
+
 
 
   viderChamps() {

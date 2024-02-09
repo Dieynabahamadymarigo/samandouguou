@@ -36,7 +36,7 @@
       <tr >
         <!-- <th scope="row">2</th> -->
         <th scope="row">{{index+1}}</th>
-        <td><img src="http://127.0.0.1:8000/storage/{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt=""></td>
+        <td><img src="http://127.0.0.1:8000/images/{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt=""></td>
         <td class="me-5 input">
           <button class="decremente"><i class="bi bi-dash-circle" (click)="upOrDownQuantity('down',produit.produit.id)"></i></button>
           <input tyte="number" [value]="produit.quantitePanier"> {{produit.produit.quantite}}
