@@ -9,29 +9,44 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class HeaderdashboardComponent {
    // variable pour gérer la déconnexion
-   connectUser: boolean = false;
+   connectUser: any;
+   deconnectUser:any;
    userName: string = '';
    constructor (private router: Router, private authService : LoginService){}
 
    ngOnInit(): void {
-        // S'abonner aux observables pour mettre à jour les propriétés du composant en fonction de l'état d'authentification
-   this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
-     this.connectUser = isAuthenticated;
-   });
 
-   this.authService.userName$.subscribe((userName) => {
-     this.userName = userName;
-   });
+   if(localStorage.getItem('userConnect')!=null){
+    this.connectUser=true;
+    this.deconnectUser=false;
+  }
+  else{
+    this.connectUser=false;
+    this.deconnectUser=true
+  }
+
+
    }
 
-   onLoginClick() {
-     if (this.connectUser) {
-       // Gérer la déconnexion
-       this.authService.deconnect().subscribe(() => {
-         this.router.navigate(['/']);
-         alert ('deconnecter')
-       });
-     }
-   }
+
+   onLogoutClick() : void{
+    this.authService.deconnect().subscribe(
+      () => {
+        // La déconnexion a réussi
+        console.log('Déconnexion réussie');
+        // this.connectUser : localStorage.removeItem('userConnect')
+        // alert('deconnect')
+        // La déconnexion est réussie
+        localStorage.removeItem('userConnect');
+        this.connectUser=false;
+        this.deconnectUser=true;
+
+      },
+      (error) => {
+        // Gérez les erreurs liées à la déconnexion
+        console.error('Erreur lors de la déconnexion :', error);
+      }
+    );
+  }
 
 }

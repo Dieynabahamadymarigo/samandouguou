@@ -19,7 +19,22 @@
   font-weight: bold;
   font-size: 45px;
 }
-
+.enlevePanier i{
+  color: red;
+}
+.enlevePanier p{
+  font-size: 50px;
+  font-weight: bold;
+}
+.enlevePanier{
+  background-color: white;
+  width: 70%;
+  height: 150px;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* tableau */
 table{
   border-collapse: collapse;
@@ -41,7 +56,7 @@ td{
 }
 .tabimg{
   height: 80px;
-  /* border: 2px solid; */
+  /* border: 2px solid black; */
 }
 .decremente{
   background-color: transparent;
@@ -98,3 +113,209 @@ td{
   border-left: 3px solid #1A6060;
   color: #1A6060;
 }
+
+ /*tablette*/
+ @media screen and (max-width: 991px)  {
+  /* banier */
+.contenu{
+  height: 220px;
+}
+.img{
+  height: 205px;
+}
+.titre{
+  margin-top: 50px;
+}
+.titre h1{
+  font-size: 40px;
+}
+}
+/* téléphone */
+@media screen and (max-width: 767px) {
+  /* banier */
+.contenu{
+height: 300px;
+/* border: 2px solid; */
+}
+.banierimg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img{
+height: 205px;
+/* width: 60% !important; */
+/* margin:0 auto; */
+/* border: 2px solid; */
+}
+.titre{
+margin-top: 30px;
+}
+.titre h1{
+font-size: 35px;
+}
+th{
+  padding: 6px;
+  font-size: 22px;
+}
+td {
+  padding: 8px;
+  font-size: 20px;
+  /* border: 2px solid black; */
+}
+.tabimg{
+  height: 75px;
+  /* border: 2px solid black; */
+}
+.decremente{
+  background-color: transparent;
+  /* border: 2px solid black; */
+  border: none;
+  font-size: 20px;
+}
+.delete{
+  background-color: transparent;
+  color: #1A6060;
+  border: none;
+  font-size: 25px;
+}
+.input input{
+  border: none;
+  /* border: 2px solid; */
+  text-align: center;
+  width: 25%;
+}
+.somme h3{
+  font-size: 25px;
+  background-color: white;
+  padding: 8px 15px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  font-weight: bold;
+}
+.enlevePanier p{
+  font-size: 46px;
+  font-weight: bold;
+}
+
+}
+
+/* mini télé */
+@media screen and (max-width: 510px) {
+  .img{
+    height: 163px;
+    }
+    .enlevePanier p{
+      font-size: 40px;
+    }
+}
+
+/* téléphone petit model */
+@media screen and (max-width: 468px)
+{
+  /* banier */
+.contenu{
+  height: 300px;
+  /* border: 2px solid; */
+}
+.img{
+  height: 210px;
+}
+.titre{
+  margin-top: 30px;
+}
+.titre h1{
+  font-size: 30px;
+}
+th{
+  padding: 5px;
+  font-size: 22px;
+}
+td {
+  padding: 7px;
+  font-size: 18px;
+  /* border: 2px solid black; */
+}
+.tabimg{
+  height: 75px;
+  /* border: 2px solid black; */
+}
+.decremente{
+  background-color: transparent;
+  /* border: 2px solid black; */
+  border: none;
+  font-size: 20px;
+}
+.delete{
+  background-color: transparent;
+  color: #1A6060;
+  border: none;
+  font-size: 23px;
+}
+.input input{
+  border: none;
+  /* border: 2px solid; */
+  text-align: center;
+  width: 25%;
+}
+.input button{
+  width: 30%;
+ /* border: 2px solid black; */
+}
+.somme h3{
+  font-size: 23px;
+  background-color: white;
+  padding: 7px 13px;
+  border-top-right-radius: 23px;
+  border-bottom-left-radius: 23px;
+  font-weight: bold;
+}
+}
+
+/* téléphone petit model */
+@media screen and (max-width: 457px)
+{
+  th{
+    padding: 4px;
+    font-size: 20px;
+  }
+  td {
+    padding: 6px;
+    font-size: 16px;
+    /* border: 2px solid black; */
+  }
+  .tabimg{
+    height: 70px;
+    /* border: 2px solid black; */
+  }
+  .decremente{
+    background-color: transparent;
+    /* border: 2px solid black; */
+    border: none;
+    font-size: 17px;
+  }
+  .enlevePanier p{
+    font-size: 37px;
+  }
+}
+/* téléphone petit model */
+@media screen and (max-width: 440px)
+{
+  .img{
+    height: 173px;
+  }
+  .enlevePanier p{
+    font-size: 30px;
+  }
+  .decremente{
+    background-color: transparent;
+    /* border: 2px solid black; */
+    border: none;
+    font-size: 15px;
+  }
+  .somme h3{
+    font-size: 19px;
+  }
+
+}
+

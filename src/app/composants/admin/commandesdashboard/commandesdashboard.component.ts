@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login/login.service';
 import { Component } from '@angular/core';
 import { CommandeService } from 'src/app/services/commande/commande.service';
 import Swal from 'sweetalert2';
@@ -52,37 +53,26 @@ export class CommandesdashboardComponent {
   produit: any = '';
   creatAt = '';
   updateAt = '';
+  userClient: any=[] ;
 
-      constructor(private commandeService: CommandeService) {}
+      constructor(private commandeService: CommandeService,private authService : LoginService) {}
 
-      ngOnInit(): void {}
+      ngOnInit(): void {
+      //   this.authService.user$.subscribe((user) => {
+      //     this.userClient = {
+      //     image: user.image,
+      //     nom: user.nom,
+      //     prenom: user.prenom,
+      //   };
+      //   console.log('Image:', this.userClient.image);
+      //   console.log('Nom:', this.userClient.nom);
+      //   console.log('Prenom:', this.userClient.prenom);
+      // });
 
-
-  //methode pour ajouter des commandes
-  ajout(): void {
-    {
-      let formData = new FormData();
-      formData.append('nomCommande', this.nomCommande);
-      formData.append('quantite', this.quantite);
-      formData.append('produit', this.produit);
-      console.log('commande', formData);
-
-      this.commandeService.submitCommande().subscribe(
-        (rep) => {
-          console.log('réussi', rep);
-          localStorage.setItem('userConnect', rep.token);
-        },
-        (error) => {
-          console.error('erreur', error);
-        }
-      );
-    }
-    this.verifierChamps('Félicitation!', 'Produit ajouté', 'success');
-
-    this.viderChamps();
-    this.ajout();
-  }
-
+        this.listerDesCommandes();
+        this.listeDesCommandesEnCours();
+        this.listeLivreurDisponible();
+      };
 
   viderChamps() {
     this.nomCommande = '';
@@ -99,17 +89,153 @@ export class CommandesdashboardComponent {
     });
   }
 
-      // listeCommnadeClient(){
-      //   this.commandeService.submitCommande().subscribe((data) => {
-      //     console.log('listeProduits', data);
+//  -----------------------------------------------------------------------------------------
+  // Commandes en attentes
+  // lister commandes en attentes
+  tabListCommandes: any []= [];
+  listerDesCommandes() {
 
-      //       // this.orders = rep;
-      //     },
-      //     (error) => {
-      //       console.error('Erreur lors de la récupération des commandes pour l\'administration :', error);
-      //     }
-      //   );
-      // }
+    console.log('agezefyvdbfegvu',this.tabListCommandes);
+    this.commandeService.listerCommande().subscribe((data) => {
+      this.tabListCommandes = data;
+      console.log('tabCommande', data);
+    });
+  }
+
+      //Pour faire la recherche
+      filterValue = '';
+      filteredProduit: any;
+
+     itemsPerPage = 6;
+     currentPage = 1;
+
+     onSearch() {
+      this.currentPage = 1; // Réinitialiser la page à 1 lorsqu'une recherche est effectuée
+
+      // Recherche se fait selon le nom du produit
+      this.filteredProduit = this.tabListCommandes.filter((elt: any) =>
+        elt?.nomProduit.toLowerCase().includes(this.filterValue.toLowerCase())
+      );
+    }
+
+    get visibleProduits() {
+      // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+      const sourceArray = this.filteredProduit ? this.filteredProduit : this.tabListCommandes;
+
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+
+      return sourceArray.slice(startIndex, endIndex);
+    }
+
+    totalPagesArray(): number[] {
+      // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+      const sourceArray = this.filteredProduit ? this.filteredProduit : this.tabListCommandes;
+
+      return Array.from({ length: Math.ceil(sourceArray.length / this.itemsPerPage) }, (_, i) => i + 1);
+    }
+
+    setPage(page: number) {
+      // Vérifiez si la page est valide en fonction du nombre total de pages
+      if (page >= 1 && page <= this.totalPagesArray().length) {
+        this.currentPage = page;
+      }
+    }
+
+
+//  -----------------------------------------------------------------------------------------
+  // Commandes en cours
+
+  //user commandes en cours
+  // id:number=0;
+  clientCommande(id:number) {
+    this.commandeService.affecterCommande(id).subscribe((response) => {
+        console.log('commandeClient', response);
+        // this.listerDesProduits();
+
+      });
+  }
+  // lister commandes en cours
+  tabListLivreurDispo: any = [];
+  listeLivreurDisponible() {
+
+    console.log('agezefyvdbfegvu',this.tabListLivreurDispo);
+    this.commandeService.listerLivreurDispo().subscribe((data) => {
+      this.tabListLivreurDispo = data.data;
+      console.log('tabLivreurDipo', data.data);
+      
+    });
+  }
+
+  // lister commandes en cours
+  tabListCommandesEncours: any []= [];
+  listeDesCommandesEnCours() {
+
+    console.log('agezefyvdbfegvu',this.tabListCommandesEncours);
+    this.commandeService.listerCommandeEnCours().subscribe((data) => {
+      this.tabListCommandesEncours = data;
+      console.log('tabCommande', data);
+    });
+  }
+
+      //Pour faire la recherche
+      filterCommande = '';
+      filteredCommandes: any;
+
+     itemsComPage = 6;
+     currentCommande = 1;
+
+     onSearchCommande() {
+      this.currentCommande = 1; // Réinitialiser la page à 1 lorsqu'une recherche est effectuée
+
+      // Recherche se fait selon le nom du produit
+      this.filteredCommandes = this.tabListCommandesEncours.filter((elt: any) =>
+        elt?.nomProduit.toLowerCase().includes(this.filterCommande.toLowerCase())
+      );
+    }
+
+    get visibleCommande() {
+      // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+      const sourceArray = this.filteredCommandes ? this.filteredCommandes : this.tabListCommandesEncours;
+
+      const startIndex = (this.currentCommande - 1) * this.itemsComPage;
+      const endIndex = startIndex + this.itemsComPage;
+
+      return sourceArray.slice(startIndex, endIndex);
+    }
+
+    totalCommandeArray(): number[] {
+      // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+      const sourceArray = this.filteredCommandes ? this.filteredCommandes : this.tabListCommandesEncours;
+
+      return Array.from({ length: Math.ceil(sourceArray.length / this.itemsComPage) }, (_, i) => i + 1);
+    }
+
+    setCommande(page: number) {
+      // Vérifiez si la page est valide en fonction du nombre total de pages
+      if (page >= 1 && page <= this.totalCommandeArray().length) {
+        this.currentCommande = page;
+      }
+    }
+
+
+
+
+
+  // listerDesCommandes() {
+  //   this.commandeService.listerCommandeEnCours().subscribe((data: any[]) => {
+  //     this.tabListCommandes = data.map(commande => {
+  //       return {
+  //         ...commande,
+  //         nom: commande.user? commande.user.nom : '',
+  //         prenom: commande.user ? commande.user.prenom : '',
+  //         image: commande.user ? commande.user.image : '',
+  //       };
+  //     });
+  //     // console.log('commande', commande.user.nom),
+  //     console.log('tabCommande', this.tabListCommandes);
+  //   });
+  // }
 
 
 }

@@ -32,6 +32,7 @@ export class PanierComponent implements OnInit {
 
   //
   connectUser: boolean = false;
+  userClient: any= [];
 
 
   constructor(private authService : LoginService, private router: Router, private panierService: PanierService,private LegumesService:LegumesService,  private cdr: ChangeDetectorRef, private commande: CommandeService) {}
@@ -41,10 +42,22 @@ export class PanierComponent implements OnInit {
       this.connectUser = isAuthenticated;
     });
 
+    // this.authService.user$.subscribe((user) => {
+    //     this.userClient = {
+    //     image: user.image,
+    //     nom: user.nom,
+    //     prenom: user.prenom,
+    //   };
+    //   console.log('Image:', this.userClient.image);
+    //   console.log('Nom:', this.userClient.nom);
+    //   console.log('Prenom:', this.userClient.prenom);
+    // });
+
     this.listerDesProduits();
     // this.produitsPanier = this.panierService.getLegumes();
     this.panier = this.panierService.getFromPanier();
     this.totalProduit();
+
     // this.isOnline();
   }
 
@@ -87,16 +100,11 @@ export class PanierComponent implements OnInit {
     this.nombreLegumes += element.quantitePanier;
     this.sommeLegumes += element.quantitePanier * element.produit.prix;
     });
-    // console.log('total',this.totalProduit)
-
+    // console.log('total',this.totalProduit),
   }
 
-  // methode pour incermenter
-  increment( quantite = 1) {
-    this.panierService.incrementerQuantite(quantite);
-    console.log('svpppp',quantite)
-    // this.produitsPanier = this.panierService.getLegumes();
-  }
+
+
   // methode supprimer
   deleteFromPanier(id: any) {
     let tab: any = [];
@@ -146,59 +154,66 @@ export class PanierComponent implements OnInit {
         createAt: new Date(),
         updateAt: "",
       }
+      // idUser: number = 0;
+
+
+
+      // variable pour adresse
+      adresseLivraison: string = '';
 
   isOnline() {
     let panier = JSON.parse(localStorage.getItem('panier') ?? '[]');
-    if (panier.length == 0) {
+    console.log('Valeur du panier dans le localStorage:', panier);
 
+    if (panier.length == 0) {
       this.panierService.message('Oop\'s', "warning", "Le panier est vide veuillez le remplir d'abord");
     }
-    else{
+    else {
       this.panierService.isAuthenticated$.subscribe((isAuthenticated) => {
         if (this.connectUser == isAuthenticated) {
-          // this.router.navigate(['/connexion']);
-            // alert('La connexion est requise pour cette action')
-            console.log(this.connectUser);
-            this.panierService.message('Oop\'s', 'error', 'La connexion est requise pour cette action');
+          console.log(this.connectUser);
+          this.panierService.message('Oop\'s', 'error', 'La connexion est requise pour cette action');
         }
         else {
-          this.commande.submitCommande().subscribe(
-            (rep) => {
-              console.log('commande', rep);
-              localStorage.setItem('userConnect', rep.token);
-            },
 
-            )
-            this.panierService.message('Commande envoyée', 'success', 'Merci pour la confiance');
-          this.commandeAllPanier();
+          let panierProduitUser: any[] = [];
+          panier.forEach((element: any) => {
+            panierProduitUser.push({
+              produit_id: element.produit.id,
+              nombre_produit: element.quantitePanier,
+              montant: element.produit.prix * element.quantitePanier,
+              });
+          });
+
+          let panierToSend = {
+            panier: panierProduitUser,
+            adresse_de_livraison: this.adresseLivraison,
+          };
+
+          console.log('panierSend', panierToSend);
+
+          this.commande.submitCommande(panierToSend).subscribe(
+            (rep) => {
+              // Mettez à jour le panier local et affichez le message de confirmation ici
+              this.panierService.message('Commande envoyée', 'success', 'Merci pour la confiance');
+              this.commandeAllPanier();
+
+            //   rep = this.userClient;
+            //  console.log('Imagerepp:', this.userClient.image);
+            //   console.log('Nom:', this.userClient.nom);
+            //   console.log('Prenom:', this.userClient.prenom);
+            // const userName = userDetails.nom;
+            // const userFirstName = userDetails.prenom;
+            },
+            (erreur: any) => {
+              console.error("Erreur lors de la requête HTTP :", erreur);
+            }
+          );
         }
       });
-
-    }
+    };
   }
 
-  // evoie dans la base de données 
-  // payer() {
-  //   // let panier = this.LegumesService.getFromPanier();
-  //   let panier : any = [] ;
-  //   let panierProduit: any[] = [];
-
-  //   panier.forEach((element: any) => {
-  //     panierProduit.push({
-  //       produit_id: element.produit.id,
-  //       nombre_produit: element.quantitePanier,
-  //       montant: element.produit.prix*element.quantitePanier
-  //     });
-  //   });
-  //   let panierToSend = {
-  //     panier: panierProduit
-  //   }
-  //   console.log(panierToSend);
-
-  //   this.service.post("api/passerCommande", panierToSend, ((reponse: any) => {
-  //     window.open(reponse.payment_url,"_self");
-  //   }));
-  // }
 
     //  pour recuperer un produit
     produitSelectionner: any = {};

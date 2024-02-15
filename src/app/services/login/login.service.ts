@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -66,21 +66,18 @@ export class LoginService {
 
 
 
-    deconnect(): Observable<any> {
-      const accessToken = localStorage.getItem('userConnect');
+deconnect(): Observable<any> {
+  const accessToken = localStorage.getItem('userConnect');
 
-      if (accessToken) {
-        const headers = new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` });
+  return accessToken
+    ? this.http.post<any>(`${this.url}/deconnect`, {}, {
+        headers: new HttpHeaders({'Authorization': `Bearer ${accessToken}`
+        }),
+      })
+    : of(null);
+}
 
-        return this.http.post<any>('http://127.0.0.1:8000/api/deconnect', null, { headers })
-          .pipe(
-            // tap(() => localStorage.removeItem('userConnect'))
-          );
-      } else {
-        return of(null);
-      }
-    }
-  // }
+
 
   // deconnect(): Observable<any> {
   //   return this.http.post(`${this.url}/deconnect`, {}).pipe(
@@ -88,6 +85,7 @@ export class LoginService {
   //       // la déconnexion est réussie
   //       this.isAuthenticatedSubject.next(false);
   //       this.userNameSubject.next('');
+  //       console.log('deconnect', this.deconnect())
   //     })
   //   );
   // }
@@ -115,13 +113,10 @@ export class LoginService {
     return accessToken ?
       this.http.post<any>(`http://127.0.0.1:8000/api/inscriptionlivreur`,user, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
-    }) : of(null);
-    // return this.http.post('http://127.0.0.1:8000/api/inscriptionlivreur',user)
+    },
+    ) : of(null);
   }
-  // //methode pour inscription livreur
-  // inscritLivreur (user: any): Observable <any>{
-  //   return this.http.post('http://127.0.0.1:8000/api/inscriptionlivreur',user)
-  // }
+
 
 
 }

@@ -23,20 +23,6 @@ export class DashboardComponent implements OnInit {
   creatAt = '';
   updateAt = '';
 
-  // variables pour les noms des clients
-  // user: User = new User();
-  // // idUser : number = 0;
-  // nomUser : string = "";
-  // prenomUser : string = "";
-  // emailUser : string = "";
-  // passwordUser : string = "";
-  // adresseUser : string = "";
-  // telephoneUser : string = "";
-  // imageUser : any = "";
-  // // statut : boolean = false;
-  // // role : string= "";
-  // create_At = '';
-
   // le tableau
   tabListProduit: any[] = [];
   tabListUser: any[] = [];
@@ -102,6 +88,7 @@ export class DashboardComponent implements OnInit {
           // console.log('quatite', rep.quantiteTotale);
           // console.log('image', this.image);
           localStorage.setItem('userConnect', rep.token);
+          this.listerDesProduits();
         },
         (error) => {
           console.error('erreur', error);
@@ -111,6 +98,7 @@ export class DashboardComponent implements OnInit {
     this.verifierChamps('Félicitation!', 'Produit ajouté', 'success');
 
     // this.ajout();
+    // this.ngOnInit();
     this.viderChamps();
   }
 
@@ -147,9 +135,11 @@ export class DashboardComponent implements OnInit {
       formData.append('description', this.description,);
     this.authService.updateProduit(this.id, formData).subscribe((response) => {
         console.log('modifProduit', response);
+        this.listerDesProduits();
+
       });
   }
-  
+
   // declare id
   id: number = 0;
   chargerInfosProduit(produit: any) {
@@ -162,6 +152,8 @@ export class DashboardComponent implements OnInit {
     this.description = produit.description;
     this.image = produit.image;
     console.log('changer', this.chargerInfosProduit);
+    this.listerDesProduits();
+
   }
 
   // methode pour supprimer
@@ -180,6 +172,8 @@ export class DashboardComponent implements OnInit {
       if (result.isConfirmed) {
         this.authService.deleteProduit(id).subscribe((response) => {
           console.log('supProduit', response);
+          this.listerDesProduits();
+
         });
       }
     });

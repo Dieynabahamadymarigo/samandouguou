@@ -67,23 +67,6 @@ export class LegumesService {
       this.http.get<any>(`http://127.0.0.1:8000/api/listerLivreur`, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
     }) : of(null);
-   }
-
-  // listerDesUsers(user: any): Observable<any> {
-  //   const accessToken = localStorage.getItem('userConnect');
-  //   const options = {
-  //     headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` }),
-  //     params: user  // Placer le paramètre 'user' dans l'objet 'params'
-  //   };
-
-  //   return accessToken ?
-  //     this.http.get<any>(`http://127.0.0.1:8000/api/listerClients`, options) : of(null);
-  // }
-
-
-
-    // return this.http.get('http://127.0.0.1:8000/api/listerClients');
-  // }
-
+   };
 
 }

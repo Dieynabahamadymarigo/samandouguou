@@ -20,6 +20,8 @@ import { HeaderclientComponent } from './composants/client/headerclient/headercl
 import { CommandeclientComponent } from './composants/client/commandeclient/commandeclient.component';
 import { PanierComponent } from './composants/panier/panier.component';
 import { GuardService } from './services/guard/guard.service';
+import { DashLivreurComponent } from './livreur/dash-livreur/dash-livreur.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 // import { DeconnexionclientComponent } from './composants/client/deconnexionclient/deconnexionclient.component';
 
 const routes: Routes = [
@@ -35,12 +37,20 @@ const routes: Routes = [
   {path: 'packs', component:PacksComponent},
   {path: 'panier', component:PanierComponent},
   {path: 'recettes', component:LegumesComponent},
+  // {path: 'admin', component:DashboardComponent},
   {path: 'admin', component:DashboardComponent, canActivate: [GuardService]},
   {path: 'admin/recettes', component:RecettesdashboardComponent},
   {path: 'admin/commandes', component:CommandesdashboardComponent},
   {path: 'admin/livreurs', component:LivreursdashboardComponent},
   {path: 'client', component:ProfilclientComponent, canActivate: [GuardService]},
   {path: 'client/commande', component:CommandeclientComponent},
+  {path: 'livreur', component:DashLivreurComponent,canActivate: [GuardService]},
+
+
+
+
+  {path: 'error', component:MaintenanceComponent},
+
   // {path: 'client', component:HeaderclientComponent},
   // {path: 'client/deconnecter', component:DeconnexionclientComponent},
   // canActivate: [MonGarde],

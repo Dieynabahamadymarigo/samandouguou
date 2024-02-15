@@ -221,7 +221,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow:0px 2px 0px 0px #2FA7A7;
+    /* box-shadow:0px 2px 0px 0px #2FA7A7; */
   }
   .image{
     height: 360px;
@@ -314,7 +314,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow:0px 2px 0px 0px #2FA7A7;
+    /* box-shadow:0px 2px 0px 0px #2FA7A7; */
   }
   .image{
     height: 300px;

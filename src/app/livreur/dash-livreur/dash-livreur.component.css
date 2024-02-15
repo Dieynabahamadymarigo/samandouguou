@@ -1,3 +1,9 @@
+/* catégories */
+.catégorie{
+  padding-top: 50px;
+  padding-left: 275px;
+}
+
 .header{
   padding: 0px 30px;
   background-color: white;
@@ -30,7 +36,7 @@
 .imgheader img{
   border-top-right-radius: 45px;
   border-bottom-left-radius: 45px;
-  height: 200px;
+  height: 170px;
 }
 .titrecategorie ul{
   padding-top: 20px;
@@ -54,6 +60,54 @@
   height: 20px;
 }
 
+/* carte */
+.card{
+  border: none;
+  background-color: transparent;
+  /* height: ; */
+  padding-top: 130px;
+  /* padding-bottom: auto ; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid; */
+}
+.carte{
+  background-color: white;
+  padding: 10px 10px;
+  border-top: 3px solid #2FA7A7;
+  border-left: 3px solid #2FA7A7;
+  border-right: none;
+  border-bottom: none;
+  box-shadow: 4px 4px #1A6060;
+  border-bottom-left-radius: 30px;
+  border-top-right-radius: 30px;
+  margin: 0 auto;
+  /* border: 2px solid; */
+}
+.imgcartre{
+  height: 200px;
+}
+.titre {
+  justify-content: center;
+  align-items: center;
+}
+.titre h4{
+  font-weight: bold;
+  font-size: 20px;
+}
+.occupe{
+  background-color: white;
+  color: #1A6060;
+  font-weight: bold;
+  border-bottom: none;
+  border-right: none;
+  border-top: 3px solid #1A6060;
+  border-left: 3px solid #1A6060;
+  box-shadow: 2px 2px 0px 1px #2FA7A7;
+  border-radius: 30px;
+  padding: 3px 13px;
+}
 
  /*tablette*/
  @media screen and (max-width: 991px){
@@ -82,13 +136,17 @@
   .imgheader img{
     border-top-right-radius: 40px;
     border-bottom-left-radius: 40px;
-    height: 150px;
+    height: 120px;
   }
 
  }
 
  /* téléphone petit model */
 @media screen and (max-width: 468px){
+  .catégorie{
+    /* padding-top: 50px; */
+    padding-left: 180px;
+  }
     .titrecategorie li{
       width: 65%;
       border-radius: 0px 40px 40px 0px;
@@ -102,7 +160,27 @@
     .imgheader img{
       border-top-right-radius: 30px;
       border-bottom-left-radius: 30px;
-      height: 100px;
+      height: 70px;
+    }
+    .carte{
+      background-color: white;
+      padding: 20px 10px;
+      border-top: 3px solid #2FA7A7;
+      border-left: 3px solid #2FA7A7;
+      border-right: none;
+      border-bottom: none;
+      box-shadow: 4px 4px #1A6060;
+      border-bottom-left-radius: 30px;
+      border-top-right-radius: 30px;
+      margin: 0 auto;
+      /* border: 2px solid; */
+    }
+    .imgcartre{
+      height: 140px;
+    }
+    .titre h4{
+      font-weight: bold;
+      font-size: 17px;
     }
 
 }

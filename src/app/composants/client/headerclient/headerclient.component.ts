@@ -34,7 +34,7 @@ export class HeaderclientComponent {
 
       this.authService.user$.subscribe((user) => {
       this.userClient = user;
-      console.log('prenom :', user)
+      // console.log('user :', user)
     });
 
      }
@@ -50,7 +50,7 @@ export class HeaderclientComponent {
     //  }
 
 
-    user: User = new User();
+    // user: User = new User();
 
     // variables pour se connecter
     formDate:any = {
@@ -70,9 +70,9 @@ export class HeaderclientComponent {
         let userClient = rep.user;
         console.log('user', userClient);
         localStorage.setItem('userConnect',rep.token)
-          // Utilisez la réponse pour obtenir le nom d'utilisateur
+          // Utilisons la réponse pour obtenir le nom d'utilisateur
           let userName = rep.user.nom;
-          // Émettez le nom d'utilisateur à travers l'observable userName$
+          // Émettons le nom d'utilisateur à travers l'observable userName$
           this.authService.userNameSubject.next(userName);
           this.authService.userSubject.next(userClient);
           // console.log('nom',userName)
@@ -87,7 +87,7 @@ export class HeaderclientComponent {
         }
         else
         {
-          this.router.navigate(['']);
+          this.router.navigate(['/livreur']);
         alert('voux etes livreur')
       }
      },

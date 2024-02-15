@@ -15,7 +15,8 @@ export class HeaderComponent {
 
 
       // variable pour gérer la déconnexion
-      connectUser: boolean = false;
+      connectUser: any;
+      deconnectUser:any;
       userName: string = '';
       userRole: string = '';
 
@@ -26,34 +27,32 @@ export class HeaderComponent {
       constructor (private router: Router,private panierService : PanierService , private authService : LoginService, private cdr: ChangeDetectorRef){}
 
       ngOnInit(): void {
-           // S'abonner aux observables pour mettre à jour les propriétés du composant en fonction de l'état d'authentification
-      this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
-        this.connectUser = isAuthenticated;
-        console.log('user',this.connectUser)
-        // this.quantitePanier = this.panierService.ajouterAuPanier(this);
+          if(localStorage.getItem('userConnect')!=null){
+            this.connectUser=true;
+            this.deconnectUser=false;
+          }
+          else{
+            this.connectUser=false;
+            this.deconnectUser=true
+          }
+
+        this.authService.userName$.subscribe((userName) => {
+          this.userName = userName;
+        });
+
+        this.authService.userRole$.subscribe((userRole) => {
+          this.userRole = userRole;
+        });
+
+       // Mettez à jour le nombre d'articles lorsque le panier change
+       this.panierService.nbpanier$.subscribe((count) => {
+        this.nbpanier = count;
+        this.cdr.detectChanges();
       });
 
-      this.authService.userName$.subscribe((userName) => {
-        this.userName = userName;
-      });
+      //  this.onLoginClick();
 
-      this.authService.userRole$.subscribe((userRole) => {
-        this.userRole = userRole;
-      });
-
-
-      // this.panierSize = this.panierService.getCart().reduce((total, item) => total + item.quantity, 0);
-      // this.panierService.iconePanier$.subscribe((cart) => {
-      //   this.panierSize = cart.reduce((total, item) => total + item.quantity, 0);
-      // });
-
-      // Mettez à jour le nombre d'articles lorsque le panier change
-    this.panierService.iconePanier$.subscribe((count) => {
-      this.nbpanier = count;
-      this.cdr.detectChanges();
-    });
-    this.onLoginClick();
-      }
+    }
 
      // effet de survol quand l'utilisateur se connect
       toggleDropdown() {
@@ -94,16 +93,84 @@ export class HeaderComponent {
 
 
 
-      // Gérer la déconnexion
-      // if (this.connectUser) {
-      onLoginClick() {
-          this.authService.deconnect().subscribe(() => {
-            this.router.navigate(['/accueil']);
-            // alert ('deconnecter');
-            console.log('deconnect',this.connectUser)
-          });
-        // } else {}
+
+      LoggedIn(): boolean {
+        const userOnline = JSON.parse(localStorage.getItem('userOnline') || '{}');
+        return !!userOnline && !!userOnline.authorization;
       }
+
+      onLogoutClick() : void{
+        this.authService.deconnect().subscribe(
+          () => {
+            // La déconnexion a réussi
+            console.log('Déconnexion réussie');
+            // this.connectUser : localStorage.removeItem('userConnect')
+            // alert('deconnect')
+            // La déconnexion est réussie
+            localStorage.removeItem('userConnect');
+            this.connectUser=false;
+            this.deconnectUser=true;
+
+          },
+          (error) => {
+            // Gérez les erreurs liées à la déconnexion
+            console.error('Erreur lors de la déconnexion :', error);
+          }
+        );
+      }
+      // }
+
+
+    //   onSubmit() : void{
+    //     console.log("merci", this.formDate),
+    //     this.authService.connection(this.formDate).subscribe(
+    //       (rep)=>{
+    //       // console.log('le nom client',rep.user)
+    //       let userClient = rep.user;
+    //       // console.log('userClient', userClient);
+    //       localStorage.setItem('userConnect',rep.token)
+    //       console.log('user',rep.token)
+    //         // Utilisation de la réponse pour obtenir le nom d'utilisateur
+    //         let userName = rep.user.nom;
+    //         // Émettre le nom d'utilisateur à travers l'observable userName$
+    //         this.authService.userNameSubject.next(userName);
+    //         this.authService.userSubject.next(userClient);
+    //         // console.log('réussi',rep)
+    //         // localStorage.setItem('userConnect',rep.token)
+    //         if(rep.user.role_id=='1'){
+    //           this.router.navigate(['/admin']);
+    //           // alert('voux etes admin')
+    //         }
+    //         else if (rep.user.role_id=='2')
+    //         {
+    //           this.router.navigate(['/client']);
+    //           // alert('voux etes client')
+    //         }
+    //         else
+    //         {
+    //           this.router.navigate(['']);
+    //         // alert('voux etes livreur')
+    //       }
+
+    //       // this.onSubmit();
+    //     },
+    //     (error) => {
+    //       console.error('Erreur lors de la connexion :', error);
+    //       // Ajoutez ici la gestion des erreurs, par exemple, afficher un message d'erreur à l'utilisateur
+    //     }
+    //     );
+
+
+
+
+      // onLoginClick() {
+      //     this.authService.deconnect().subscribe(() => {
+      //       this.router.navigate(['/']);
+      //       // alert ('deconnecter');
+      //       console.log('deconnect',this.connectUser)
+      //     });
+      //   // } else {}
+      // }
 
 
 
@@ -140,6 +207,7 @@ export class HeaderComponent {
         this.panier = this.panierService.getFromPanier();
         this.nbpanier= panierProduit.length;
         this.panierService.updateIncrementePanier(this.nbpanier);
+        this.panierService.updateNbPanier(this.nbpanier);
         // this.cdr.detectChanges();
         console.log('nombbre',this.nbpanier)
         // console.log('Nombre de produits dans le panier :', this.nbpanier);

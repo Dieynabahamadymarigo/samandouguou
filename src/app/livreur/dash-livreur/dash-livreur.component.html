@@ -1,0 +1,71 @@
+<div class="header"><h3 *ngIf="connectUser">Nom: {{ userName }}</h3></div>
+
+<div class="  titrecategorie">
+  <div class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler toogle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon  "></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <!-- <li class="nav-item" routerLinkActive="active" > -->
+            <a class="nav-link imgheader mb-5" aria-current="page" ><img src="http://127.0.0.1:8000/images/{{userClient.image}}"  alt=""></a>
+          <!-- </li> -->
+          <li class="nav-item mb-3" routerLinkActive="active">
+            <a class="nav-link" >
+              <!-- <img src="../../../../assets/bi_person-blanc.png" class="iconsheader"> -->
+              Statut</a>
+          </li>
+
+          <li class="nav-item mb-3" routerLinkActive="active">
+            <a class="nav-link" >
+              <!-- <img src="../../../../assets/commande.png" class="iconsheader"> -->
+               Commandes</a>
+          </li>
+
+          <!-- <button *ngIf="deconnectUser" (click)="onLogoutClick()">Connexion</button> -->
+
+          <li class="nav-item mb-3" routerLinkActive="active"  >
+            <a class="nav-link" *ngIf="connectUser" (click)="onLogoutClick()" routerLink="/" >
+              <!-- <i class="bi bi-house"></i> -->
+              Deconnecter</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- corps -->
+<div class="catégorie">
+
+  <div class="container ">
+    <div class="card mb-3 " >
+      <div class="row g-0 carte" *ngIf="userClient">
+        <div class="col-md-5">
+          <img src="http://127.0.0.1:8000/images/{{userClient.image}}" class="img-fluid imgcartre" alt="" >
+        </div>
+        <div class="col-md-7 titre ">
+          <div class="card-body">
+            <h4 class="card-title">Nom : {{userClient.nom}} </h4>
+            <h4 class="card-title">Prenom : {{userClient.prenom}} </h4>
+            <h4 class="card-title">Membre : {{ userClient.created_at | date:'mediumDate' }}</h4>
+            <h4 class="card-title">Téléphone : {{userClient.telephone}}</h4>
+          </div>
+
+          <button class="me-3 mb-3 occupe" (click)="statutLivreur('occupe')">Occupé</button>
+          <button class="mb-2 occupe" (click)="statutLivreur('disponible')">Disponible</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

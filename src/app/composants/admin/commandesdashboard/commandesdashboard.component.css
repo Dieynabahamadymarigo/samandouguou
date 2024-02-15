@@ -102,7 +102,43 @@
   margin-top: -10px;
   /* border: 2px solid; */
 }
+/* Modal */
+.titremodal{
+  color: #1A6060;
+  font-weight: bold;
+}
+.fermer{
+  background-color: white;
+  color: #1A6060;
+  font-weight: bold;
+  border-bottom: none;
+  border-right: none;
+  box-shadow: 2px 2px 0px 1px #2FA7A7;
+  border-radius: 30px;
+  padding: 4px 20px;
 
+}
+.fermer:hover {
+border: none;
+color: #1A6060;
+}
+.ajoutelemnt{
+background-color: white;
+color: #1A6060;
+font-weight: bold;
+border-bottom: none;
+border-right: none;
+border-top: 3px solid #1A6060;
+border-left: 3px solid #1A6060;
+box-shadow: 3px 3px 0px 1px #2FA7A7;
+border-radius: 30px;
+padding: 4px 20px;
+}
+.ajoutelemnt:hover {
+border-top: 3px solid #1A6060;
+border-left: 3px solid #1A6060;
+color: #1A6060;
+}
 /* pagination */
 .iconpagination{
   padding-top: 50px;
@@ -111,13 +147,12 @@
   justify-content: center;
   gap: 15px;
   color: #1A6060;
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
 }
-.un{
-  background-color: #1A6060;
-  padding: 0px 5px 0px 5px;
-  color: white;
+.iconpagination button{
+  border: 2px solid #1A6060;
+  color: #1A6060;
 }
 
 /* desactiver carte */

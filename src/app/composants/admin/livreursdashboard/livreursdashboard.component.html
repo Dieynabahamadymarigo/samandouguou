@@ -27,16 +27,16 @@
         <div class="iconproduits">
           <!-- <i class="bi bi-check2-all me-3"></i> -->
           <i class="bi bi-eye-fill me-3" style="cursor: pointer;" (click)="getLivreur (livreur)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i>
-          <i class="bi bi-pencil-square me-3" style="cursor: pointer;" (click)="chargerInfosLivreur (livreur)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i>
-          <i class="bi bi-trash-fill me-3" style="cursor: pointer;" (click)="supprimerLivreur(livreur.id)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i>
+          <!-- <i class="bi bi-pencil-square me-3" style="cursor: pointer;" (click)="chargerInfosLivreur (livreur)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i>
+          <i class="bi bi-trash-fill me-3" style="cursor: pointer;" (click)="supprimerLivreur(livreur.id)" data-bs-toggle="modal" data-bs-target="#detailLivreurs"></i> -->
         </div>
         <div class="contenupacks2" ></div>
       </div>
 
-      <div class="iconpagination">
-        <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button>
-      </div>
+    </div>
 
+    <div class="iconpagination">
+      <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button>
     </div>
 
   <!-- </div> -->

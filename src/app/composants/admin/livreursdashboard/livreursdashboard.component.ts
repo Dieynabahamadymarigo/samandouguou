@@ -54,6 +54,7 @@ export class LivreursdashboardComponent {
   this.authService.user$.subscribe((user) => {
     this.userClient = user;
   });
+  
   this.listerLivreur();
 
   }
@@ -107,15 +108,7 @@ onSubmit() : void{
 
 }
 
-// onLoginClick() {
-//   if (this.connectUser) {
-//     // Gérer la déconnexion
-//     this.authService.deconnect().subscribe(() => {
-//       this.router.navigate(['/']);
-//       alert ('deconnecter')
-//     });
-//   }
-// }
+
 //   // inserer l'image
   getFile(event: any) {
     console.log('img',this.image)
@@ -125,6 +118,10 @@ onSubmit() : void{
 
   //methode pour inscription client
   onInscrire() : void{
+    if (this.nom=="" && this.prenom=="" && this.email=="" && this.password=="" && this.adresse=="" && this.telephone=="" && this.image == "" ) {
+      this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
+      }
+      else {
     let formData = new FormData();
     formData.append("nom", this.nom);
     formData.append("prenom", this.prenom);
@@ -139,16 +136,12 @@ onSubmit() : void{
     this.authService.inscritLivreur(formData).subscribe(
       (rep)=>{
         console.log('réussi',rep)
+        this.listerLivreur();
       },
     (error) => {
       console.error('erreur',error);
     }
     );
-
-    if (this.nom=="" && this.prenom=="" && this.email=="" && this.password=="" && this.adresse=="" && this.telephone=="" && this.image == "" ) {
-    this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
-    }
-     else {
       this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
     }
     this.viderChamps();
@@ -165,6 +158,7 @@ onSubmit() : void{
     formData.append("image", this.image);
     this.LegumesService.updateLivreur(this.id, formData).subscribe((response) => {
         console.log('modifProduit', response);
+        this.listerLivreur()
       });
   }
 
@@ -182,6 +176,7 @@ onSubmit() : void{
     this.telephone = livreur.telephone;
     this.image = livreur.image;
     console.log('changer', this.chargerInfosLivreur);
+    this.listerLivreur()
   }
 
   // methode pour supprimer
@@ -200,6 +195,7 @@ onSubmit() : void{
       if (result.isConfirmed) {
         this.LegumesService.deleteProduit(id).subscribe((response) => {
           console.log('supProduit', response);
+          this.listerLivreur()
         });
       }
     });
@@ -252,7 +248,7 @@ onSubmit() : void{
 
       // Recherche se fait selon le nom du produit
       this.filteredLivreur = this.tabListLivreur.filter((elt: any) =>
-        elt?.prenom.toLowerCase().includes(this.filterValue.toLowerCase())
+        elt?.prenom.toLowerCase().includes(this.filterValue.toLowerCase()) || elt?.nom.toLowerCase().includes(this.filterValue.toLowerCase())
       );
     }
 

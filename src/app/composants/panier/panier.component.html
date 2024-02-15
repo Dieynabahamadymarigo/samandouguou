@@ -7,21 +7,28 @@
       <h1>Vos courses, livrées chez vous</h1>
     </div>
     <!-- image slide -->
-    <div class="col-md-6">
+    <div class="col-md-6 banierimg">
       <img src="../../../assets/baniere/panier.png" class=" img" alt="...">
     </div>
   </div>
 </div>
 
 <!-- tableau -->
-<div>
+<div *ngIf="panier.length === 0; else  enlevePanier" class="enlevePanier container">
+  <p class="text-center "><i class="bi bi-x-circle me-3"></i>Votre panier est vide.</p>
+</div>
+
+<div >
+  <ng-template #enlevePanier>
+
   <h3>Mon panier</h3>
   <button class="delete container">
    <p class="fw-bold"> Vider le panier<i class="bi bi-trash-fill"  (click)="deleteAllPanier()"></i></p>
   </button>
 
-  <table class="table container">
-    <thead>
+  <div class=" table-responsive">
+  <table class="table container ">
+    <thead >
       <tr>
         <th scope="col">#</th>
         <th scope="col">Produits</th>
@@ -37,7 +44,7 @@
         <!-- <th scope="row">2</th> -->
         <th scope="row">{{index+1}}</th>
         <td><img src="http://127.0.0.1:8000/images/{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt=""></td>
-        <td class="me-5 input">
+        <td class=" input">
           <button class="decremente"><i class="bi bi-dash-circle" (click)="upOrDownQuantity('down',produit.produit.id)"></i></button>
           <input tyte="number" [value]="produit.quantitePanier"> {{produit.produit.quantite}}
           <button class="decremente"><i class="bi bi-plus-circle" (click)="upOrDownQuantity('up',produit.produit.id)"></i></button>
@@ -51,7 +58,7 @@
 
     </tbody>
   </table>
-
+ </div>
   <!-- total et commande -->
   <div class="somme container">
     <div class="d-flex total">
@@ -61,6 +68,7 @@
       <h3 class="commande" style="cursor: pointer;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" >Commander</h3>
     </div>
   </div>
+</ng-template>
 
 </div>
 
@@ -87,6 +95,12 @@
           <!-- <h3>{{prixLivraion+this.sommeLegumes}} fr</h3> -->
           <h3>{{prixLivraion+this.sommeLegumes}} fr</h3>
         </div>
+        <!-- Ajoutez ce champ d'entrée dans votre formulaire -->
+        <div class="form-group">
+          <label for="adresseLivraison">Adresse de Livraison</label>
+          <input type="text" id="adresseLivraison" [(ngModel)]="adresseLivraison" class="form-control" required>
+        </div>
+
         <div>
           <h6 class="text-center pt-3 fw-bold"><i class="bi bi-info-square text-black" style="font-size: 16px;"></i> NB </h6>
           <p><span>*</span>On annule pas une commander validée</p>

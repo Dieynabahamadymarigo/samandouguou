@@ -27,6 +27,8 @@ import { DeconnexionclientComponent } from './composants/client/deconnexionclien
 import { CommandeclientComponent } from './composants/client/commandeclient/commandeclient.component';
 import { ProfilclientComponent } from './composants/client/profilclient/profilclient.component';
 import { CardPaginationComponent } from './card-pagination/card-pagination.component';
+import { DashLivreurComponent } from './livreur/dash-livreur/dash-livreur.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { CardPaginationComponent } from './card-pagination/card-pagination.compo
     CommandeclientComponent,
     DeconnexionclientComponent,
     ProfilclientComponent,
-    CardPaginationComponent
+    CardPaginationComponent,
+    DashLivreurComponent,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,

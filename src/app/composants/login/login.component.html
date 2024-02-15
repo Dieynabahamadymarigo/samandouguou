@@ -12,35 +12,51 @@
 
       <div class="col-md-7 mt-5 info">
 
-          <div class="champs mb-3">
+          <div class="champs ">
             <div class="d-block">
-              <input type="text" class="me-3" id="nom" placeholder="Votre nom" [(ngModel)]="nom"  name="nom" required><br>
+              <input type="text" class="me-3 mt-3" id="nom" placeholder="Votre nom" [(ngModel)]="nom"  name="nom" required (input)="verifNomFonction()">
+              <p class="text-danger" *ngIf="!exactNom">{{verifNom}}</p>
+              <p class="text-success" *ngIf="exactNom"><i class="bi bi-check2-all"></i> Exact !</p>
+              <!-- <br> -->
             </div>
 
             <div class="d-block">
-              <input type="text" class="" placeholder="Votre prénom" [(ngModel)]="prenom" name="prenom" required>
+              <input type="text" class="mt-3" placeholder="Votre prénom" [(ngModel)]="prenom" name="prenom" required
+              (input)="verifPrenomFonction()">
+              <p class="text-danger" *ngIf="!exactPrenom">{{verifPrenom}}</p>
+              <p class="text-success" *ngIf="exactPrenom"><i class="bi bi-check2-all"></i> Exact !</p>
+            </div>
+          </div>
+
+          <div class="champs ">
+            <div class="block">
+              <input type="email" class="me-3 mt-3" placeholder="Votre email" [(ngModel)]="email" name="email" required (input)="verifEmailFonction()">
+              <p class="text-danger" *ngIf="!exactEmail">{{verifEmail}}</p>
+              <p class="text-success" *ngIf="exactEmail"><i class="bi bi-check2-all"></i> Exact !</p>
+            </div>
+
+            <div class="block">
+              <input type="password" class="mt-3" placeholder="mot de passe" [(ngModel)]="password" name="password" required (input)="verifPasswordFonction()">
+              <p class="text-danger" *ngIf="!exactPassword">{{verifPassword}}</p>
+              <p class="text-success" *ngIf="exactPassword"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
           </div>
 
           <div class="champs mb-3">
             <div class="block">
-              <input type="email" class="me-3" placeholder="Votre email" [(ngModel)]="email" name="email" required>
+              <input type="tel" class="me-3 mt-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse" required (input)="verifAdresseFonction()">
+              <p class="text-danger" *ngIf="!exactAdresse">{{verifAdresse}}</p>
+              <p class="text-success" *ngIf="exactAdresse"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
+
             <div class="block">
-              <input type="password" class="" placeholder="mot de passe" [(ngModel)]="password" name="password" required>
+              <input type="tel" class="mt-3" placeholder="votre télephone" [(ngModel)]="telephone" name="telephone" required (input)="verifTelephoneFonction()">
+              <p class="text-danger" *ngIf="!exactTelephone">{{verifTelephone}}</p>
+              <p class="text-success" *ngIf="exactTelephone"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
           </div>
 
-          <div class="champs mb-3">
-            <div class="block">
-              <input type="tel" class="me-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse" required>
-            </div>
-            <div class="block">
-              <input type="tel" class="" placeholder="votre télephone" [(ngModel)]="telephone" name="telephone" required>
-            </div>
-          </div>
-
-          <div class="champs">
+          <div class="champs mt-3">
             <!-- <div class="block" >
               <input type="text"  placeholder="votre statut" class="me-3" [(ngModel)]="nom" name="statut" required>
             </div> -->
@@ -62,6 +78,7 @@
 
     </div>
   </form>
+  <div style="padding-bottom: 100px;"></div>
 </div>
 
 
@@ -72,23 +89,31 @@
     <div class="row g-0 contenu">
       <h2>Page de connexion</h2>
 
-      <div class="col-md-5 mt-5 gimg">
+      <div class="col-md-6 mt-5 gimg">
         <img src="../../../assets/baniere/compte.png" class="img-fluid img" alt="">
       </div>
 
-      <div class="col-md-7 mt-5 info">
+      <div class="col-md-6 mt-5 info">
 
           <div class="champs">
-            <input type="email" class="mb-3" name="email" [(ngModel)]="formDate.email" placeholder="Votre email" required>
+            <div class="block" style=" width: 100%;">
+            <input type="email" class="mb-3" name="email" [(ngModel)]="formDate.email" placeholder="Votre email" required (input)="verifEmailConFonction()">
+            <!-- <p class="text-danger" *ngIf="!exactEmailCon">{{verifEmailCon}}</p>
+            <p class="text-success" *ngIf="exactEmailCon"><i class="bi bi-check2-all"></i> Exact !</p> -->
+            </div>
           </div>
 
           <div class="champs">
-            <input type="password" class="" name="password" [(ngModel)]="formDate.password" placeholder="mot de passe" required>
+            <div class="block" style="width: 100%;">
+            <input type="password" class="" name="password" [(ngModel)]="formDate.password" placeholder="mot de passe" required (input)="verifPasswordConFonction()">
+            <!-- <p class="text-danger" *ngIf="!exactPasswordCon">{{verifPasswordCon}}</p>
+            <p class="text-success" *ngIf="exactPasswordCon"><i class="bi bi-check2-all"></i> Exact !</p> -->
+            </div>
           </div>
 
           <div class="btn mt-3">
-            <button type="submit" (click)="onLoginClick()" >{{ connectUser ? 'Déconnexion' : 'Connexion' }}</button>
-            <span *ngIf="connectUser"></span>
+            <button type="submit" >Connexion</button>
+            <!-- <span *ngIf="connectUser"></span> -->
           </div>
 
             <p class="card-text">Vous n'avez pas de compte ?</p>
@@ -99,5 +124,6 @@
 
     </div>
   </form>
+  <div style="padding-bottom: 100px;"></div>
 </div>
 

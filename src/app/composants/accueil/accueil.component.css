@@ -372,6 +372,17 @@
   width: 12rem !important;
 
 }
+.carteimg{
+  margin-top: -55px;
+  height: 8rem;
+  /* border: 2px solid black; */
+}
+.imgetape{
+  background-color: #1A6060;
+  height: 11rem;
+  /* border: 2px solid black; */
+}
+
 }
 
 /* téléphone petit model */

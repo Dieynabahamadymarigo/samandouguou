@@ -49,6 +49,14 @@ export class PanierService {
     //   }
 
   // incremente panier
+  private nbpanierSubject = new BehaviorSubject<number>(0);
+  nbpanier$ = this.nbpanierSubject.asObservable();
+
+  // Mettez à jour le nombre d'articles dans le panier et émettez la nouvelle valeur
+  updateNbPanier(count: number) {
+    this.nbpanierSubject.next(count);
+  }
+
   private incrementePanier = new BehaviorSubject<number>(0);
   iconePanier$ = this.incrementePanier.asObservable();
 
@@ -58,19 +66,27 @@ export class PanierService {
   }
 
 
-  post(path: string, dataToSend: any, onSuccess: Function) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: "Bearer" + JSON.parse(localStorage.getItem("onlineUser") ?? '{}').token
-      })
-    };
-    this.http.post(this.url + path, dataToSend, httpOptions).subscribe((reponse: any) => onSuccess(reponse));
-  }
+  // post(path: string, dataToSend: any, onSuccess: Function) {
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       Authorization: "Bearer " + JSON.parse(localStorage.getItem("userConnect") ?? '{}').token
+  //     })
+  //   };
+  //   this.http.post(this.url + path, dataToSend, httpOptions).subscribe(
+  //     (reponse: any) => {
+  //       console.log('Réponse du serveur:', reponse);
+  //       onSuccess(reponse);
+  //     }
+  //   // this.http.post(this.url + path, dataToSend, httpOptions).subscribe((reponse: any) => onSuccess(reponse));
+  // )}
+
+
+
 
   simplePost(path: string, onSuccess: Function) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: "Bearer" + JSON.parse(localStorage.getItem("onlineUser") ?? '{}').token
+        Authorization: "Bearer " + JSON.parse(localStorage.getItem("onlineUser") ?? '{}').token
       })
     };
     this.http.post(this.url + path, httpOptions).subscribe((reponse: any) => onSuccess(reponse));
@@ -92,8 +108,12 @@ export class PanierService {
     });
   }
 
+  private getPanier(): any[] {
+    return JSON.parse(localStorage.getItem('panier') || '[]');
+  }
+
   ajouterAuPanier(legume: any, quantite = 1) {
-    let panier = this.getPanier();
+    let panier = this.getFromPanier();
 
     let existingProduct = panier.find((item: any) => item.produit.id === legume.id);
 
@@ -113,38 +133,7 @@ export class PanierService {
       this.router.navigate(['/panier']);
 
     }
-  }
-
-
-
-  incrementerQuantite(legume: any) {
-    let panier = this.getPanier();
-
-    let existingProduct = panier.find((item: any) => item.produit.id === legume.id);
-
-    if (existingProduct) {
-      // Le produit existe déjà dans le panier, augmenter ou diminuer la quantité
-      existingProduct.quantitePanier += 1;
-      console.log('quantite', existingProduct);
-      if (existingProduct.quantitePanier < 1) {
-        existingProduct.quantitePanier = 1;
-      }
-      localStorage.setItem('panier', JSON.stringify(panier));
-
-      // Mettre à jour la référence du tableau pour déclencher la mise à jour de l'interface utilisateur
-      // this.panier = [...panier];
-
-      this.message("Parfait", "success", "Quantité du produit mise à jour dans le panier");
-    }
-    // else {
-    //   this.message("Oops", "warning", "Ce produit n'existe pas dans le panier");
-    // }
-  }
-
-  private getPanier(): any[] {
-    return JSON.parse(localStorage.getItem('panier') || '[]');
-  }
-
+  };
 
 
   getFromPanier() {
