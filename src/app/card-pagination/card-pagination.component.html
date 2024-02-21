@@ -1,9 +1,70 @@
-<!-- card-pagination.component.html -->
-<div *ngFor="let card of visibleData" class="card">
-  <h3>{{ card.title }}</h3>
-  <p>{{ card.content }}</p>
+<app-header></app-header>
+<!-- baniere -->
+  <div class="container banier">
+    <div class="banierimg1">
+      <img src="../../../assets/baniere/Vector 14.png" alt="">
+    </div>
+    <div class="titrebanier">
+      <h1>Des légumes sélectionnés pour sublimer vos plats</h1>
+    </div>
+    <div class=" banierimg2">
+      <img src="../../../assets/baniere/banierpacks2.png" alt="">
+    </div>
+  </div>
+
+
+  <div class="espacebaniereimgtext"></div>
+
+  <!-- la présentation -->
+<div class="card mb-3 container textimg">
+  <div class="row g-0">
+    <div class="col-md-7">
+      <div class="contenutemoin"></div>
+      <div class="card-body">
+        <!-- <h5 class="card-title">Présentation</h5> -->
+        <p class="card-text">Le thiep bou dieune est le plat national du Sénégal.
+          Il se constitue à base de poissons frais ou poisson
+          séchés, du yet (coquillage séché au goût prononcé), du riz, de la purée de tomates, de l’ail, des oignons, du piment, du poivre, le tout mélangé avec de nombreux légumes comme citrouille, le manioc, l’aubergine, la carotte, de l’huile  d’arachide </p>
+      </div>
+    </div>
+
+    <div class="col-md-5 divimage">
+      <img src="../../assets/plats/thip dieunne.png" class="img-fluid image " alt="...">
+    </div>
+    <div class="contenutemoin2" ></div>
+  </div>
 </div>
 
-<div class="pagination">
-  <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)">{{ page }}</button>
+<div class="espacebaniereimgtext"></div>
+<!-- les produites -->
+<div>
+  <div class="gcartelegumes">
+
+    <div class="card carte" *ngFor=" let produit of tabListProduit" >
+      <div class="contour"></div>
+      <img src="http://127.0.0.1:8000/images/{{produit.image}}" class="card-img-top carteimg" alt="..." >
+      <div class="card-body titrepanier">
+        <h4 class="card-title" >{{produit.nomProduit}}</h4>
+        <h5 class="card-text">{{produit.prix}} fr</h5>
+      </div>
+      <div class="contour2">
+        <!-- <i class="bi bi-trash-fill" (click)="deleteFromPanier(produit.id)" ></i> -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div class="iconpagination">
+      <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button>
+  </div> -->
+
+
 </div>
+
+<div class="espacebaniereimgtext"></div>
+<div class=" container buttonajoutelemnt">
+  <button type="button" class="btn ajoutelemnt " (click)="addPanier()">Valider</button>
+</div>
+<div class="espacebaniereimgtext"></div>
+
+<app-footer></app-footer>

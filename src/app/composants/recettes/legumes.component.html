@@ -20,13 +20,13 @@
 
   <!-- button de recherche -->
   <div class="container buttonsearch">
-    <input type="search" placeholder="Recherche"><i class="bi bi-search search"></i>
+    <input type="search" placeholder="Recherche" [(ngModel)]="rechercheNom">
   </div>
 
 
   <!-- body -->
-  <div class=" categorie">
-
+  <!-- <div class=" categorie"> -->
+<!--
     <div class=" container titrecategorie">
       <div class="navbar navbar-expand-lg ">
         <div class="container-fluid">
@@ -61,81 +61,39 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="">
       <div class="container">
         <div class=" gcartelegumes">
 
-          <div class="card carte">
+              <div *ngIf="packsFiltres.length === 0">
+                <h1 style="color: red;">🙄 Recette non trouvée.</h1>
+              </div>
+
+          <div class="card carte" *ngFor="let video of packsFiltres">
             <div class="contour"></div>
-            <iframe class="carteimg" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe class="carteimg" [src]="getSafeUrl(video.videoUrl)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <!-- <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="..."> -->
             <div class="card-body">
-              <h3 class="card-title">Plat : thiep</h3>
+              <!-- <h3 class="card-title">{{video.plat}} </h3> -->
+              <h4 class="card-title">{{ tronquerTexte(video.plat, 13) }}</h4>
               <p class="card-text"></p>
             </div>
             <div class="contour2"></div>
           </div>
 
-          <div class="card carte">
-            <div class="contour"></div>
-            <iframe class="carteimg" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <!-- <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="..."> -->
-            <div class="card-body">
-              <h3 class="card-title">Plat : thiep</h3>
-              <p class="card-text"></p>
-            </div>
-            <div class="contour2"></div>
-          </div>
-
-          <div class="card carte">
-            <div class="contour"></div>
-            <iframe class="carteimg" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <!-- <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="..."> -->
-            <div class="card-body">
-              <h3 class="card-title">Plat : thiep</h3>
-              <p class="card-text"></p>
-            </div>
-            <div class="contour2"></div>
-          </div>
-
-          <div class="card carte">
-            <div class="contour"></div>
-            <iframe class="carteimg" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <!-- <img src="../../../assets/légumes/tomates.png" class="card-img-top carteimg" alt="..."> -->
-            <div class="card-body">
-              <h3 class="card-title">Plat : thiep</h3>
-              <p class="card-text"></p>
-            </div>
-            <div class="contour2"></div>
-          </div>
 
         </div>
       </div>
 
       <!-- pagination -->
       <div class="iconpagination">
-
-        <div class="chevron">
-          <i class="bi bi-chevron-left"></i>
-        </div>
-        <div class="un">
-          <i class="bi bi-1-square"></i>
-        </div>
-        <div class="deux">
-          <i class="bi bi-2-square"></i>
-        </div>
-        <div class="trois">
-          <i class="bi bi-3-square"></i>
-        </div>
-        <div class="">
-          <i class="bi bi-chevron-right"></i>
-        </div>
+        <button *ngFor="let page of nombrePagesArray()" (click)="changerPage(page)">{{ page }}</button>
       </div>
     </div>
 
 
-  </div>
+  <!-- </div> -->
 
   <app-footer></app-footer>

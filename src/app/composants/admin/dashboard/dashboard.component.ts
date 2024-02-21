@@ -58,18 +58,19 @@ export class DashboardComponent implements OnInit {
     private LegumesService: LegumesService
   ) {}
 
-  // inserer l'image
-  getFile(event: any) {
-    console.log('img', this.image);
-    console.warn(event.target.files[0]);
-    this.image = event.target.files[0] as File;
-  }
+
 
   ngOnInit(): void {
     this.listerDesProduits();
     this.listerUsers();
   }
 
+  // inserer l'image
+  getFile(event: any) {
+    console.log('img', this.image);
+    console.warn(event.target.files[0]);
+    this.image = event.target.files[0] as File;
+  }
   //methode pour ajouter des prduits
   ajout(): void {
     {
@@ -87,7 +88,7 @@ export class DashboardComponent implements OnInit {
           // console.log('prix', rep.this.prix);
           // console.log('quatite', rep.quantiteTotale);
           // console.log('image', this.image);
-          localStorage.setItem('userConnect', rep.token);
+          // localStorage.setItem('userConnect', rep.token);
           this.listerDesProduits();
         },
         (error) => {
@@ -278,6 +279,11 @@ export class DashboardComponent implements OnInit {
       text: text,
       icon: icon,
     });
+  // Ferme le pop-up après 2 secondes
+  setTimeout(() => {
+    Swal.close();
+  }, 2000);
   }
+
 }
 

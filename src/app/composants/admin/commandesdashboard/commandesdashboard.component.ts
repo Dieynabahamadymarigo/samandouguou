@@ -57,22 +57,12 @@ export class CommandesdashboardComponent {
 
       constructor(private commandeService: CommandeService,private authService : LoginService) {}
 
-      ngOnInit(): void {
-      //   this.authService.user$.subscribe((user) => {
-      //     this.userClient = {
-      //     image: user.image,
-      //     nom: user.nom,
-      //     prenom: user.prenom,
-      //   };
-      //   console.log('Image:', this.userClient.image);
-      //   console.log('Nom:', this.userClient.nom);
-      //   console.log('Prenom:', this.userClient.prenom);
-      // });
+  ngOnInit(): void {
 
-        this.listerDesCommandes();
-        this.listeDesCommandesEnCours();
-        this.listeLivreurDisponible();
-      };
+    this.listerDesCommandes();
+    this.listeDesCommandesEnCours();
+    this.listeLivreurDisponible();
+  };
 
   viderChamps() {
     this.nomCommande = '';
@@ -87,6 +77,9 @@ export class CommandesdashboardComponent {
       text: text,
       icon: icon,
     });
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
   }
 
 //  -----------------------------------------------------------------------------------------
@@ -149,12 +142,28 @@ export class CommandesdashboardComponent {
   //user commandes en cours
   // id:number=0;
   clientCommande(id:number) {
+      // Vérifier s'il y a des livreurs disponibles
+  if (this.tabListLivreurDispo.length === 0) {
+    this.verifierChamps('Erreur', 'Aucun livreur disponible. Impossible de passer la commande.','warning');
+  }
+  else {
+    const firstLivreur = this.tabListLivreurDispo[0];
     this.commandeService.affecterCommande(id).subscribe((response) => {
         console.log('commandeClient', response);
-        // this.listerDesProduits();
+        // si la commande il éfface une carte
+        const index = this.tabListCommandes.findIndex(commande => commande.id === id);
+        if (index !== -1) {
+          this.tabListCommandes.splice(index, 1);
+        }
+        this.listeLivreurDisponible();
+        this.verifierChamps('Succès', 'Commande affectée au livreur ' + firstLivreur.nom, 'success');
 
       });
+    }
+
+      this.listeDesCommandesEnCours();
   }
+
   // lister commandes en cours
   tabListLivreurDispo: any = [];
   listeLivreurDisponible() {
@@ -163,7 +172,7 @@ export class CommandesdashboardComponent {
     this.commandeService.listerLivreurDispo().subscribe((data) => {
       this.tabListLivreurDispo = data.data;
       console.log('tabLivreurDipo', data.data);
-      
+
     });
   }
 
@@ -218,24 +227,6 @@ export class CommandesdashboardComponent {
       }
     }
 
-
-
-
-
-  // listerDesCommandes() {
-  //   this.commandeService.listerCommandeEnCours().subscribe((data: any[]) => {
-  //     this.tabListCommandes = data.map(commande => {
-  //       return {
-  //         ...commande,
-  //         nom: commande.user? commande.user.nom : '',
-  //         prenom: commande.user ? commande.user.prenom : '',
-  //         image: commande.user ? commande.user.image : '',
-  //       };
-  //     });
-  //     // console.log('commande', commande.user.nom),
-  //     console.log('tabCommande', this.tabListCommandes);
-  //   });
-  // }
 
 
 }

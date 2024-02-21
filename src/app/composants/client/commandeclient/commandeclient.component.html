@@ -2,7 +2,7 @@
 <div class="catégorie">
 
   <!-- les différentes catégories -->
-  <div class="gcategories">
+  <!-- <div class="gcategories">
     <div class="difcategories" (click)=" afficheProduits()">
       <img src="../../../../assets/Vector.png" alt="">
       <h3 style="cursor: pointer;" >Commande validée</h3>
@@ -16,9 +16,9 @@
       <h3 style="cursor: pointer;">Commande annulée </h3>
     </div>
 
-  </div>
+  </div> -->
 
-  <div class="catégorie">
+  <div class="catégorie1">
 
     <div *ngIf="tabProduits">
       <!-- button ajouter et search  -->
@@ -31,29 +31,31 @@
         </div>
       </div> -->
 
-      <div class="gcarte">
+      <div class="gcarte container">
 
-        <!-- <div class="card cartepacks">
+        <div class="card cartepacks"  *ngFor="let commande of tabListCommande">
           <div class="contenupacks"></div>
-          <img src="http://127.0.0.1:8000/images/{{}}" class="img-top imglegumes" alt="...">
-          <div class="card-body titreproduits">
-            <h4 class="card-title"></h4>
-            <p></p>
+          <div class="card-body titreproduits" >
+            <h4 class="card-title"> Commande N° {{commande.numeroCommande}}</h4>
+            <h4 class="card-title">{{commande.adresse_de_livraison}} </h4>
+            <h4 class="card-title">Statut : {{commande.statut}} </h4>
+            <h4 class="card-title">{{commande.dateCommande | date:'shortDate'}} </h4>
+            <!-- <p></p> -->
           </div>
 
-          <div class="iconproduits">
+          <!-- <div class="iconproduits">
             <i class="bi bi-eye-fill me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#details" ></i>
             <i class="bi bi-pencil-square me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modification" ></i>
             <i class="bi bi-trash-fill me-3" style="cursor: pointer;"></i>
-          </div>
+          </div> -->
           <div class="contenupacks2" ></div>
-        </div> -->
+        </div>
 
       </div>
 
       <div class="iconpagination">
         <!-- <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button> -->
-    </div>
+      </div>
 
     </div>
 

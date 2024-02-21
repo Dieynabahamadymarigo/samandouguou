@@ -41,34 +41,26 @@ export class CommandeService {
     }): of (null);
   }
 
-  // liste commande en cours pour un user
+
+  // Affecter une commande en cours à un livreur
   affecterCommande(id:number):Observable<any>{
     const accessToken = localStorage.getItem('userConnect');
     console.log('token',accessToken)
     return accessToken ?
-    this.http.post(`http://127.0.0.1:8000/api/AffecterLivreur/${id}`, {
+    this.http.post(`http://127.0.0.1:8000/api/affecterLivreur/${id}`, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`}),
     }): of (null);
   }
-  
 
-  // affecterCommande(id: number): Observable<any> {
-  //   const accessToken = localStorage.getItem('userConnect');
-
-  //   if (!accessToken) {
-  //     console.error('Jetons d\'accès manquant. Utilisateur non authentifié.');
-  //     return of(null);
-  //   }
-
-  //   const headers = new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` });
-
-  //   return this.http.post(`${this.url}AffecterLivreur/${id}`, null, { headers })
-  //     .pipe(
-  //       catchError((error) => {
-  //         console.error('Erreur lors de la requête HTTP:', error);
-  //         return of(null);
-  //       })
-  //     );
+  // Affecter une commande en cours à un livreur
+  commandeTerminer(id:number):Observable<any>{
+    const accessToken = localStorage.getItem('userConnect');
+    console.log('token',accessToken)
+    return accessToken ?
+    this.http.post(`http://127.0.0.1:8000/api/CommandeTerminee/${id}`, {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`}),
+    }): of (null);
+  }
 
 
    // liste commande en cours
@@ -80,11 +72,29 @@ export class CommandeService {
     }): of (null);
   }
 
+   // liste commande affectees a un livreur
+   listerCommandeAffecteLivreur():Observable<any>{
+    const accessToken = localStorage.getItem('userConnect');
+    return accessToken ?
+    this.http.get(`http://127.0.0.1:8000/api/ListerCommandeAffecter`, {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`})
+    }): of (null);
+  }
+
    // liste livreur dispo
    listerLivreurDispo():Observable<any>{
     const accessToken = localStorage.getItem('userConnect');
     return accessToken ?
     this.http.get(`http://127.0.0.1:8000/api/listerLivreursDisponible`, {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`})
+    }): of (null);
+  }
+
+  // liste des commandes d'un user
+  listerCommandeUser(): Observable<any> {
+    const accessToken = localStorage.getItem('userConnect');
+    return accessToken ?
+    this.http.get(`http://127.0.0.1:8000/api/indexCommande`, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`})
     }): of (null);
   }

@@ -21,7 +21,7 @@
 <div >
   <ng-template #enlevePanier>
 
-  <h3>Mon panier</h3>
+  <h3 class="container">Mon panier</h3>
   <button class="delete container">
    <p class="fw-bold"> Vider le panier<i class="bi bi-trash-fill"  (click)="deleteAllPanier()"></i></p>
   </button>
@@ -46,12 +46,14 @@
         <td><img src="http://127.0.0.1:8000/images/{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt=""></td>
         <td class=" input">
           <button class="decremente"><i class="bi bi-dash-circle" (click)="upOrDownQuantity('down',produit.produit.id)"></i></button>
-          <input tyte="number" [value]="produit.quantitePanier"> {{produit.produit.quantite}}
+          <input tyte="number" [(ngModel)]="produit.quantitePanier" (input)="validerInputPanier(produit.quantitePanier, produit.produit.id); totalProduit()"> {{produit.produit.quantite}}
           <button class="decremente"><i class="bi bi-plus-circle" (click)="upOrDownQuantity('up',produit.produit.id)"></i></button>
+          <p class="text-danger">{{messagePanier}}</p>
         </td>
         <!-- <td>10 fr </td> -->
         <td>{{produit.produit.prix}}fr </td>
-        <td> {{produit.produit.prix*produit.quantitePanier}} fr </td>
+        <td *ngIf="isPanierValid"> {{produit.produit.prix*produit.quantitePanier}} fr </td>
+        <td *ngIf="!isPanierValid"> 0 fr </td>
         <td><button class="delete"><i class="bi bi-trash-fill"  (click)="deleteFromPanier(produit.produit.id)"></i></button></td>
 
       </tr>

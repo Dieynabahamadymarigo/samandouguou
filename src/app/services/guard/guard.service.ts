@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PanierService } from '../panier/panier.service';
+// import { PanierService } from '../panier/panier.service';
 import { LoginService } from '../login/login.service';
 
 @Injectable({
@@ -9,7 +9,8 @@ import { LoginService } from '../login/login.service';
 })
 export class GuardService implements CanActivate {
 
-  constructor(private authService: LoginService, private router: Router) {}
+  constructor(private authService: LoginService, private router: Router) { }
+
 
   canActivate(): boolean {
     if (this.authService.isAuthenticatedSubject.value) {
@@ -22,14 +23,4 @@ export class GuardService implements CanActivate {
     }
   }
 
-
-
-
-
-  // canActivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot
-  //   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-  //     return true;
-  // }
 }

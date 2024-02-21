@@ -28,50 +28,23 @@
 
     <div class="gcarte">
 
-      <div class="card cartepacks" *ngFor="let commande of visibleProduits" >
+      <div class="card cartepacks" *ngFor="let commande of visibleProduits">
         <div class="contenupacks"></div>
-        <!-- <img src="http://127.0.0.1:8000/images/{{commande.image}}" class="img-top imgperson" alt="..."> -->
+
         <div class="card-body titreproduits">
           <h4 class="card-title"> Commande : {{commande.numeroCommande}} </h4>
           <h4 class="card-title"> Adresse : {{commande.adresse_de_livraison}} </h4>
           <h4 class="card-title"> Date : {{commande.dateCommande | date:'shortDate'}}  </h4>
-          <!-- <h4 class="card-title"> Commande : {{commande.numeroCommande}} </h4>
-          <h4 class="card-title"> Commande : {{commande.numeroCommande}} </h4> -->
         </div>
+
         <div class="iconproduits">
-          <i class="bi bi-check2-all me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#commandesAffecter"></i>
+          <!-- <i class="bi bi-check2-all me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#commandesAffecter"></i> -->
+          <i class="bi bi-check2-all me-3" style="cursor: pointer;" (click)="clientCommande(commande.id)"></i>
           <i class="bi bi-eye-fill me-3" style="cursor: pointer;"></i>
-          <!-- <i class="bi bi-pencil-square me-3"></i> -->
-          <!-- <i class="bi bi-trash-fill me-3"></i> -->
         </div>
+
         <div class="contenupacks2" ></div>
       </div>
-
-      <!-- <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE </h4>
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-check2-all me-3"></i>
-          <i class="bi bi-eye-fill me-3"></i>
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
-
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-check2-all me-3"></i>
-          <i class="bi bi-eye-fill me-3"></i>
-        </div>
-        <div class="contenupacks2" ></div>
-      </div> -->
 
     </div>
 
@@ -297,7 +270,7 @@
 </div> -->
 
 <!-- Modal commande affectée -->
-<div class="modal fade" id="commandesAffecter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="commandesAffecter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" >
       <div class="modal-header">
@@ -327,7 +300,6 @@
                 <td><h4>{{affectLivreur.statut}}</h4></td>
                 <td><h4>{{affectLivreur.telephone}}</h4></td>
                 <td><button class="delete" (click)="clientCommande(affectLivreur.id)">Affecter</button> </td>
-                <!-- <i class="bi bi-check-lg"  ></i> -->
 
               </tr>
 
@@ -335,27 +307,11 @@
           </table>
          </div>
 
-        <!-- <div class="mb-3 inputmodal"   >
-          <label for="" class="me-3">Nom : {{affectLivreur.nom}} </label>
-        </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Prix : {{affectLivreur.prenom}} </label>
-        </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Nombre : {{affectLivreur.statut}} </label>
-        </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">description : {{affectLivreur.telephone}} </label>
-        </div>
-        <div class="mb-3 inputmodal">
-        <img src="http://localhost:8000/images/{{affectLivreur.image}}" class="img-top imglegumesdetail" alt="...">
-        </div> -->
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
-        <!-- <button type="submit" (click)="()" class="btn ajoutelemnt ">Ajouter</button> -->
       </div>
     </div>
   </div>
-</div>
+</div> -->

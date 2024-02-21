@@ -22,6 +22,7 @@ import { PanierComponent } from './composants/panier/panier.component';
 import { GuardService } from './services/guard/guard.service';
 import { DashLivreurComponent } from './livreur/dash-livreur/dash-livreur.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { CardPaginationComponent } from './card-pagination/card-pagination.component';
 // import { DeconnexionclientComponent } from './composants/client/deconnexionclient/deconnexionclient.component';
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'foter', component:FooterComponent},
   {path: 'a propos', component:AproposComponent},
   {path: 'packs', component:PacksComponent},
+  {path: 'packs/decouvrir', component:CardPaginationComponent},
   {path: 'panier', component:PanierComponent},
   {path: 'recettes', component:LegumesComponent},
   // {path: 'admin', component:DashboardComponent},
@@ -44,6 +46,7 @@ const routes: Routes = [
   {path: 'admin/livreurs', component:LivreursdashboardComponent},
   {path: 'client', component:ProfilclientComponent, canActivate: [GuardService]},
   {path: 'client/commande', component:CommandeclientComponent},
+  // {path: 'livreur', component:DashLivreurComponent},
   {path: 'livreur', component:DashLivreurComponent,canActivate: [GuardService]},
 
 

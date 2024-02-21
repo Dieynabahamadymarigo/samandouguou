@@ -187,3 +187,17 @@
   border-left: 3px solid #1A6060;
   color: #1A6060;
 }
+.modal {
+  --bs-modal-zindex: 1055;
+  --bs-modal-width: 800px;
+}
+  .delete{
+    background-color: transparent;
+    color: #1A6060;
+    border: none;
+    font-size: 25px;
+  }
+/* .modalListe{
+  width: 700rem !important;
+  border: 2px solid black;
+} */

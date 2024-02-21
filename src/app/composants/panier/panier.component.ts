@@ -42,17 +42,6 @@ export class PanierComponent implements OnInit {
       this.connectUser = isAuthenticated;
     });
 
-    // this.authService.user$.subscribe((user) => {
-    //     this.userClient = {
-    //     image: user.image,
-    //     nom: user.nom,
-    //     prenom: user.prenom,
-    //   };
-    //   console.log('Image:', this.userClient.image);
-    //   console.log('Nom:', this.userClient.nom);
-    //   console.log('Prenom:', this.userClient.prenom);
-    // });
-
     this.listerDesProduits();
     // this.produitsPanier = this.panierService.getLegumes();
     this.panier = this.panierService.getFromPanier();
@@ -62,17 +51,62 @@ export class PanierComponent implements OnInit {
   }
 
 
+  // Validation input panier
+  isPanierValid:boolean = true;
+  messagePanier: string = "";
+  validerInputPanier(inputPanier:any, id: any){
+    const panierRegex = /^[1-9]{1,}$/;
+    let validInput = panierRegex.test(inputPanier);  // Retourne vrai si l'input est un number positif non null
+    // alert(panierRegex.test(inputPanier));
+    // if(parseInt(inputPanier) < 0){
+    //   this.isPanierValid = false;
+    //   this.messagePanier =  "Ne prend que des valeurs positives";
+    // }
+    
+    if (validInput) {
+      this.isPanierValid = true;
+      this.messagePanier =  "";
+      let panierProduit = this.panierService.getFromPanier();
+      panierProduit.forEach((element: any) => {
+        // console.log('ajout', panierProduit)
+        if (element.produit.id == id) {
+          element.quantitePanier = inputPanier;
+        }
+        // console.log('increment',this.upOrDownQuantity)
+      });
+      localStorage.setItem("panier", JSON.stringify(panierProduit));
+      this.totalProduit();
+    } else {
+      this.isPanierValid = false;
+      this.messagePanier =  "Ne prend que des valeurs positives";
+    }
+    // console.log(this.isPanierValid);
+    // console.log(this.messagePanier);
+
+    //  const panierRegex = /^[1-9]/;
+    //  let test = panierRegex.test(inputPanier);
+
+    //  if(panierRegex.test(inputPanier)) {
+    //   this.isPanierValid = true;
+    //   this.messagePanier =  "";
+    //  }  else {
+    //   this.isPanierValid = false;
+    //   this.messagePanier =  "Ne prend que des valeurs positives";
+    //  }
+  }
+
+  // incrémente
   upOrDownQuantity(type: string, id: any) {
     let panierProduit = this.panierService.getFromPanier();
     panierProduit.forEach((element: any) => {
       // console.log('ajout', panierProduit)
       if (element.produit.id == id) {
         if (type == 'up') {
-          this.quantite++;
+          // this.quantite++;
           element.quantitePanier++;
-          if (element.quantitePanier>element.produit.quantite) {
+          if (element.quantitePanier>element.produit.quantiteTotale) {
             element.quantitePanier--;
-            this.panierService.message("Oops","warning",`il n'en reste que ${element.produit.quantite} produit en stock`);
+            this.panierService.message("Oops","warning",`il n'en reste que ${element.produit.quantiteTotale} produits en stock`);
           }
         } else {
           // this.quantite--;
@@ -87,23 +121,25 @@ export class PanierComponent implements OnInit {
     localStorage.setItem("panier", JSON.stringify(panierProduit));
     this.totalProduit();
     this.panier = this.panierService.getFromPanier();
-    this.nbpanier= (panierProduit.length);
-    this.cdr.detectChanges();
-    console.log('nombbre',this.nbpanier)
+    // this.nbpanier= (panierProduit.length);
+    // this.cdr.detectChanges();
+    // console.log('nombbre',this.nbpanier)
   }
 
+// total dess produits
   totalProduit() {
+    // alert(this.isPanierValid);
     this.nombreLegumes = 0;
     this.sommeLegumes = 0;
     let panierProduit = this.panierService.getFromPanier();
     panierProduit.forEach((element: any) => {
-    this.nombreLegumes += element.quantitePanier;
-    this.sommeLegumes += element.quantitePanier * element.produit.prix;
+      this.nombreLegumes += element.quantitePanier;
+      this.sommeLegumes += element.quantitePanier * element.produit.prix;
+      // if(element.quantitePanier > 0) {
+      // }
     });
     // console.log('total',this.totalProduit),
   }
-
-
 
   // methode supprimer
   deleteFromPanier(id: any) {
@@ -121,6 +157,7 @@ export class PanierComponent implements OnInit {
 
   }
 
+  // vider panier
   deleteAllPanier() {
     let tab: any = [];
     tab = this.panierService.getFromPanier();
@@ -134,10 +171,10 @@ export class PanierComponent implements OnInit {
     this.totalProduit();
   }
 
+  // aprés commande vider le panier
   commandeAllPanier() {
     let tab: any = [];
     tab = this.panierService.getFromPanier();
-
     // Vider le tableau
     tab = [];
 
@@ -197,13 +234,6 @@ export class PanierComponent implements OnInit {
               // Mettez à jour le panier local et affichez le message de confirmation ici
               this.panierService.message('Commande envoyée', 'success', 'Merci pour la confiance');
               this.commandeAllPanier();
-
-            //   rep = this.userClient;
-            //  console.log('Imagerepp:', this.userClient.image);
-            //   console.log('Nom:', this.userClient.nom);
-            //   console.log('Prenom:', this.userClient.prenom);
-            // const userName = userDetails.nom;
-            // const userFirstName = userDetails.prenom;
             },
             (erreur: any) => {
               console.error("Erreur lors de la requête HTTP :", erreur);

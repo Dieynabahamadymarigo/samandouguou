@@ -31,14 +31,16 @@ export class LoginService {
         this.isAuthenticatedSubject.next(true);
         this.userNameSubject.next(response.userName);
         this.userSubject.next(response.user);
+        this.userRoleSubject.next(response.userRole);
+
       })
     );
   }
-
   setAuthenticationStatus(isAuthenticated: boolean) {
     this.isAuthenticatedSubject.next(isAuthenticated);
-  }
+    // console.log('tesrr',this.setAuthenticationStatus)
 
+  }
   // Méthode pour choisir le rôle
   role(user:any): Observable<any> {
     return this.http.post(`${this.url}/ajouterRole`,user).pipe(
@@ -50,19 +52,6 @@ export class LoginService {
     );
   }
 
-  // role(userRole: any): Observable<any> {
-  //   return this.http.post(`${this.url}/ajouterRole`, userRole);
-  // }
-
-  // Méthode pour déconnecter
-  // deconnect(): Observable<any> {
-  //   const accessToken = localStorage.getItem('userConnect');
-  //   return accessToken ?
-  //     this.http.post<any>(`http://127.0.0.1:8000/api/deconnect`,  {
-  //     headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
-  //   })
-  //   :
-  //    of(null);}
 
 
 
@@ -78,33 +67,13 @@ deconnect(): Observable<any> {
 }
 
 
-
-  // deconnect(): Observable<any> {
-  //   return this.http.post(`${this.url}/deconnect`, {}).pipe(
-  //     tap(() => {
-  //       // la déconnexion est réussie
-  //       this.isAuthenticatedSubject.next(false);
-  //       this.userNameSubject.next('');
-  //       console.log('deconnect', this.deconnect())
-  //     })
-  //   );
-  // }
-
-
-
-  // return this.http.post(`${this.url}/login`, users).pipe(
-  //   tap((response: any) => {
-  //     // console.log('Réponse du serveur:', response);
-  //     // la connexion est réussie
-  //     this.isAuthenticatedSubject.next(true);
-  //     this.userNameSubject.next(response.userName);
-  //     this.userSubject.next(response.user);
-  //   })
-  // );
-
   //methode pour inscription client
   inscritClient (user: any): Observable <any>{
     return this.http.post('http://127.0.0.1:8000/api/inscriptionClient',user)
+  }
+  //methode pour verifier si l'email du client existe
+ verifEmailClient (user: any): Observable <any>{
+    return this.http.post('http://127.0.0.1:8000/api/verifMail',user)
   }
 
   //methode pour inscription livreur

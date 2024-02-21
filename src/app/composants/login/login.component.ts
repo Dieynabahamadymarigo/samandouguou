@@ -80,6 +80,10 @@ export class LoginComponent implements OnInit  {
       text: text,
       icon: icon
     });
+  // Ferme le pop-up après 2 secondes
+  setTimeout(() => {
+    Swal.close();
+  }, 1500);
   }
 
     // Variables pour faire la vérifications
@@ -101,8 +105,8 @@ export class LoginComponent implements OnInit  {
     exactTelephone : boolean = false;
 
    // Variable pour la connexion
-   emailCon : String = "";
-   passwordCon: String = "";
+  //  emailCon : String = "";
+  //  passwordCon: String = "";
 
    // Pour vérifier les champs pour la connexion
    verifEmailCon : String = "";
@@ -114,206 +118,235 @@ export class LoginComponent implements OnInit  {
 
   // Verification du nom
   verifNomFonction() {
-    this.exactNom = false;
-    if(this.nom == ""){
-      this.verifNom = "Veuillez renseigner votre nom";
+    if (this.nom == '') {
+      this.verifNom = '';
     }
-    else if (/^\s+$/.test(this.nom)) {
       // Vérifie si le nom contient uniquement des espaces
+      else if (/^\s+$/.test(this.nom)) {
       this.verifNom = "Veuillez renseigner votre nom";
     }
-    else if (this.nom.length < 2 ){
-      this.verifNom = "Le nom est trop court";
+     else {
+      if (this.nom.length < 2) {
+        this.exactNom = false;
+        this.verifNom = 'Le nom est trop court';
+      } else {
+        this.exactNom = true;
+        this.verifNom = ' Correct';
+      }
     }
-    else {
-      this.verifNom = "";
-      this.exactNom = true;
-    }
+    // this.viderChamps();
   }
 
   // Verification du prenom
   verifPrenomFonction() {
-    this.exactPrenom = false;
-    if(this.prenom == ""){
+    if (this.prenom == '') {
+      this.verifPrenom = '';
+    }
+      // Vérifie si le prenom contient uniquement des espaces
+      else if (/^\s+$/.test(this.prenom)) {
       this.verifPrenom = "Veuillez renseigner votre prenom";
     }
-    else if (/^\s+$/.test(this.prenom)) {
-      // Vérifie si le nom contient uniquement des espaces
-      this.verifPrenom = "Veuillez renseigner votre prenom";
+     else {
+      if (this.prenom.length < 3) {
+        this.exactPrenom = false;
+        this.verifPrenom = 'Le prenom est trop court';
+      } else {
+        this.exactPrenom = true;
+        this.verifPrenom = ' Correct';
+      }
     }
-    else if (this.prenom.length < 3 ){
-      this.verifPrenom = "Le prenom est trop court";
-
-    }
-    else{
-      this.verifPrenom = "";
-      this.exactPrenom = true;
-    }
+    // this.viderChamps();
   }
 
   // Verification de  l'email
-  verifEmailFonction(){
-    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
-    this.exactEmail = false;
 
-    if(this.email == ""){
-      this.verifEmail = "Veuillez renseigner votre email";
-    }
-    else if (!this.email.match(emailPattern) ){
-      this.verifEmail = "Veuillez donner un email valide";
+  verifEmailFonction(){
+    if (this.email == '') {
+      this.verifEmail = '';
     }
     else {
-      this.verifEmail = "";
-      this.exactEmail = true;
+      if (this.validateEmail(this.email) == true) {
+        console.log('true');
+        this.exactEmail = true;
+        this.verifEmail = 'le format du mail est valide';
+        console.log(this.verifEmail);
+      }
+
+      if (this.validateEmail(this.email) == false) {
+        console.log('false');
+        this.exactEmail = false;
+        this.verifEmail = 'le format du mail est invalide';
+        console.log(this.verifEmail);
+      }
     }
+    // this.viderChamps();
   }
 
   // Fonction de Verification de l'email pour la fonctionnalité connexion
-  verifEmailConFonction(){
-    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
-    this.exactEmailCon = false;
+  validateEmail(email: string): boolean {
+    const emailRegex =
+      /^[A-Za-z]+[A-Za-z0-9\._%+-]+@[A-Za-z][A-Za-z0-9\.-]+\.[A-Za-z]{2,}$/;
+    // const endsWithCom = /com$/;
 
-    if(this.emailCon == ""){
-      this.verifEmailCon = "Veuillez renseigner votre email";
-    }
-    else if (!this.emailCon.match(emailPattern) ){
-      this.verifEmailCon = "Veuillez donner un email valide";
-    }
-    else {
-      this.verifEmailCon = "";
-      this.exactEmailCon = true;
-    }
+    // return emailRegex.test(email) && endsWithCom.test(email);
+    return emailRegex.test(email);
   }
 
+  verifEmailConFonction() {
+    if (this.formDate.email == '') {
+      this.verifEmailCon = '';
+    }
+    else {
+      if (this.validateEmail(this.formDate.email) == true) {
+        console.log('true');
+        this.exactEmailCon = true;
+        this.verifEmailCon = 'le format du mail est valide';
+        console.log(this.verifEmailCon);
+      }
+
+      if (this.validateEmail(this.formDate.email) == false) {
+        console.log('false');
+        this.exactEmailCon = false;
+        this.verifEmailCon = 'le format du mail est invalide';
+        console.log(this.verifEmailCon);
+      }
+    }
+    // this.viderChamps();
+  }
+
+
     // Verification du mot de passe
-    verifPasswordFonction(){
-      this.exactPassword = false;
-      if(this.password == ""){
-        this.verifPassword = "Veuillez renseigner votre mot de passe";
-      }
-      else if (/^\s+$/.test(this.password)) {
-        // Vérifie si le nom contient uniquement des espaces
-        this.verifPassword = "Veuillez renseigner votre prenom";
-      }
-      else if (this.password.length < 5 ){
-        this.verifPassword = "Mot de passe est trop court";
-      }
-      else{
-        this.verifPassword = "";
+
+  validatePassword(password: string): boolean {
+    return password.length >= 5;
+  }
+
+  verifPasswordFonction(){
+    if (this.password == '') {
+      this.verifPassword = '';
+    }
+    // Vérifie si le password contient uniquement des espaces
+    else if (/^\s+$/.test(this.password)) {
+      this.verifPassword = "Veuillez renseigner votre mot de passe";
+    }
+    else {
+      if (this.password.length < 5) {
+        this.exactPassword = false;
+        this.verifPassword =
+          'Le Mot de passe est trop court';
+      } else {
         this.exactPassword = true;
+        this.verifPassword = 'Mot de Passe Correcte';
       }
     }
+    // this.viderChamps();
+  }
 
-    // Fonction de Verification de l'email pour la fonctionnalité connexion
-    verifPasswordConFonction(){
-      this.exactPasswordCon = false;
-      if(this.passwordCon == ""){
-        this.verifPasswordCon = "Veuillez renseigner votre mot de passe";
-      }
-      else if (this.passwordCon.length < 5 ){
-        this.verifPasswordCon = "Mot de passe doit être supérieur ou égal à 5";
-      }
-      else{
-        this.verifPasswordCon = "";
+  // Fonction de Verification de l'email pour la fonctionnalité connexion
+  verifPasswordConFonction() {
+    if (this.formDate.password == '') {
+      this.verifPasswordCon = '';
+    } else if (/^\s+$/.test(this.formDate.password)) {
+      this.verifPasswordCon = "Veuillez renseigner votre mot de pasee";
+    }
+      else {
+      if (this.formDate.password.length < 5) {
+        this.exactPasswordCon = false;
+        this.verifPasswordCon =
+          'Le Mot de passe doit être superieur ou égal à 5 caractere';
+      } else {
         this.exactPasswordCon = true;
+        this.verifPasswordCon = 'Mot de Passe Correcte';
       }
     }
+    // this.viderChamps();
+  }
 
-      // Verification du adresse
+    // Verification du adresse
   verifAdresseFonction() {
-    this.exactAdresse = false;
-    if(this.adresse == ""){
+    if (this.adresse == '') {
+      this.verifAdresse = '';
+    }
+      // Vérifie si le adresse contient uniquement des espaces
+      else if (/^\s+$/.test(this.adresse)) {
       this.verifAdresse = "Veuillez renseigner votre adresse";
     }
-    else if (/^\s+$/.test(this.adresse)) {
-      this.verifAdresse = "Veuillez renseigner votre prenom";
+     else {
+      if (this.adresse.length < 5) {
+        this.exactAdresse = false;
+        this.verifAdresse = 'L\'adresse est trop court';
+      } else {
+        this.exactAdresse = true;
+        this.verifAdresse = ' Correct';
+      }
     }
-    else if (this.adresse.length < 4 ){
-      this.verifAdresse = "Le adresse est trop court";
-    }
-    else{
-      this.verifAdresse = "";
-      this.exactAdresse = true;
-    }
+    // this.viderChamps();
+
   }
 
   // Verification du telephone
   verifTelephoneFonction() {
-    this.exactTelephone = false;
-    if(this.telephone == ""){
-      this.verifTelephone = "Veuillez renseigner votre telephone";
+    if (this.telephone == '') {
+      this.verifTelephone = '';
     }
-    else if (/^\s+$/.test(this.telephone)) {
-      this.verifTelephone = "Veuillez renseigner votre prenom";
+    // Vérifie si le numéro de téléphone contient exactement 9 chiffres
+    else if (!/^\d{9}$/.test(this.telephone)) {
+      // this.exactTelephone = false;
+      this.verifTelephone = 'Le numéro doit contenir 9 chiffres';
     }
-    else if (this.telephone.length < 9 ){
-      this.verifTelephone = "Le telephone est trop court";
-
+     else {
+      if (this.telephone.length < 9) {
+        this.exactTelephone = false;
+        this.verifTelephone = 'Le numero est trop court';
+      } else {
+        this.exactTelephone = true;
+        this.verifTelephone = ' Correct';
+      }
     }
-    else{
-      this.verifTelephone = "";
-      this.exactTelephone = true;
-    }
+    // this.viderChamps();
   }
 
 
 
   //methode pour se connecter
-  onSubmit() : void{
+
+// Methode pour se connecter
+onSubmit(): void {
+  if (this.validateEmail(this.formDate.email) && this.validatePassword(this.formDate.password)) {
+    // Effectuer la connexion
+    let email = this.formDate.email;
+    let password = this.formDate.password;
+
     this.verifPasswordConFonction();
     this.verifEmailConFonction();
-    if (this.formDate.email=="" || this.formDate.password=="" ) {
-      this.verifierChamps('Champs obligatoire', 'Veuillez remplir les champs', 'error');
-      // window.location.reload();
-    }
-    else {
-      console.log("merci", this.formDate),
-      this.authService.connection(this.formDate).subscribe(
-        (rep)=>{
-          // console.log('le nom client',rep.user)
+
+    this.authService.connection({ email: email, password: password }).subscribe(
+      (rep: any) => {
         let userClient = rep.user;
-        // console.log('userClient', userClient);
-        localStorage.setItem('userConnect',rep.token)
-        console.log('user',rep.token)
-          // Utilisation de la réponse pour obtenir le nom d'utilisateur
-          let userName = rep.user.nom;
-          // Émettre le nom d'utilisateur à travers l'observable userName$
-          this.authService.userNameSubject.next(userName);
-          this.authService.userSubject.next(userClient);
-          // console.log('réussi',rep)
-          // localStorage.setItem('userConnect',rep.token)
-          if(rep.user.role_id=='1'){
-            this.router.navigate(['/admin']);
-            // alert('voux etes admin')
-          }
-          else if (rep.user.role_id=='2')
-          {
-            this.router.navigate(['/client']);
-            // alert('voux etes client')
-          }
-          else if (rep.user.role_id=='3')
-          {
-            this.router.navigate(['/livreur']);
-            // alert('voux etes livreur')
-          }
-          else {
-
-          }
-
-          // this.onSubmit();
-        },
-        (error) => {
-          console.error('Erreur lors de la connexion :', error);
-          // Ajoutez ici la gestion des erreurs, par exemple, afficher un message d'erreur à l'utilisateur
-        }
-        );
+        console.log("merci", rep),
+          localStorage.setItem('userConnect', rep.token)
+        console.log('user', rep.token)
+        let userName = rep.user.nom;
+        this.authService.userNameSubject.next(userName);
+        this.authService.userSubject.next(userClient);
         this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
-      }
-
-    this.viderChamps();
-    // this.onSubmit();
-
+        if (rep.user.role_id == '1') {
+          this.router.navigate(['/admin']);
+        } else if (rep.user.role_id == '2') {
+          this.router.navigate(['/client']);
+        } else if (rep.user.role_id == '3') {
+          this.router.navigate(['/livreur']);
+        }
+        this.viderChamps();
+      },
+    );
+  } else {
+    this.verifierChamps('Erreur de validation', 'Veuillez remplir correctement tous les champs', 'error');
   }
+}
+
+
+
 
     // inserer l'image
     getFile(event: any) {
@@ -348,14 +381,14 @@ export class LoginComponent implements OnInit  {
       this.authService.inscritClient(formData).subscribe(
         (rep)=>{
           console.log('réussi',rep)
-          this.verifierChamps('Félicitatio  n!', rep.messagge, 'success');
+          this.verifierChamps('Félicitation!', rep.messagge, 'success');
+          this.viderChamps();
         },
       (error) => {
         console.error('erreur',error);
       }
       )
-      }
-      this.viderChamps();
+    }
     }
 
   // Methode pour vider les champs
@@ -369,6 +402,26 @@ export class LoginComponent implements OnInit  {
     this.telephone = "";
     this.image = "";
     this.formDate = "";
+    // -----------------------------------
+    this.verifNom = "";
+    this.verifPrenom = "";
+    this.verifEmail = "";
+    this.verifPassword = "";
+    this.verifAdresse = "";
+    this.verifTelephone = "";
+    this.verifEmailCon = "";
+    this.verifPasswordCon="";
+    // --------------------------------------
+    this.exactNom = false;
+    this.exactPrenom = false;
+    this.exactEmail = false;
+    this.exactEmailCon = false;
+    this.exactPassword = false;
+    this.exactPasswordCon = false;
+    this.exactAdresse = false;
+    this.exactTelephone = false;
+    // this.verifI = "";
+
   }
 
   // methode pour inscrire livreur

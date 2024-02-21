@@ -112,7 +112,13 @@ export class AccueilComponent {
     // this.produitsPanier = this.panierService.getLegumes();
   }
 
-
+    // Fonction qui permet de faire des pointier si le texte est lon
+    tronquerTexte(texte: string, longueurMax: number): string {
+      if (texte.length > longueurMax) {
+        return texte.substring(0, longueurMax) + '...';
+      }
+      return texte;
+    }
 
     //Pour faire la recherche
     filterValue = '';
@@ -156,7 +162,7 @@ export class AccueilComponent {
       this.currentPage = page;
     }
   }
-  
+
 
   listerDesProduits(){
     // console.log(this.tabListProduit);

@@ -13,14 +13,14 @@
           <!-- <li class="nav-item" routerLinkActive="active" > -->
             <a class="nav-link imgheader mb-5" aria-current="page" ><img src="http://127.0.0.1:8000/images/{{userClient.image}}"  alt=""></a>
           <!-- </li> -->
-          <li class="nav-item mb-3" routerLinkActive="active">
-            <a class="nav-link" >
+          <li class="nav-item mb-3" routerLinkActive="active" (click)="afficheProfil()">
+            <a class="nav-link" style="cursor: pointer;" >
               <!-- <img src="../../../../assets/bi_person-blanc.png" class="iconsheader"> -->
               Statut</a>
           </li>
 
-          <li class="nav-item mb-3" routerLinkActive="active">
-            <a class="nav-link" >
+          <li class="nav-item mb-3" routerLinkActive="active" (click)="afficheCommande()">
+            <a class="nav-link" style="cursor: pointer;" >
               <!-- <img src="../../../../assets/commande.png" class="iconsheader"> -->
                Commandes</a>
           </li>
@@ -43,7 +43,8 @@
 <!-- corps -->
 <div class="catégorie">
 
-  <div class="container ">
+  <!-- profil -->
+  <div class="container" *ngIf="tabProfil">
     <div class="card mb-3 " >
       <div class="row g-0 carte" *ngIf="userClient">
         <div class="col-md-5">
@@ -57,15 +58,46 @@
             <h4 class="card-title">Téléphone : {{userClient.telephone}}</h4>
           </div>
 
-          <button class="me-3 mb-3 occupe" (click)="statutLivreur('occupe')">Occupé</button>
-          <button class="mb-2 occupe" (click)="statutLivreur('disponible')">Disponible</button>
+
+          <button class="mb-2 occupe" (click)="statutLivreur('disponible')" [ngClass]="{'change-couleur': statutPourLivreur === 'disponible'}">Disponible</button>
+
+          <button class="me-3 mb-3 occupe" (click)="statutLivreur('occupe')" [ngClass]="{'change-couleur': statutPourLivreur === 'occupe'}" >Occupé</button>
         </div>
-
-
       </div>
     </div>
   </div>
 
-</div>
+  <!-- liste commande -->
+  <div *ngIf="tabCommande">
 
+    <div class="gcarte container">
+
+      <div class="card cartepacks"  *ngFor="let commande of tabListCommandeLivreur">
+        <div class="contenupacks"></div>
+        <div class="card-body titreproduits" >
+          <h4 class="card-title"> Commande N° {{commande.Id}}</h4>
+          <h4 class="card-title">Date: {{commande.Date_commande | date:'shortDate'}} </h4>
+          <h4 class="card-title"> Statut: {{commande.Etat}} </h4>
+          <h4 class="card-title">Client: {{commande.user.Prenom}} {{tronquerTexte(commande.user.Nom, 8)}} </h4>
+          <h4 class="card-title">Adresse: {{tronquerTexte(commande.user.Adresse, 9)}} </h4>
+          <!-- <p></p> -->
+        </div>
+
+        <div class="iconproduits">
+          <i class= "bi bi-check2-all me-3" style="cursor: pointer;" (click)="commandeUserTermine(commande.Id)"  ></i>
+          <i class="bi bi-eye-fill me-3" style="cursor: pointer;" ></i>
+          <!-- <i class="bi bi-trash-fill me-3" style="cursor: pointer;"></i> -->
+        </div>
+        <div class="contenupacks2" ></div>
+      </div>
+
+    </div>
+
+    <div class="iconpagination">
+      <!-- <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button> -->
+    </div>
+
+  </div>
+
+</div>
 

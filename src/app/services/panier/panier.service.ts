@@ -42,74 +42,27 @@ export class PanierService {
       this.isAuthenticatedSubject.next(isAuthenticated);
     }
 
-    // panierSize: number = 0;
-    // cart: any ;
-    // getCart(): any[] {
-    //     return this.cart;
-    //   }
-
-  // incremente panier
-  private nbpanierSubject = new BehaviorSubject<number>(0);
-  nbpanier$ = this.nbpanierSubject.asObservable();
-
-  // Mettez à jour le nombre d'articles dans le panier et émettez la nouvelle valeur
-  updateNbPanier(count: number) {
-    this.nbpanierSubject.next(count);
-  }
-
-  private incrementePanier = new BehaviorSubject<number>(0);
-  iconePanier$ = this.incrementePanier.asObservable();
-
-  updateIncrementePanier(count: number) {
-    this.incrementePanier.next(count);
-    // this.incrementePaniercount;
-  }
-
-
-  // post(path: string, dataToSend: any, onSuccess: Function) {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       Authorization: "Bearer " + JSON.parse(localStorage.getItem("userConnect") ?? '{}').token
-  //     })
-  //   };
-  //   this.http.post(this.url + path, dataToSend, httpOptions).subscribe(
-  //     (reponse: any) => {
-  //       console.log('Réponse du serveur:', reponse);
-  //       onSuccess(reponse);
-  //     }
-  //   // this.http.post(this.url + path, dataToSend, httpOptions).subscribe((reponse: any) => onSuccess(reponse));
-  // )}
-
-
-
-
-  simplePost(path: string, onSuccess: Function) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: "Bearer " + JSON.parse(localStorage.getItem("onlineUser") ?? '{}').token
-      })
-    };
-    this.http.post(this.url + path, httpOptions).subscribe((reponse: any) => onSuccess(reponse));
-  }
-  get(path: string, onSuccess: Function) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: "Bearer" + JSON.parse(localStorage.getItem("onlineUser") ?? '{}').token
-      })
-    };
-    this.http.get(this.url + path, httpOptions).subscribe((reponse: any) => onSuccess(reponse));
-  }
-
   message(title: any, icon: any, message: any) {
     Swal.fire({
       title: title,
       text: message,
       icon: icon
     });
+      // Ferme le pop-up après 2 secondes
+  setTimeout(() => {
+    Swal.close();
+  }, 2000);
   }
 
-  private getPanier(): any[] {
-    return JSON.parse(localStorage.getItem('panier') || '[]');
+  // private produitLegumes: any[] = [];
+  // incremente l'icon panier
+  private nombreProduitsSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  nombreProduits$ = this.nombreProduitsSubject.asObservable();
+
+ updateNombreProduits() {
+    let panier = this.getFromPanier();
+    let nombreProduits = panier.reduce((total: number, item: any) => total + item.quantitePanier, 0);
+    this.nombreProduitsSubject.next(nombreProduits);
   }
 
   ajouterAuPanier(legume: any, quantite = 1) {

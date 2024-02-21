@@ -18,53 +18,25 @@
 
   <div class="gcarte">
 
-    <div class="card cartepacks" >
+    <div class="card cartepacks" *ngFor="let blog of tabListBlog">
       <div class="contenupacks"></div>
-      <iframe class="imglegumes" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <!-- <img src="../../../assets/légumes/tomates.png" class="img-top imglegumes" alt="..."> -->
+      <!-- <iframe class="imglegumes" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
       <div class="card-body titreproduits">
-        <h4 class="card-title"> Plat : Thiep </h4>
-        <!-- <p>Prix : 300fr</p> -->
+        <h4 class="card-title"> Blog : {{blog.nomCategorie}} </h4>
       </div>
+
+      <div class="card-body titreproduits">
+        <h4 class="card-title"> Articles <i class="bi bi-folder-plus me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#ajoutArticle"></i> <i class="bi bi-card-checklist me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#listeArticle"></i> </h4>
+      </div>
+
       <div class="iconproduits">
-        <i class="bi bi-eye-fill me-3"></i>
-        <i class="bi bi-pencil-square me-3"></i>
-        <i class="bi bi-trash-fill me-3"></i>
+        <i class="bi bi-eye-fill me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#details" (click)="getblog(blog)"></i>
+        <!-- <i class="bi bi-pencil-square me-3" style="cursor: pointer;"></i> -->
+        <i class="bi bi-trash-fill me-3" style="cursor: pointer;" (click)="supprimerBlog(blog.id)"></i>
       </div>
       <div class="contenupacks2" ></div>
     </div>
 
-    <div class="card cartepacks" >
-      <div class="contenupacks"></div>
-      <iframe class="imglegumes" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <!-- <img src="../../../assets/légumes/tomates.png" class="img-top imglegumes" alt="..."> -->
-      <div class="card-body titreproduits">
-        <h4 class="card-title"> Plat : Thiep </h4>
-        <!-- <p>Prix : 300fr</p> -->
-      </div>
-      <div class="iconproduits">
-        <i class="bi bi-eye-fill me-3"></i>
-        <i class="bi bi-pencil-square me-3"></i>
-        <i class="bi bi-trash-fill me-3"></i>
-      </div>
-      <div class="contenupacks2" ></div>
-    </div>
-
-    <div class="card cartepacks" >
-      <div class="contenupacks"></div>
-      <iframe class="imglegumes" src="https://www.youtube.com/embed/YMoa-uSyfw8?si=y6jraaUX-0YWSygx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <!-- <img src="../../../assets/légumes/tomates.png" class="img-top imglegumes" alt="..."> -->
-      <div class="card-body titreproduits">
-        <h4 class="card-title"> Plat : Thiep </h4>
-        <!-- <p>Prix : 300fr</p> -->
-      </div>
-      <div class="iconproduits">
-        <i class="bi bi-eye-fill me-3"></i>
-        <i class="bi bi-pencil-square me-3"></i>
-        <i class="bi bi-trash-fill me-3"></i>
-      </div>
-      <div class="contenupacks2" ></div>
-    </div>
 
   </div>
 
@@ -90,7 +62,7 @@
 
 </div>
 
-<!-- Modal -->
+<!-- Modal ajout blog -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -99,29 +71,221 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body ">
-        <div class="mb-3 ">
-          <input type="file">
-        </div>
+        <!-- <div class="mb-3 ">
+          <input type="file" (change)="getFile($event)" name="image" required>
+        </div> -->
         <div class="mb-3 inputmodal">
           <label for="" class="me-3">Plat : </label>
-          <input type="text" >
+          <input type="text" name="plat" [(ngModel)]="plat" name="plat" required >
         </div>
         <!-- <div class="mb-3 inputmodal">
           <label for="" class="me-3">Prix : </label>
           <input type="text">
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn ajoutelemnt " (click)="ajout()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal ajout blog article -->
+<div class="modal fade" id="ajoutArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Ajout</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text" name="nom" [(ngModel)]="nom" name="nom" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Titre : </label>
+          <input type="text" name="titre" [(ngModel)]="titre" name="titre" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Description : </label>
+          <input type="text" name="description" [(ngModel)]="description" name="description" required >
+        </div>
+
+        <div class="mb-3 ">
+          <input type="file" (change)="getFile($event)" name="image" required>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Date de Post : </label>
+          <input type="text" name="datePost" [(ngModel)]="datePost" name="datePost" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Categorie_blog_id : </label>
+          <input type="text" name="categorie_blog_id" [(ngModel)]="categorie_blog_id" name="categorie_blog_id" required >
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn ajoutelemnt " (click)="ajoutArticle()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal liste blog article -->
+<div class="modal fade" id="listeArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modalListe" >
+    <div class="modal-content"  >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Liste des articles </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body " >
+
+        <div class=" table-responsive">
+          <table class="table container ">
+            <thead >
+              <tr>
+                <th scope="col">N°</th>
+                <!-- <th scope="col">Image</th> -->
+                <th scope="col">Nom</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Details </th>
+                <th scope="col">Action </th>
+                <!-- <th scope="col">Categorie</th> -->
+              </tr>
+            </thead>
+
+            <tbody *ngFor="let article of tabListBlogArticle; let index=index" >
+              <tr >
+                <th scope="row">{{index+1}}</th>
+                <!-- <td> <img src="http://127.0.0.1:8000/images/{{article.image}}"class="img-top imglegumes" alt="..."></td> -->
+                <td><h5>{{tronquerTexte(article.nomPost, 9)}}</h5></td>
+                <td><h5>{{article.titrePost}}</h5></td>
+                <td><h5>{{tronquerTexte(article.description, 12)}}</h5></td>
+                <td><h5 class="delete"><i class="bi bi-eye-fill" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#detailsListeArticle" (click)="getArticle(article)"></i> </h5></td>
+                <td><button class="delete"><i class="bi bi-trash-fill" (click)="supprimerBlogArticle(article.id)"></i> <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierArticle" (click)="chargerInfosProduit(article)"></i></button></td>
+
+                <!-- <td><h5>{{article.datePost}}</h5></td> -->
+                <!-- <td> <h5> {{article.categorie_blog_id}}</h5></td> -->
+
+              </tr>
+
+            </tbody>
+          </table>
+         </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- details d'un article  -->
+<div class="modal fade" id="detailsListeArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Detail de l'article </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body " >
+        <div class="mt-5 mb-3 ">
+         <img src="http://127.0.0.1:8000/images/{{articleSelectionner.image}}"class="img-top imglegumes" alt="...">
         </div>
         <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Nombre : </label>
-          <input type="number">
+          <label for="" class="me-3">Description : {{articleSelectionner.description}} </label>
+        </div>
+        <div>
+          <label for="" class="me-3">Date de Post : {{articleSelectionner.datePost}} </label>
+        </div>
+        <!-- <div>
+          <label for="" class="me-3">Categorie_blog_id : {{article.categorie_blog_id}} </label>
         </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal blog details -->
+<div class="modal fade" id="details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Voir detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
         <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Date : </label>
-          <input type="text">
+          <label for="" class="me-3">Nom : {{blogSelectionner.nomCategorie}} </label>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn ajoutelemnt ">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal modifier blog article -->
+<div class="modal fade" id="modifierArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Ajout</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text" name="nom" [(ngModel)]="nom" name="nom" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Titre : </label>
+          <input type="text" name="titre" [(ngModel)]="titre" name="titre" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Description : </label>
+          <input type="text" name="description" [(ngModel)]="description" name="description" required >
+        </div>
+
+        <div class="mb-3 ">
+          <input type="file" (change)="getFile($event)" name="image" required>
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Date de Post : </label>
+          <input type="text" name="datePost" [(ngModel)]="datePost" name="datePost" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Categorie_blog_id : </label>
+          <input type="text" name="categorie_blog_id" [(ngModel)]="categorie_blog_id" name="categorie_blog_id" required >
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn ajoutelemnt " data-bs-dismiss="modal" (click)="modifierProduit()">Modifier</button>
       </div>
     </div>
   </div>

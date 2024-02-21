@@ -34,3 +34,23 @@ export class Panier{
   quantititePanier : number = 0;
   totalPanier : number = 0;
 }
+
+// pour commande d'un user
+export interface Commande {
+  numeroCommande: string;
+  adresse_de_livraison: string;
+  statut: string;
+  // ... autres propriétés
+}
+
+// Models pour les users
+export class Article{
+  id : number = 0;
+  nom : string = "";
+  titre : string = "";
+  description : string = "";
+  image : string = "";
+  datePost : string = "";
+  categorie_blog_id:any =[];
+  create_At = '';
+}

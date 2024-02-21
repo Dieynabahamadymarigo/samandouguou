@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { LegumesService } from 'src/app/services/legumes/legumes.service';
+import { CommandeService } from 'src/app/services/commande/commande.service';
+import { Commande } from 'src/app/models/login';
 
 @Component({
   selector: 'app-commandeclient',
   templateUrl: './commandeclient.component.html',
   styleUrls: ['./commandeclient.component.css']
 })
-export class CommandeclientComponent {
+export class CommandeclientComponent implements OnInit {
 
 
-  constructor(
-    private authService: LegumesService,private LegumesService: LegumesService) {}
+  constructor(private legumesService: LegumesService, private commandeService: CommandeService) {}
+
+  ngOnInit(): void {
+    this.listeCommandeUser();
+  }
     // variables choix de produits
     tabProduits: boolean = true;
     tabPacks: boolean = false;
@@ -47,6 +52,19 @@ export class CommandeclientComponent {
      this.produitSelectionner = produit;
    }
 
+
+     // lister commandes d'un user
+  tabListCommande: any = [];
+
+  listeCommandeUser() {
+    console.log('agezefyvdbfegvu',this.tabListCommande);
+    this.commandeService.listerCommandeUser().subscribe((data) => {
+      this.tabListCommande = data.listerCommande;
+      console.log('tabListCommande', data.listerCommande);
+
+    });
+  }
+
    modifierProduit() {
      let formData = new FormData();
       //  formData.append('nomProduit', this.nomProduit,);
@@ -54,7 +72,7 @@ export class CommandeclientComponent {
       //  formData.append('quantiteTotale', this.quantiteTotale,);
       //  formData.append('image', this.image,);
       //  formData.append('description', this.description,);
-     this.authService.updateProduit(this.id, formData).subscribe((response) => {
+     this.legumesService.updateProduit(this.id, formData).subscribe((response) => {
          console.log('modifProduit', response);
        });
    }
@@ -86,7 +104,7 @@ supprimerProduit(id:number){
     confirmButtonText: "Oui, je supprime!"
   }).then((result) => {
     if (result.isConfirmed) {
-      this.authService.deleteProduit(id).subscribe((response) => {
+      this.legumesService.deleteProduit(id).subscribe((response) => {
         console.log('supProduit', response);
       });
     }

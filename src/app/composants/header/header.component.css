@@ -98,3 +98,12 @@
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
+.badge {
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}

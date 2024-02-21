@@ -141,13 +141,12 @@
   justify-content: center;
   gap: 15px;
   color: #1A6060;
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
 }
-.un{
-  background-color: #1A6060;
-  padding: 0px 5px 0px 5px;
-  color: white;
+.iconpagination button{
+  border: 2px solid #1A6060;
+  color: #1A6060;
 }
 
 /* ordinateur */

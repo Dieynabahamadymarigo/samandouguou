@@ -22,11 +22,19 @@ export class HeaderComponent {
 
       // le survol du profil
       showDropdown: boolean = false;
+      userClient: any [] = [];
+
 
 
       constructor (private router: Router,private panierService : PanierService , private authService : LoginService, private cdr: ChangeDetectorRef){}
 
       ngOnInit(): void {
+
+        this.authService.user$.subscribe((user) => {
+          this.userClient = user;
+          // console.log('userNgonit',user)
+        });
+        // t
           if(localStorage.getItem('userConnect')!=null){
             this.connectUser=true;
             this.deconnectUser=false;
@@ -44,52 +52,48 @@ export class HeaderComponent {
           this.userRole = userRole;
         });
 
-       // Mettez à jour le nombre d'articles lorsque le panier change
-       this.panierService.nbpanier$.subscribe((count) => {
-        this.nbpanier = count;
-        this.cdr.detectChanges();
-      });
-
-      //  this.onLoginClick();
-
     }
 
      // effet de survol quand l'utilisateur se connect
+     user_id: number = 0;
       toggleDropdown() {
+        
         this.showDropdown = !this.showDropdown;
       }
+
       // navigateToProfile() {
-        //naviguer vers la page de profil
+      //   // naviguer vers la page de profil
       //   this.router.navigate(['/client']);
       //   console.log('Naviguer vers le profil');
       // }
 
-      // navigateToProfile() {
-      //   if (!this.connectUser) {
-      //     this.authService.role(this.connectUser).subscribe((userRole) => {
+      navigateToProfile() {
+        this.authService.user$.subscribe((user) => {
+          if (user) {
+            switch (user.role_id) {
+              case '1':
+                // Naviguer vers la page d'administration
+                this.router.navigate(['/admin']);
+                break;
+              case '2':
+                // Naviguer vers la page du client
+                this.router.navigate(['/client']);
+                break;
+              case '3':
+                // Naviguer vers la page du livreur
+                this.router.navigate(['/livreur']);
+                break;
+              default:
+                // Gérer d'autres cas si nécessaire
+                break;
+            }
+            console.log('user', user.role_id)
+          }
+        });
+      }
 
-      //       this.authService.userRoleSubject.next(userRole);
 
-      //       if(userRole.role_id=='1'){
-      //         this.router.navigate(['/admin']);
-      //         alert('voux etes admin')
-      //       }
-      //       else if (userRole.role_id=='2')
-      //       {
-      //         this.router.navigate(['/client']);
-      //         alert('voux etes client')
-      //       }
-      //       else
-      //       {
-      //         this.router.navigate(['/livreur']);
-      //       alert('voux etes livreur')
-      //     }
 
-      //       this.router.navigate([userRole]);
-      //       console.log('Naviguer vers le profil',userRole);
-      //     });
-      //   }
-      // }
 
 
 
@@ -101,15 +105,17 @@ export class HeaderComponent {
 
       onLogoutClick() : void{
         this.authService.deconnect().subscribe(
-          () => {
+          (data) => {
             // La déconnexion a réussi
-            console.log('Déconnexion réussie');
+            console.log('Déconnexion réussie',data);
             // this.connectUser : localStorage.removeItem('userConnect')
             // alert('deconnect')
             // La déconnexion est réussie
             localStorage.removeItem('userConnect');
+            this.authService.setAuthenticationStatus(false);
             this.connectUser=false;
             this.deconnectUser=true;
+            this.router.navigate(['/'])
 
           },
           (error) => {
@@ -176,7 +182,7 @@ export class HeaderComponent {
 
 
   public quantite = 1;
-  public nbpanier=0;
+  // public nbpanier=0;
 
 
 // increment et dés-increment
@@ -186,11 +192,11 @@ export class HeaderComponent {
           // console.log('ajout', panierProduit)
           if (element.produit.id == id) {
             if (type == 'up') {
-              this.quantite++;
+              // this.quantite++;
               element.quantitePanier++;
-              if (element.quantitePanier>element.produit.quantite) {
+              if (element.quantitePanier>element.produit.quantiteTotale) {
                 element.quantitePanier--;
-                this.panierService.message("Oops","warning",`il n'en reste que ${element.produit.quantite} produit en stock`);
+                this.panierService.message("Oops","warning",`il n'en reste que ${element.produit.quantiteTotale} produit en stock`);
               }
             } else {
               // this.quantite--;
@@ -205,11 +211,9 @@ export class HeaderComponent {
         localStorage.setItem("panier", JSON.stringify(panierProduit));
         this.totalProduit();
         this.panier = this.panierService.getFromPanier();
-        this.nbpanier= panierProduit.length;
-        this.panierService.updateIncrementePanier(this.nbpanier);
-        this.panierService.updateNbPanier(this.nbpanier);
-        // this.cdr.detectChanges();
-        console.log('nombbre',this.nbpanier)
+        // this.nbpanier= panierProduit.length;
+        // // this.cdr.detectChanges();
+        // console.log('nombbre',this.nbpanier)
         // console.log('Nombre de produits dans le panier :', this.nbpanier);
 
       }

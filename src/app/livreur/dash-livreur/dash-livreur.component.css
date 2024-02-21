@@ -108,6 +108,78 @@
   border-radius: 30px;
   padding: 3px 13px;
 }
+.change-couleur {
+  background-color: #1A6060;
+  color: white;
+}
+
+/* carte des personnes */
+.gcarte{
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 30px;
+  justify-content: space-evenly;
+  border: 2px solid black;
+}
+.cartepacks{
+  /* height: 25rem; */
+  background-color: #ffffff;
+  width: 15rem;
+  border-top:none;
+  border-bottom:none;
+  border-left:6px dashed #1A6060;
+  border-right:6px dashed #1A6060;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+.cartepacks h4 {
+  font-weight: bold;
+  font-size: 23px;
+  /* border: 2px solid; */
+}
+.contenupacks{
+  border-top:6px solid #1A6060;
+  border-left:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-top: -130px;
+  margin-left: -150px;
+}
+.contenupacks2{
+  border-bottom:6px solid #1A6060;
+  border-right:6px solid #1A6060;
+  width: 90px;
+  height: 70px !important;
+  margin-left: 144px;
+  margin-top:-30px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.imgperson{
+  width: 14rem;
+  border-top-right-radius: 40px;
+  margin:0 auto;
+  margin-top: -55px;
+  /* border: 2px solid; */
+}
+.titreproduits{
+  font-weight: bold;
+}
+ .titreproduits h4{
+  font-weight: bold;
+  /* border: 2px solid; */
+}
+
+.iconproduits{
+  color: #1A6060;
+  font-size: 25px;
+  padding: 0px 10px;
+  display: flex;
+  justify-content: end;
+  margin-top: -10px;
+  /* border: 2px solid; */
+}
 
  /*tablette*/
  @media screen and (max-width: 991px){

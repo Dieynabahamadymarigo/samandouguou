@@ -1,7 +1,7 @@
 /* catégories */
 .catégorie{
   padding-top: 50px;
-  padding-left: 275px;
+  padding-left: 260px;
 }
 /* categories */
 .gcategories{
@@ -29,13 +29,110 @@
 .difcategories img{
   height: 35px;
 }
+/* carte des personnes */
+/* .catégorie1{
+  padding-top: 50px;
+  padding-left: 275px;
+} */
+.gcarte{
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 30px;
+  justify-content: space-evenly;
+  /* border: 2px solid black; */
+}
+.cartepacks{
+  /* height: 25rem; */
+  width: 15rem;
+  border-top:none;
+  border-bottom:none;
+  border-left:6px dashed #1A6060;
+  border-right:6px dashed #1A6060;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+.cartepacks h4 {
+  font-weight: bold;
+  /* border: 2px solid; */
+}
+.contenupacks{
+  border-top:6px solid #1A6060;
+  border-left:6px solid #1A6060;
+  width: 90px;
+  height: 70px;
+  margin-left: -6px;
+}
+.contenupacks2{
+  border-bottom:6px solid #1A6060;
+  border-right:6px solid #1A6060;
+  width: 90px;
+  height: 70px !important;
+  margin-left: 144px;
+  margin-top:-20px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.imgperson{
+  width: 14rem;
+  border-top-right-radius: 40px;
+  margin:0 auto;
+  margin-top: -55px;
+  /* border: 2px solid; */
+}
+.titreproduits{
+  font-weight: bold;
+}
+ .titreproduits h4{
+  font-weight: bold;
+  /* border: 2px solid; */
+}
 
+.iconproduits{
+  color: #1A6060;
+  font-size: 25px;
+  padding: 0px 10px;
+  display: flex;
+  justify-content: end;
+  margin-top: -10px;
+  /* border: 2px solid; */
+}
 
+ /*ordinateur*/
+ @media screen and (max-width: 1048px)  {
+  .cartepacks{
+    /* height: 25rem; */
+    width: 14rem;
+    border-top:none;
+    border-bottom:none;
+    border-left:6px dashed #1A6060;
+    border-right:6px dashed #1A6060;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+  .contenupacks2{
+  width: 90px;
+  height: 70px !important;
+  margin-left: 128px;
+  margin-top:-40px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.titreproduits h4{
+  font-weight: bold;
+  font-size: 23px;
+  /* border: 2px solid; */
+}
+ }
  /*tablette*/
  @media screen and (max-width: 991px)  {
+  .catégorie{
+    padding-top: 50px;
+    padding-left: 210px;
+  }
   .gcategories{
     padding: 20px 10px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     gap: 10px;
   }
   .difcategories{
@@ -53,25 +150,14 @@
   .difcategories img{
     height: 27px;
   }
- }
-
- /* téléphone */
-/* @media screen and (max-width: 845px){
-  .gcategories{
+  .gcarte{
+    padding-top: 30px;
     display: grid;
     grid-template-columns: auto auto ;
+    gap: 40px;
     justify-content: space-evenly;
-    padding: 20px 10px;
-    gap: 23px;
   }
-  .difcategories{
-    border: 2px solid #1A6060;
-    display: flex;
-    justify-content: center;
-    padding: 10px 5px;
-    width: 170px;
-  }
-} */
+ }
 
  /* téléphone */
  @media screen and (max-width: 767px){
@@ -89,8 +175,189 @@
     padding: 10px 5px;
     width: 170px;
   }
+  .difcategories h3{
+    font-size: 20px;
+  }
+  .difcategories img{
+    height: 30px;
+  }
+  .cartepacks{
+    /* height: 25rem; */
+    width: 14rem;
+    border-top:none;
+    border-bottom:none;
+    border-left:6px dashed #1A6060;
+    border-right:6px dashed #1A6060;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+  .contenupacks2{
+  width: 90px;
+  height: 70px !important;
+  margin-left: 128px;
+  margin-top:-40px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.titreproduits h4{
+  font-weight: bold;
+  font-size: 23px;
+  /* border: 2px solid; */
+}
  }
-/* téléphone petit model */
-@media screen and (max-width: 468px)
 
-{}
+ /* téléphone */
+ @media screen and (max-width: 700px){
+  .gcategories{
+    display: grid;
+    grid-template-columns: auto auto ;
+    justify-content: space-evenly;
+    padding: 20px 10px;
+    gap: 23px;
+  }
+  .difcategories{
+    border: 2px solid #1A6060;
+    display: flex;
+    justify-content: center;
+    padding: 5px 5px;
+    width: 130px;
+  }
+  .difcategories h3{
+    color: #1A6060;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .difcategories img{
+    height: 20px;
+  }
+  .cartepacks{
+    /* height: 25rem; */
+    width: 13rem;
+    border-top:none;
+    border-bottom:none;
+    border-left:6px dashed #1A6060;
+    border-right:6px dashed #1A6060;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+  .contenupacks2{
+  width: 90px;
+  height: 70px !important;
+  margin-left: 112px;
+  margin-top:-40px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.titreproduits h4{
+  font-weight: bold;
+  font-size: 21px;
+  /* border: 2px solid; */
+}
+ }
+
+/* téléphone petit model */
+ @media screen and (max-width: 516px){
+  .gcategories{
+    display: grid;
+    grid-template-columns: auto auto ;
+    justify-content: space-evenly;
+    padding: 20px 10px;
+    gap: 18px;
+  }
+  .difcategories{
+    display: flex;
+    justify-content: center;
+    padding: 3px 3px;
+    width: 110px;
+    border-radius: 15px;
+    box-shadow: 3px 3px #2FA7A7;
+    gap: 2px;
+  }
+  .difcategories h3{
+    color: #1A6060;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .difcategories img{
+    height: 16px;
+  }
+ }
+
+ /* téléphone petit model */
+ @media screen and (max-width: 664px){
+  .cartepacks{
+    /* height: 25rem; */
+    width: 12rem;
+    border-top:none;
+    border-bottom:none;
+    border-left:6px dashed #1A6060;
+    border-right:6px dashed #1A6060;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+  .contenupacks2{
+  width: 90px;
+  height: 70px !important;
+  margin-left: 96px;
+  margin-top:-40px;
+  box-shadow:6px 6px #2FA7A7;
+  border-radius:0px 10px 0px 10px ;
+}
+.titreproduits h4{
+  font-weight: bold;
+  font-size: 19px;
+  /* border: 2px solid; */
+}
+ }
+ /* téléphone petit model */
+ @media screen and (max-width: 636px){
+  /* catégories */
+.catégorie{
+  padding-top: 50px;
+  padding-left: 200px;
+}
+  .gcarte{
+    display: grid;
+    grid-template-columns: auto  ;
+    justify-content: space-evenly;
+    padding: 20px 10px;
+    gap: 18px;
+  }
+ }
+
+/* téléphone petit model */
+ @media screen and (max-width: 468px){
+  .gcategories{
+    display: grid;
+    grid-template-columns: auto  ;
+    justify-content: space-evenly;
+    padding: 20px 10px;
+    gap: 30px;
+  }
+  .difcategories{
+    display: flex;
+    justify-content: center;
+    padding: 3px 3px;
+    width: 110px;
+    border-radius: 15px;
+    box-shadow: 3px 3px #2FA7A7;
+    gap: 2px;
+  }
+  .difcategories h3{
+    color: #1A6060;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .difcategories img{
+    height: 16px;
+  }
+  /* carte */
+  /* .gcarte{
+    padding-top: 30px;
+    display: grid;
+    grid-template-columns: auto ;
+    gap: 30px;
+    justify-content: space-evenly; */
+    /* border: 2px solid black; */
+  /* } */
+ }
