@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MentionLegalesComponent } from './mention-legales.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('MentionLegalesComponent', () => {
   let component: MentionLegalesComponent;
@@ -8,7 +9,8 @@ describe('MentionLegalesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MentionLegalesComponent]
+      declarations: [MentionLegalesComponent],
+      imports: [HttpClientModule],
     });
     fixture = TestBed.createComponent(MentionLegalesComponent);
     component = fixture.componentInstance;

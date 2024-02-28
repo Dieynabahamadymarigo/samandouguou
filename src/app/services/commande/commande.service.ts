@@ -53,13 +53,27 @@ export class CommandeService {
   }
 
   // Affecter une commande en cours à un livreur
-  commandeTerminer(id:number):Observable<any>{
+  // commandeTerminer(id:number):Observable<any>{
+  //   const accessToken = localStorage.getItem('userConnect');
+  //   console.log('token',accessToken)
+  //   return accessToken ?
+  //   this.http.post(`http://127.0.0.1:8000/api/CommandeTerminee/${id}`, {
+  //     headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`}),
+  //   }): of (null);
+  // }
+  commandeTerminer(id: number): Observable<any> {
     const accessToken = localStorage.getItem('userConnect');
-    console.log('token',accessToken)
-    return accessToken ?
-    this.http.post(`http://127.0.0.1:8000/api/CommandeTerminee/${id}`, {
-      headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`}),
-    }): of (null);
+    console.log('token', accessToken);
+
+    if (accessToken) {
+      const headers = new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` });
+
+      // Utilisation de 'null' pour le corps de la requête
+      return this.http.post(`http://127.0.0.1:8000/api/CommandeTerminee/${id}`, null, { headers });
+    } else {
+      // Utilisation de 'of' pour retourner un observable vide si l'accessToken est nul
+      return of(null);
+    }
   }
 
 
@@ -68,6 +82,15 @@ export class CommandeService {
     const accessToken = localStorage.getItem('userConnect');
     return accessToken ?
     this.http.get(`http://127.0.0.1:8000/api/listeCommandeEnCours`, {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`})
+    }): of (null);
+  }
+
+   // liste commande terminée
+   listerCommandeTermine():Observable<any>{
+    const accessToken = localStorage.getItem('userConnect');
+    return accessToken ?
+    this.http.get(`http://127.0.0.1:8000/api/ListecommandeTerminee`, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`})
     }): of (null);
   }

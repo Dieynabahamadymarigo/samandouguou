@@ -71,8 +71,11 @@
         <!-- newsletter -->
         <div class="news">
           <h3>Newsletter</h3>
-          <input type="text" class="input"><br>
-          <button class="bouton">S'inscrire</button>
+          <input type="text" class="input" [(ngModel)]="email"  name="email" required (input)="verifEmailFonction()"><br>
+          <span class="text-danger ms-3" *ngIf="exactEmail == false">{{verifEmail}}</span>
+          <span class="text-success ms-3" *ngIf="exactEmail == true"><i class="bi bi-check2-all"></i> Exact !</span>
+          <br>
+          <button class="bouton" style="cursor: pointer;" (click)="addNews()">S'inscrire</button>
         </div>
         </div>
 

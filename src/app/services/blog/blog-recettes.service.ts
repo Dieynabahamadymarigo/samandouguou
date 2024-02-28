@@ -70,7 +70,7 @@ export class BlogRecettesService {
   deleteArticle(id:number): Observable<any> {
     const accessToken = localStorage.getItem('userConnect');
     return accessToken ?
-    this.http.delete(`http://127.0.0.1:8000/api/deletePost`+ id, {
+    this.http.delete(`http://127.0.0.1:8000/api/deletePost/`+ id, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}`})
     }): of (null);
   }

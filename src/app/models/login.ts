@@ -54,3 +54,12 @@ export class Article{
   categorie_blog_id:any =[];
   create_At = '';
 }
+export class Pack{
+  idPack: number=0;
+  nom !: string;
+  image!: string;
+  video!: string;
+  nombre!:number;
+  etatPack!:number;
+  legumes:any=[];
+}

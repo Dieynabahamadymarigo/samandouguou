@@ -1,4 +1,4 @@
-<app-header></app-header>
+<header></header>
 
 <!-- Page inscription -->
 <div class="top" *ngIf="!showFrmConnexion">
@@ -14,45 +14,45 @@
 
           <div class="champs ">
             <div class="d-block">
-              <input type="text" class="me-3 mt-3" id="nom" placeholder="Votre nom" [(ngModel)]="nom"  name="nom" required (input)="verifNomFonction()">
-              <p class="text-danger" *ngIf="exactNom == false">{{verifNom}}</p>
-              <p class="text-success" *ngIf="exactNom == true"><i class="bi bi-check2-all"></i> Exact !</p>
+              <input type="text" class="me-3 " id="nom" placeholder="Votre nom" [(ngModel)]="nom"  name="nom" required (input)="verifNomFonction()">
+              <p class="text-danger ms-3" *ngIf="exactNom == false">{{verifNom}}</p>
+              <p class="text-success ms-3" *ngIf="exactNom == true"><i class="bi bi-check2-all"></i> Exact !</p>
               <!-- <br> -->
             </div>
 
             <div class="d-block">
-              <input type="text" class="mt-3" placeholder="Votre prénom" [(ngModel)]="prenom" name="prenom" required
+              <input type="text" class="" placeholder="Votre prénom" [(ngModel)]="prenom" name="prenom" required
               (input)="verifPrenomFonction()">
-              <p class="text-danger" *ngIf="exactPrenom == false">{{verifPrenom}}</p>
-              <p class="text-success" *ngIf="exactPrenom == true"><i class="bi bi-check2-all"></i> Exact !</p>
+              <p class="text-danger ms-3" *ngIf="exactPrenom == false">{{verifPrenom}}</p>
+              <p class="text-success ms-3" *ngIf="exactPrenom == true"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
           </div>
 
           <div class="champs ">
             <div class="block">
-              <input type="email" class="me-3 mt-3" placeholder="Votre email" [(ngModel)]="email" name="email" required (input)="verifEmailFonction()">
-              <p class="text-danger" id="verifEmail" *ngIf="exactEmail == false">{{verifEmail}}</p>
-              <p class="text-success" id="verifEmail" *ngIf="exactEmail == true" ><i class="bi bi-check2-all"></i> Exact !</p>
+              <input type="email" class="me-3 " placeholder="Votre email" [(ngModel)]="email" name="email" required (input)="verifEmailFonction()">
+              <p class="text-danger" id="verifEmail ms-3" *ngIf="exactEmail == false">{{verifEmail}}</p>
+              <p class="text-success" id="verifEmail ms-3" *ngIf="exactEmail == true" ><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
 
             <div class="block">
-              <input type="password" class="mt-3" placeholder="mot de passe" [(ngModel)]="password" name="password" required (input)="verifPasswordFonction()">
-              <p class="text-danger" *ngIf="exactPassword == false">{{verifPassword}}</p>
-              <p class="text-success" *ngIf="exactPassword == true"><i class="bi bi-check2-all"></i> Exact !</p>
+              <input type="password" class="" placeholder="mot de passe" [(ngModel)]="password" name="password" required (input)="verifPasswordFonction()">
+              <p class="text-danger ms-3" *ngIf="exactPassword == false">{{verifPassword}}</p>
+              <p class="text-success ms-3" *ngIf="exactPassword == true"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
           </div>
 
           <div class="champs mb-3">
             <div class="block">
-              <input type="tel" class="me-3 mt-3" placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse" required (input)="verifAdresseFonction()">
-              <p class="text-danger" *ngIf="exactAdresse == false">{{verifAdresse}}</p>
-              <p class="text-success" *ngIf="exactAdresse == true"><i class="bi bi-check2-all"></i> Exact !</p>
+              <input type="tel" class="me-3 " placeholder="Votre adresse" [(ngModel)]="adresse" name="adresse" required (input)="verifAdresseFonction()">
+              <p class="text-danger ms-3" *ngIf="exactAdresse == false">{{verifAdresse}}</p>
+              <p class="text-success ms-3" *ngIf="exactAdresse == true"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
 
             <div class="block">
-              <input type="tel" class="mt-3" placeholder="votre télephone" [(ngModel)]="telephone" name="telephone" required (input)="verifTelephoneFonction()">
-              <p class="text-danger" *ngIf="exactTelephone== false">{{verifTelephone}}</p>
-              <p class="text-success" *ngIf="exactTelephone== true"><i class="bi bi-check2-all"></i> Exact !</p>
+              <input type="tel" class="" placeholder="votre télephone" [(ngModel)]="telephone" name="telephone" required (input)="verifTelephoneFonction()">
+              <p class="text-danger ms-3" *ngIf="exactTelephone== false">{{verifTelephone}}</p>
+              <p class="text-success ms-3" *ngIf="exactTelephone== true"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
           </div>
 
@@ -96,11 +96,11 @@
       <div class="col-md-6 mt-5 info">
 
           <div class="champs">
-            <div class="block" style=" width: 100%;">
-            <input type="email" class="mb-3" name="email" [(ngModel)]="formDate.email" placeholder="Votre email" required (input)="verifEmailConFonction()">
+            <div class="block mb-3" style=" width: 100%;">
+            <input type="email" class="" name="email" [(ngModel)]="formDate.email" placeholder="Votre email" required (input)="verifEmailConFonction()">
 
-            <p id="verifEmailCon" class="text-success" *ngIf="exactEmailCon == true">{{ verifEmailCon }}</p>
-            <p id="verifEmailCon" class="text-danger" *ngIf="exactEmailCon == false">{{ verifEmailCon }}</p>
+            <span id="verifEmailCon" class="text-success ms-3" *ngIf="exactEmailCon == true">{{ verifEmailCon }}</span>
+            <span id="verifEmailCon" class="text-danger ms-3" *ngIf="exactEmailCon == false">{{ verifEmailCon }}</span>
 
             <!-- <p class="text-danger" *ngIf="!exactEmailCon">{{verifEmailCon}}</p>
             <p class="text-success" *ngIf="exactEmailCon"><i class="bi bi-check2-all"></i> Exact !</p> -->
@@ -111,8 +111,8 @@
             <div class="block" style="width: 100%;">
             <input type="password" class="" name="password" [(ngModel)]="formDate.password" placeholder="mot de passe" required (input)="verifPasswordConFonction()">
 
-            <p id="verifPasswordCon" class="text-danger" *ngIf="exactPasswordCon == false">{{ verifPasswordCon }}</p>
-          <p id="verifPasswordCon" class="text-success" *ngIf="exactPasswordCon == true">{{ verifPasswordCon }}</p>
+            <span id="verifPasswordCon" class="text-danger ms-3" *ngIf="exactPasswordCon == false">{{ verifPasswordCon }}</span>
+            <span id="verifPasswordCon" class="text-success ms-3" *ngIf="exactPasswordCon == true">{{ verifPasswordCon }}</span>
 
             <!-- <p class="text-danger" *ngIf="!exactPasswordCon">{{verifPasswordCon}}</p>
             <p class="text-success" *ngIf="exactPasswordCon"><i class="bi bi-check2-all"></i> Exact !</p> -->

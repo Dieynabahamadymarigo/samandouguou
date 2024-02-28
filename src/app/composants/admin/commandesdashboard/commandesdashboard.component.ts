@@ -4,11 +4,14 @@ import { CommandeService } from 'src/app/services/commande/commande.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-commandesdashboard',
+  selector: 'commandesdashboard',
   templateUrl: './commandesdashboard.component.html',
   styleUrls: ['./commandesdashboard.component.css']
 })
 export class CommandesdashboardComponent {
+  // slice() {
+  //   throw new Error('Method not implemented.');
+  // }
     // variables choix de transactions
     tabEnCours : boolean = true;
     tabConfirmer : boolean = false;
@@ -62,6 +65,7 @@ export class CommandesdashboardComponent {
     this.listerDesCommandes();
     this.listeDesCommandesEnCours();
     this.listeLivreurDisponible();
+    this.listerDesCommandesTerminee();
   };
 
   viderChamps() {
@@ -91,7 +95,7 @@ export class CommandesdashboardComponent {
     console.log('agezefyvdbfegvu',this.tabListCommandes);
     this.commandeService.listerCommande().subscribe((data) => {
       this.tabListCommandes = data;
-      console.log('tabCommande', data);
+      console.log('liste commande en attente', data);
     });
   }
 
@@ -144,19 +148,20 @@ export class CommandesdashboardComponent {
   clientCommande(id:number) {
       // Vérifier s'il y a des livreurs disponibles
   if (this.tabListLivreurDispo.length === 0) {
-    this.verifierChamps('Erreur', 'Aucun livreur disponible. Impossible de passer la commande.','warning');
+    this.verifierChamps('Oops\'s', 'Aucun livreur disponible. Impossible de passer la commande.','warning');
   }
   else {
-    const firstLivreur = this.tabListLivreurDispo[0];
+    // recupére le premier livreur dispo
+    const firstLivreur = this.tabListLivreurDispo;
     this.commandeService.affecterCommande(id).subscribe((response) => {
         console.log('commandeClient', response);
-        // si la commande il éfface une carte
+        // si la commande est affectée il éfface la carte
         const index = this.tabListCommandes.findIndex(commande => commande.id === id);
         if (index !== -1) {
           this.tabListCommandes.splice(index, 1);
         }
         this.listeLivreurDisponible();
-        this.verifierChamps('Succès', 'Commande affectée au livreur ' + firstLivreur.nom, 'success');
+        this.verifierChamps('Succès', 'Commande affectée au livreur ' + firstLivreur.prenom + " " + firstLivreur.nom, 'success');
 
       });
     }
@@ -183,7 +188,7 @@ export class CommandesdashboardComponent {
     console.log('agezefyvdbfegvu',this.tabListCommandesEncours);
     this.commandeService.listerCommandeEnCours().subscribe((data) => {
       this.tabListCommandesEncours = data;
-      console.log('tabCommande', data);
+      console.log('liste commande en cours', data);
     });
   }
 
@@ -224,6 +229,58 @@ export class CommandesdashboardComponent {
       // Vérifiez si la page est valide en fonction du nombre total de pages
       if (page >= 1 && page <= this.totalCommandeArray().length) {
         this.currentCommande = page;
+      }
+    }
+
+  //  -----------------------------------------------------------------------------------------
+  // lister commandes terminee
+  tabListCommandesTerminee: any []= [];
+  listerDesCommandesTerminee() {
+
+    console.log('agezefyvdbfegvu',this.tabListCommandesTerminee);
+    this.commandeService.listerCommandeTermine().subscribe((data) => {
+      this.tabListCommandesTerminee = data;
+      console.log('liste commande terminee', data);
+    });
+  }
+
+      //Pour faire la recherche
+      filterTerminee = '';
+      filteredCommandeTerminee: any;
+
+     itemsComTermineePage = 6;
+     currentComTermineePage = 1;
+
+     onSearchCommandeTerminee() {
+      this.currentComTermineePage = 1; // Réinitialiser la page à 1 lorsqu'une recherche est effectuée
+
+      // Recherche se fait selon le nom du produit
+      this.filteredCommandeTerminee = this.tabListCommandesTerminee.filter((elt: any) =>
+        elt?.nomProduit.toLowerCase().includes(this.filterTerminee.toLowerCase())
+      );
+    }
+
+    get visibleCommandeTerminee() {
+      // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+      const sourceArray = this.filteredCommandeTerminee ? this.filteredCommandeTerminee : this.tabListCommandesTerminee;
+
+      const startIndex = (this.currentComTermineePage - 1) * this.itemsComTermineePage;
+      const endIndex = startIndex + this.itemsComTermineePage;
+
+      return sourceArray.slice(startIndex, endIndex);
+    }
+
+    totalPagesCommande(): number[] {
+      // Utilisez le tableau filtré si la recherche est active, sinon utilisez le tableau complet
+      const sourceArray = this.filteredCommandeTerminee ? this.filteredCommandeTerminee : this.tabListCommandesTerminee;
+
+      return Array.from({ length: Math.ceil(sourceArray.length / this.itemsComTermineePage) }, (_, i) => i + 1);
+    }
+
+    setPageCommandeTerminee(page: number) {
+      // Vérifiez si la page est valide en fonction du nombre total de pages
+      if (page >= 1 && page <= this.totalPagesCommande().length) {
+        this.currentComTermineePage = page;
       }
     }
 

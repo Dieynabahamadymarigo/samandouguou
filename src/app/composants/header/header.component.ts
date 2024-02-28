@@ -4,7 +4,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { PanierService } from 'src/app/services/panier/panier.service';
 
 @Component({
-  selector: 'app-header',
+  selector: 'header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
@@ -52,12 +52,21 @@ export class HeaderComponent {
           this.userRole = userRole;
         });
 
+        // this.changeButtonName()
+
+    }
+
+
+    changeButtonName(){
+      if(!localStorage.getItem('userConnect')){
+        alert('hello')
+      }
     }
 
      // effet de survol quand l'utilisateur se connect
      user_id: number = 0;
       toggleDropdown() {
-        
+
         this.showDropdown = !this.showDropdown;
       }
 
@@ -124,6 +133,8 @@ export class HeaderComponent {
           }
         );
       }
+
+
       // }
 
 

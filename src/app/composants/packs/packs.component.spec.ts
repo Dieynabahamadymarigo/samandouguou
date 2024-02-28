@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PacksComponent } from './packs.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 describe('PacksComponent', () => {
   let component: PacksComponent;
@@ -8,7 +10,8 @@ describe('PacksComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PacksComponent]
+      declarations: [PacksComponent],
+      imports: [HttpClientModule,FormsModule],
     });
     fixture = TestBed.createComponent(PacksComponent);
     component = fixture.componentInstance;

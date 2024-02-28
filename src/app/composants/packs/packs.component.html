@@ -1,4 +1,4 @@
-<app-header></app-header>
+<header></header>
 <!-- baniere -->
   <div class="container banier">
     <div class="banierimg1">
@@ -14,23 +14,22 @@
 
   <!-- button de recherche -->
   <div class="container buttonsearch">
-    <input type="search" placeholder="Recherche" [(ngModel)]="rechercheNom">
+    <input type="search" placeholder="Recherche" [(ngModel)]="filterPackValue" (input)="onSearchPack()" >
   </div>
 
   <!-- carte des packs -->
   <div class="gcarte">
-    <div *ngIf="packsFiltres.length === 0">
+    <div *ngIf="visiblePackProduits.length === 0">
       <h1 style="color: red;">🙄 Pack non trouvé.</h1>
     </div>
 
-    <div class="card cartepacks" *ngFor="let pack of packsFiltres">
+    <div class="card cartepacks" *ngFor="let pack of visiblePackProduits">
       <div class="contenupacks"></div>
       <img [src]="pack.image" class="img-top imgpacks" alt="...">
       <div class="card-body">
-        <!-- <h5 class="card-title"> {{ pack.nom }} </h5> -->
         <h5 class="card-title">{{ tronquerTexte(pack.nom, 16) }}</h5>
         <div class="button">
-          <button class="btn" routerLink="/packs/decouvrir">Découvrir</button>
+          <button class="btn" (click)=" Packclique(pack)"  [routerLink]="['/packs/decouvrir', pack.idPack]">Découvrir</button>
         </div>
       </div>
       <div class="contenupacks2" ></div>
@@ -39,9 +38,9 @@
   </div>
 
   <div class="iconpagination">
-    <button *ngFor="let page of nombrePagesArray()" (click)="changerPage(page)">{{ page }}</button>
+    <button *ngFor="let page of totalPagesPackArray()" (click)="setPagePack(page)">{{ page }}</button>
   </div>
 
 
 <div class="espace"></div>
-<app-footer></app-footer>
+<footer></footer>

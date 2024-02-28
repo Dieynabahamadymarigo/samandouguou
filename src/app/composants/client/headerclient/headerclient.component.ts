@@ -5,7 +5,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-headerclient',
+  selector: 'headerclient',
   templateUrl: './headerclient.component.html',
   styleUrls: ['./headerclient.component.css']
 })

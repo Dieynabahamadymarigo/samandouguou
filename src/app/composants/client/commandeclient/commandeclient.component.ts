@@ -5,7 +5,7 @@ import { CommandeService } from 'src/app/services/commande/commande.service';
 import { Commande } from 'src/app/models/login';
 
 @Component({
-  selector: 'app-commandeclient',
+  selector: 'commandeclient',
   templateUrl: './commandeclient.component.html',
   styleUrls: ['./commandeclient.component.css']
 })
@@ -18,28 +18,28 @@ export class CommandeclientComponent implements OnInit {
     this.listeCommandeUser();
   }
     // variables choix de produits
-    tabProduits: boolean = true;
-    tabPacks: boolean = false;
+    tabCommandeTerminee: boolean = true;
+    tabPCommandeEnCours: boolean = false;
     tabClients: boolean = false;
 
     //choix de produits pour tableau produits
-    afficheProduits() {
-      this.tabProduits = true;
-      this.tabPacks = false;
+    afficheCommandeTerminee() {
+      this.tabCommandeTerminee = true;
+      this.tabPCommandeEnCours = false;
       this.tabClients = false;
     }
 
     //choix de produits pour tableau packs
-    affichePacks() {
-      this.tabProduits = false;
-      this.tabPacks = true;
+    afficheCommandeEnCours() {
+      this.tabCommandeTerminee = false;
+      this.tabPCommandeEnCours = true;
       this.tabClients = false;
     }
 
     //choix de produits pour tableau clients
     afficheClients() {
-      this.tabProduits = false;
-      this.tabPacks = false;
+      this.tabCommandeTerminee = false;
+      this.tabPCommandeEnCours = false;
       this.tabClients = true;
     }
 

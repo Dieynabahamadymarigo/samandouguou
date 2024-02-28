@@ -108,7 +108,8 @@
 }
 .carteimg{
   margin-top: -55px;
-  /* width: 10rem; */
+  margin-left: 6px;
+  width: 12rem;
   height: 10rem;
   /* border: 2px solid black; */
 }
@@ -335,7 +336,6 @@
   /* baniere */
 .banier{
 height: 300px;
-width: 98%;
 display: grid;
 grid-template-columns: auto auto auto;
 }
@@ -375,10 +375,27 @@ font-size: 25px;
   width: 60px;
   margin-left: 100px;
 }
+.carteimg{
+  width: 9rem;
+  height: 7rem;
+}
 }
 
 /* téléphone petit model */
 @media screen and (max-width: 375px){
+    /* baniere */
+.banier{
+  height: 300px;
+  /* width: 98%; */
+  display: grid;
+  grid-template-columns: auto auto auto;
+  }
+  .banierimg2 img{
+    height: 296px;
+    margin-left:12px ;
+    width: 100%;
+    /* border: 2px solid black; */
+    }
   .gcartelegumes{
     display: grid;
     grid-template-columns: auto ;

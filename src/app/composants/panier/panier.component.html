@@ -1,4 +1,4 @@
-<app-header></app-header>
+<header></header>
 <!-- banier -->
 <div class=" mb-3 container" >
   <div class="row g-0 contenu">
@@ -39,11 +39,17 @@
       </tr>
     </thead>
 
+    <!--  -->
     <tbody *ngFor="let produit of panier; let index=index" >
-      <tr >
+      <tr>
         <!-- <th scope="row">2</th> -->
         <th scope="row">{{index+1}}</th>
-        <td><img src="http://127.0.0.1:8000/images/{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt=""></td>
+        <td>
+          <!-- image api -->
+          <img src="http://127.0.0.1:8000/images/{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt="">
+          <!-- image localSorage -->
+          <img src="{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt="">
+        </td>
         <td class=" input">
           <button class="decremente"><i class="bi bi-dash-circle" (click)="upOrDownQuantity('down',produit.produit.id)"></i></button>
           <input tyte="number" [(ngModel)]="produit.quantitePanier" (input)="validerInputPanier(produit.quantitePanier, produit.produit.id); totalProduit()"> {{produit.produit.quantite}}
@@ -54,11 +60,42 @@
         <td>{{produit.produit.prix}}fr </td>
         <td *ngIf="isPanierValid"> {{produit.produit.prix*produit.quantitePanier}} fr </td>
         <td *ngIf="!isPanierValid"> 0 fr </td>
-        <td><button class="delete"><i class="bi bi-trash-fill"  (click)="deleteFromPanier(produit.produit.id)"></i></button></td>
+        <td>
+          <!-- <button class="delete"><i class="bi bi-trash-fill" (click)="deleteFromPanier(produit.produit.id);supprimerLegume(produit.produit)"></i></button> -->
+          <button class="delete"><i class="bi bi-trash-fill" (click)="supprimerLegume(produit.produit)"></i>
+          </button>
+        </td>
 
       </tr>
 
     </tbody>
+
+
+<!--  -->
+<!-- <tbody *ngFor="let produit of panier; let index=index" >
+  <tr >
+    <th scope="row">{{index+1}}</th>
+    <td>
+      <img src="{{produit.produit.image}}" [routerLink]="['/admin',produit.produit.id]" class="tabimg" alt="">
+    </td>
+    <td class=" input">
+      <button class="decremente"><i class="bi bi-dash-circle" (click)="upOrDownQuantity('down',produit.produit.id)"></i></button>
+      <input tyte="number" [(ngModel)]="produit.quantitePanier" (input)="validerInputPanier(produit.quantitePanier, produit.produit.id); totalProduit()"> {{produit.produit.quantite}}
+      <button class="decremente"><i class="bi bi-plus-circle" (click)="upOrDownQuantity('up',produit.produit.id)"></i></button>
+      <p class="text-danger">{{messagePanier}}</p>
+    </td>
+    <td>{{produit.produit.prix}}fr </td>
+    <td *ngIf="isPanierValid"> {{produit.produit.prix*produit.quantitePanier}} fr </td>
+    <td *ngIf="!isPanierValid"> 0 fr </td>
+    <td>
+      <button class="delete"><i class="bi bi-trash-fill" (click)="supprimerLegume(produit.paramLegume)"></i>
+      </button>
+    </td>
+
+  </tr>
+
+</tbody> -->
+
   </table>
  </div>
   <!-- total et commande -->
@@ -118,4 +155,4 @@
 <div style="padding-bottom:150px;"></div>
 
 
-<app-footer></app-footer>
+<footer></footer>

@@ -69,4 +69,8 @@ export class LegumesService {
     }) : of(null);
    };
 
+  //  PACKS
+   getFrompPacks() {
+    return JSON.parse(localStorage.getItem('packs') ?? '[]');
+  }
 }

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderclientComponent } from './headerclient.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('HeaderclientComponent', () => {
   let component: HeaderclientComponent;
@@ -8,7 +9,8 @@ describe('HeaderclientComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderclientComponent]
+      declarations: [HeaderclientComponent],
+      imports: [HttpClientModule],
     });
     fixture = TestBed.createComponent(HeaderclientComponent);
     component = fixture.componentInstance;

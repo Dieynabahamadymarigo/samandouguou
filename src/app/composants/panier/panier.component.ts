@@ -6,6 +6,7 @@ import { PanierService } from 'src/app/services/panier/panier.service';
 import { LegumesService } from 'src/app/services/legumes/legumes.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { CommandeService } from 'src/app/services/commande/commande.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-panier',
@@ -62,7 +63,7 @@ export class PanierComponent implements OnInit {
     //   this.isPanierValid = false;
     //   this.messagePanier =  "Ne prend que des valeurs positives";
     // }
-    
+
     if (validInput) {
       this.isPanierValid = true;
       this.messagePanier =  "";
@@ -116,14 +117,17 @@ export class PanierComponent implements OnInit {
           }
         }
       }
+      // Ajoutez cette condition pour vérifier si la quantité totale est épuisée
+      if (element.produit.quantiteTotale === 0) {
+        element.epuise = true; // Ajoutez une propriété "epuise" à l'élément dans le panier
+      } else {
+        element.epuise = false;
+      }
       // console.log('increment',this.upOrDownQuantity)
     });
     localStorage.setItem("panier", JSON.stringify(panierProduit));
     this.totalProduit();
     this.panier = this.panierService.getFromPanier();
-    // this.nbpanier= (panierProduit.length);
-    // this.cdr.detectChanges();
-    // console.log('nombbre',this.nbpanier)
   }
 
 // total dess produits
@@ -141,7 +145,7 @@ export class PanierComponent implements OnInit {
     // console.log('total',this.totalProduit),
   }
 
-  // methode supprimer
+  // methode supprimer produit api
   deleteFromPanier(id: any) {
     let tab: any = [];
     tab = this.panierService.getFromPanier();
@@ -156,6 +160,21 @@ export class PanierComponent implements OnInit {
     this.totalProduit();
 
   }
+
+  // methode pour supprimer produit localStorage
+  supprimerLegume(paramLegume:any){
+     let tabLegume: any = [];
+        alert(paramLegume.etatLegume)
+        tabLegume = this.panierService.getFromPanier();
+        console.log('arqa',tabLegume)
+        console.log('sup',paramLegume)
+        console.log(paramLegume.idLegume)
+        tabLegume.splice(paramLegume.idLegume-2, 1)
+
+        localStorage.setItem("panier", JSON.stringify(this.panier));
+        this.panierService.message("Parfait", "success", "produit retiré vcfdt du panier");
+
+      }
 
   // vider panier
   deleteAllPanier() {
@@ -197,6 +216,8 @@ export class PanierComponent implements OnInit {
 
       // variable pour adresse
       adresseLivraison: string = '';
+      // Déclarez une variable loading dans votre composant
+      loading: boolean = false;
 
   isOnline() {
     let panier = JSON.parse(localStorage.getItem('panier') ?? '[]');
@@ -206,10 +227,21 @@ export class PanierComponent implements OnInit {
       this.panierService.message('Oop\'s', "warning", "Le panier est vide veuillez le remplir d'abord");
     }
     else {
+      Swal.fire({
+        title: '😊 Veuillez patienter',
+        text: 'Envoi de la commande en cours...',
+        icon: 'info',
+        showConfirmButton:false,
+        // timer:15000,
+      });
+      // Afficher "Veuillez patienter"
+    // this.verifierChamps('😊 Veuillez patienter', 'Envoi de la commande en cours...', 'info');
+
       this.panierService.isAuthenticated$.subscribe((isAuthenticated) => {
         if (this.connectUser == isAuthenticated) {
           console.log(this.connectUser);
           this.panierService.message('Oop\'s', 'error', 'La connexion est requise pour cette action');
+          // this.router.navigate(['/connexion']);
         }
         else {
 
@@ -229,14 +261,22 @@ export class PanierComponent implements OnInit {
 
           console.log('panierSend', panierToSend);
 
+          // Mettez à jour la variable de chargement
+          this.loading = true;
+
           this.commande.submitCommande(panierToSend).subscribe(
             (rep) => {
               // Mettez à jour le panier local et affichez le message de confirmation ici
               this.panierService.message('Commande envoyée', 'success', 'Merci pour la confiance');
               this.commandeAllPanier();
+              this.viderChamps();
             },
             (erreur: any) => {
               console.error("Erreur lors de la requête HTTP :", erreur);
+            },
+            ()=>{
+             // Mettez à jour la variable de chargement après l'achèvement de la requête
+            this.loading = false
             }
           );
         }
@@ -259,5 +299,21 @@ export class PanierComponent implements OnInit {
     this.tabListProduit = data.ListeProduit;
      } ) }
 
+    // Méthode pour afficher un sweetalert2 apres vérification
+    verifierChamps(title:any, text:any, icon:any) {
+      Swal.fire({
+        title: title,
+        text: text,
+        icon: icon
+      });
+    // Ferme le pop-up après 2 secondes
+    // setTimeout(() => {
+    //   Swal.close();
+    // }, 1500);
+    }
 
+    // Methode pour vider les champs
+    viderChamps(){
+      this.adresseLivraison="";
+    }
 }

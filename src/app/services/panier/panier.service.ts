@@ -46,7 +46,8 @@ export class PanierService {
     Swal.fire({
       title: title,
       text: message,
-      icon: icon
+      icon: icon,
+      showConfirmButton:false,
     });
       // Ferme le pop-up après 2 secondes
   setTimeout(() => {
@@ -71,6 +72,29 @@ export class PanierService {
     let existingProduct = panier.find((item: any) => item.produit.id === legume.id);
 
     if (existingProduct) {
+      // Le produit existe déjà dans le panier, informer l'utilisateur ou mettre à jour la quantité
+      this.message("Oops", "warning", "Ce produit existe déjà dans le panier");
+    } else {
+      // Le produit n'existe pas dans le panier, l'ajouter
+      let produitPanier = {
+        produit: legume,
+        quantitePanier: quantite
+      };
+
+      panier.push(produitPanier);
+      localStorage.setItem('panier', JSON.stringify(panier));
+      this.message("Parfait", "success", "Produit ajouté au panier");
+      this.router.navigate(['/panier']);
+
+    }
+  };
+
+  ajouterAuPanierLegumes(legume: any, quantite = 1) {
+    let panier = this.getFromPanier();
+
+    let existingLegume = panier.find((item: any) => item.produit.nomProduit === legume.nom);
+
+    if (existingLegume) {
       // Le produit existe déjà dans le panier, informer l'utilisateur ou mettre à jour la quantité
       this.message("Oops", "warning", "Ce produit existe déjà dans le panier");
     } else {

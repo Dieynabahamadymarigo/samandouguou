@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Panier } from 'src/app/models/login';
 import { PanierService } from 'src/app/services/panier/panier.service';
 import { LegumesService } from 'src/app/services/legumes/legumes.service';
+import { HeaderComponent } from '../header/header.component';
 import { Router } from '@angular/router';
 
 
@@ -53,6 +54,12 @@ export class AccueilComponent {
             element.quantitePanier = 1;
           }
         }
+           // Ajoutez cette condition pour vérifier si la quantité totale est épuisée
+      if (element.produit.quantiteTotale === 0) {
+        element.epuise = true; // Ajoutez une propriété "epuise" à l'élément dans le panier
+      } else {
+        element.epuise = false;
+      }
       }
     });
     localStorage.setItem("panier", JSON.stringify(panierProduit));
@@ -69,7 +76,7 @@ export class AccueilComponent {
     let panierProduit = this.panierService.getFromPanier();
     panierProduit.forEach((element: any) => {
       this.nombreLegumes += element.quantitePanier;
-      this.sommeLegumes += element.quantitePanier * element.produit.prix;
+      this.sommeLegumes += element.quantitePanier * element.prix;
     });
 
   }

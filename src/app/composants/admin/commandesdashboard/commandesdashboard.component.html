@@ -1,4 +1,4 @@
-<app-headerdashboard></app-headerdashboard>
+<headerdashboard></headerdashboard>
 <!-- catégories -->
 <div class="catégorie">
 
@@ -70,7 +70,7 @@
           <h4 class="card-title"> Commande : {{commande.numeroCommande}} </h4> -->
         </div>
         <div class="iconproduits">
-          <i class="bi bi-check2-all me-3" style="cursor: pointer;"></i>
+          <!-- <i class="bi bi-check2-all me-3" style="cursor: pointer;"></i> -->
           <i class="bi bi-eye-fill me-3" style="cursor: pointer;"></i>
           <!-- <i class="bi bi-pencil-square me-3"></i> -->
           <!-- <i class="bi bi-trash-fill me-3"></i> -->
@@ -91,11 +91,14 @@
 
     <div class="gcarte">
 
-      <div class="card cartepacks" >
+      <div class="card cartepacks" *ngFor="let commande of visibleCommandeTerminee" >
         <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
+        <!-- <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="..."> -->
         <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
+          <h4 class="card-title"> Commande : {{commande.numeroCommande}}</h4>
+          <h4 class="card-title"> Adresse : {{commande.adresse_de_livraison}}</h4>
+          <h4 class="card-title"> Date : {{commande.dateCommande | date:'shortDate'}}</h4>
+
         </div>
         <div class="iconproduits">
           <i class="bi bi-check2-all me-3"></i>
@@ -106,56 +109,13 @@
         <div class="contenupacks2" ></div>
       </div>
 
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-check2-all me-3"></i>
-          <!-- <i class="bi bi-eye-fill me-3"></i> -->
-          <!-- <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i> -->
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
 
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=740&t=st=1706470465~exp=1706471065~hmac=dfdfc8ab57d96a47f3488546584e72423c5d0c9a746553e10f7b1e6ad5ececf5" class="img-top imgperson" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Aîcha NDIAYE</h4>
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-check2-all me-3"></i>
-          <!-- <i class="bi bi-eye-fill me-3"></i> -->
-          <!-- <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i> -->
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
 
     </div>
 
     <!-- pagination -->
     <div class="iconpagination">
-
-      <div class="chevron">
-        <i class="bi bi-chevron-left"></i>
-      </div>
-      <div class="un">
-        <i class="bi bi-1-square"></i>
-      </div>
-      <div class="deux">
-        <i class="bi bi-2-square"></i>
-      </div>
-      <div class="trois">
-        <i class="bi bi-3-square"></i>
-      </div>
-      <div class="">
-        <i class="bi bi-chevron-right"></i>
-      </div>
+      <button *ngFor="let page of totalPagesCommande()" (click)="setPageCommandeTerminee(page)"> {{ page }}</button>
     </div>
 
   </div>

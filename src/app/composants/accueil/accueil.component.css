@@ -110,6 +110,7 @@
   margin-top:-25px;
   margin-bottom:-6px;
 }
+
 .contour2 i {
   font-size: 30px;
   color: #1A6060;
@@ -117,8 +118,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top:13px;
+  padding-top: 13px;
   cursor: pointer;
+}
+
+.contour2 i:hover::after {
+  content: "Ajouter au panier";
+  margin-right: 7rem;
+  background-color: #1A6060;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 15px;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+
+.contour2 span {
+  font-size: 22px;
+  color: red;
+  font-weight: bold;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-top:13px;
 }
 
 /* pagination */
@@ -351,7 +375,10 @@
   width: 60px;
   margin-left: 100px;
 }
-
+.contour2 i:hover::after {
+  margin-right: 6rem;
+  font-size: 13px;
+}
 /* pagination */
 .iconpagination{
   gap: 10px;

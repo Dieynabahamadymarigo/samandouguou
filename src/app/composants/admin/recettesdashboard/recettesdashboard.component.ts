@@ -200,6 +200,7 @@ export class RecettesdashboardComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.blogService.deleteArticle(id).subscribe((response) => {
+          console.log('id',response.id)
           console.log('supProduit', response);
           this.listerDesBlogArticle();
 

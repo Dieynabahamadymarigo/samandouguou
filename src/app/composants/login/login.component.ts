@@ -104,10 +104,6 @@ export class LoginComponent implements OnInit  {
     exactAdresse : boolean = false;
     exactTelephone : boolean = false;
 
-   // Variable pour la connexion
-  //  emailCon : String = "";
-  //  passwordCon: String = "";
-
    // Pour vérifier les champs pour la connexion
    verifEmailCon : String = "";
    verifPasswordCon: String = "";
@@ -129,6 +125,10 @@ export class LoginComponent implements OnInit  {
       if (this.nom.length < 2) {
         this.exactNom = false;
         this.verifNom = 'Le nom est trop court';
+      } else if (!/^[a-zA-Z\s]+$/.test(this.nom)) {
+        // Utilisation de l'expression régulière
+        this.exactNom = false;
+        this.verifNom = 'Veuillez renseigner un nom correct';
       } else {
         this.exactNom = true;
         this.verifNom = ' Correct';
@@ -150,6 +150,10 @@ export class LoginComponent implements OnInit  {
       if (this.prenom.length < 3) {
         this.exactPrenom = false;
         this.verifPrenom = 'Le prenom est trop court';
+      } else if (!/^[a-zA-Z\s]+$/.test(this.prenom)) {
+        // Utilisation de l'expression régulière
+        this.exactPrenom = false;
+        this.verifPrenom = 'Veuillez renseigner un prenom correct';
       } else {
         this.exactPrenom = true;
         this.verifPrenom = ' Correct';
@@ -218,7 +222,7 @@ export class LoginComponent implements OnInit  {
     // Verification du mot de passe
 
   validatePassword(password: string): boolean {
-    return password.length >= 5;
+    return password.length >= 8;
   }
 
   verifPasswordFonction(){
@@ -230,7 +234,8 @@ export class LoginComponent implements OnInit  {
       this.verifPassword = "Veuillez renseigner votre mot de passe";
     }
     else {
-      if (this.password.length < 5) {
+      if (this.password.length < 8) {
+        const passwordRegex=/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$/;
         this.exactPassword = false;
         this.verifPassword =
           'Le Mot de passe est trop court';
@@ -250,10 +255,10 @@ export class LoginComponent implements OnInit  {
       this.verifPasswordCon = "Veuillez renseigner votre mot de pasee";
     }
       else {
-      if (this.formDate.password.length < 5) {
+      if (this.formDate.password.length < 8) {
         this.exactPasswordCon = false;
         this.verifPasswordCon =
-          'Le Mot de passe doit être superieur ou égal à 5 caractere';
+          'Le Mot de passe doit être superieur ou égal à 8 caractere';
       } else {
         this.exactPasswordCon = true;
         this.verifPasswordCon = 'Mot de Passe Correcte';
@@ -275,6 +280,10 @@ export class LoginComponent implements OnInit  {
       if (this.adresse.length < 5) {
         this.exactAdresse = false;
         this.verifAdresse = 'L\'adresse est trop court';
+      }else if (!/^[a-zA-Z\s]+$/.test(this.adresse)) {
+        // Utilisation de l'expression régulière
+        this.exactAdresse = false;
+        this.verifAdresse = 'Veuillez renseigner un adresse correct';
       } else {
         this.exactAdresse = true;
         this.verifAdresse = ' Correct';
@@ -289,21 +298,26 @@ export class LoginComponent implements OnInit  {
     if (this.telephone == '') {
       this.verifTelephone = '';
     }
-    // Vérifie si le numéro de téléphone contient exactement 9 chiffres
-    else if (!/^\d{9}$/.test(this.telephone)) {
-      // this.exactTelephone = false;
+    // Vérifie si le numéro de téléphone commence par 77, 78, 76 ou 70
+    else if (!/^(77|78|76|70)\d{7}$/.test(this.telephone)) {
+      this.exactTelephone = false;
+      // this.verifTelephone = 'Le numéro doit commencer par 77, 78, 76 ou 70 ';
       this.verifTelephone = 'Le numéro doit contenir 9 chiffres';
     }
-     else {
-      if (this.telephone.length < 9) {
+    // Vérifie si le numéro de téléphone contient exactement 9 chiffres
+    else if (!/^\d{9}$/.test(this.telephone)) {
+      this.exactTelephone = false;
+      this.verifTelephone = 'Le numéro doit contenir 9 chiffres';
+    }
+
+    else if (this.telephone.length < 9) {
         this.exactTelephone = false;
         this.verifTelephone = 'Le numero est trop court';
-      } else {
+      }
+      else {
         this.exactTelephone = true;
         this.verifTelephone = ' Correct';
       }
-    }
-    // this.viderChamps();
   }
 
 
@@ -322,25 +336,33 @@ onSubmit(): void {
 
     this.authService.connection({ email: email, password: password }).subscribe(
       (rep: any) => {
-        let userClient = rep.user;
-        console.log("merci", rep),
-          localStorage.setItem('userConnect', rep.token)
-        console.log('user', rep.token)
-        let userName = rep.user.nom;
-        this.authService.userNameSubject.next(userName);
-        this.authService.userSubject.next(userClient);
-        this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
-        if (rep.user.role_id == '1') {
-          this.router.navigate(['/admin']);
-        } else if (rep.user.role_id == '2') {
-          this.router.navigate(['/client']);
-        } else if (rep.user.role_id == '3') {
-          this.router.navigate(['/livreur']);
+
+        if(rep.status == false){
+          // alert('hello')
+          this.verifierChamps('Erreur de validation', 'Email ou mot de passe incorrect', 'error');
+        }else{
+          let userClient = rep.user;
+          console.log("merci", rep),
+            localStorage.setItem('userConnect', rep.token)
+          console.log('user', rep.token)
+          let userName = rep.user.nom;
+          this.authService.userNameSubject.next(userName);
+          this.authService.userSubject.next(userClient);
+          this.verifierChamps('Félicitation!', 'Connexion réussie', 'success');
+          if (rep.user.role_id == '1') {
+            this.router.navigate(['/admin']);
+          } else if (rep.user.role_id == '2') {
+            this.router.navigate(['/client']);
+          } else if (rep.user.role_id == '3') {
+            this.router.navigate(['/livreur']);
+          }
+          this.viderChamps();
         }
-        this.viderChamps();
+
       },
     );
-  } else {
+  }
+  else {
     this.verifierChamps('Erreur de validation', 'Veuillez remplir correctement tous les champs', 'error');
   }
 }
@@ -380,9 +402,16 @@ onSubmit(): void {
 
       this.authService.inscritClient(formData).subscribe(
         (rep)=>{
-          console.log('réussi',rep)
-          this.verifierChamps('Félicitation!', rep.messagge, 'success');
-          this.viderChamps();
+          if(rep.success == false){
+            // alert('hello')
+            this.verifierChamps('Erreur de validation', 'Ce email existe ', 'error');
+
+          }else {
+
+            console.log('réussi',rep)
+            this.verifierChamps('Félicitation!', rep.messagge, 'success');
+            this.viderChamps();
+          }
         },
       (error) => {
         console.error('erreur',error);

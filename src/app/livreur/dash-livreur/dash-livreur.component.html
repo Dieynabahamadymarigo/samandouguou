@@ -58,10 +58,10 @@
             <h4 class="card-title">Téléphone : {{userClient.telephone}}</h4>
           </div>
 
+          <button class="me-3 mb-3 occupe" (click)="statutLivreur('occupe')" [ngClass]="{'change-couleur': statutPourLivreur === 'occupe'}" >Occupé</button>
 
           <button class="mb-2 occupe" (click)="statutLivreur('disponible')" [ngClass]="{'change-couleur': statutPourLivreur === 'disponible'}">Disponible</button>
 
-          <button class="me-3 mb-3 occupe" (click)="statutLivreur('occupe')" [ngClass]="{'change-couleur': statutPourLivreur === 'occupe'}" >Occupé</button>
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@
       <div class="card cartepacks"  *ngFor="let commande of tabListCommandeLivreur">
         <div class="contenupacks"></div>
         <div class="card-body titreproduits" >
-          <h4 class="card-title"> Commande N° {{commande.Id}}</h4>
+          <h4 class="card-title"> Commande N° {{commande.Commande_ID}}</h4>
           <h4 class="card-title">Date: {{commande.Date_commande | date:'shortDate'}} </h4>
           <h4 class="card-title"> Statut: {{commande.Etat}} </h4>
           <h4 class="card-title">Client: {{commande.user.Prenom}} {{tronquerTexte(commande.user.Nom, 8)}} </h4>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="iconproduits">
-          <i class= "bi bi-check2-all me-3" style="cursor: pointer;" (click)="commandeUserTermine(commande.Id)"  ></i>
+          <i class= "bi bi-check2-all me-3" style="cursor: pointer;" (click)="commandeUserTermine(commande.Commande_ID)"  ></i>
           <i class="bi bi-eye-fill me-3" style="cursor: pointer;" ></i>
           <!-- <i class="bi bi-trash-fill me-3" style="cursor: pointer;"></i> -->
         </div>

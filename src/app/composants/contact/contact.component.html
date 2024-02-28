@@ -1,4 +1,4 @@
-<app-header></app-header>
+<header></header>
 
 
 <!-- formulaire de contact -->
@@ -17,22 +17,45 @@
 
             <h2 class="card-title">Contatez - nous</h2>
 
-            <div class="mb-3 nomprenom">
-              <input type="text" placeholder="Nom" class="mb-3 me-3">
-              <input type="text" placeholder="Prénom" class="mb-3 ">
+            <div class=" nomprenom">
+              <div class="d-block">
+              <input type="text" placeholder="Nom" class="me-3" [(ngModel)]="nom"  name="nom" required (input)="verifNomFonction()">
+              <p class="text-danger ms-3" *ngIf="exactNom == false">{{verifNom}}</p>
+              <p class="text-success ms-3" *ngIf="exactNom == true"><i class="bi bi-check2-all"></i> Exact !</p>
             </div>
 
-            <div class="mb-3 nomprenom">
-              <input type="email" id="exampleInputEmail1" placeholder="E-mail" class="mb-3 me-3" aria-describedby="emailHelp">
-              <input type="tel" placeholder="Téléphone" class="mb-3 " id="exampleInputPassword1">
+            <div class="d-block">
+              <input type="text" placeholder="Prénom" class=""[(ngModel)]="prenom"  name="prenom" required (input)="verifPrenomFonction()">
+              <p class="text-danger ms-3" *ngIf="exactPrenom == false">{{verifPrenom}}</p>
+              <p class="text-success ms-3" *ngIf="exactPrenom == true"><i class="bi bi-check2-all"></i> Exact !</p>
+
+            </div>
             </div>
 
-            <div class="gmessage">
-              <textarea name="" id="" cols="43" rows="3" placeholder="Message" class="message"></textarea>
+            <div class=" nomprenom">
+              <div class="d-block">
+                <input type="email" id="exampleInputEmail1" placeholder="E-mail" class="me-3" aria-describedby="emailHelp" [(ngModel)]="email"  name="email" required (input)="verifEmailFonction()">
+                <p class="text-danger ms-3" *ngIf="exactEmail == false">{{verifEmail}}</p>
+                <p class="text-success ms-3" *ngIf="exactEmail == true"><i class="bi bi-check2-all"></i> Exact !</p>
+              </div>
+              <div class="d-block">
+                <input type="tel" placeholder="Téléphone" class="" [(ngModel)]="telephone"  name="telephone" required (input)="verifTelephoneFonction()">
+                <p class="text-danger ms-3" *ngIf="exactTelephone == false">{{verifTelephone}}</p>
+                <p class="text-success ms-3" *ngIf="exactTelephone == true"><i class="bi bi-check2-all"></i> Exact !</p>
+              </div>
             </div>
 
-            <div class="bton">
-              <button type="submit" class="btn">Envoyer</button>
+            <div class="gmessage mt-3">
+              <div class="d-block">
+              <textarea name="" id="" cols="43" rows="3" placeholder="Message" class="message" [(ngModel)]="message"  name="message" required (input)="verifMessageFonction()">
+              </textarea>
+              <p class="text-danger ms-3" *ngIf="exactMessage == false">{{verifMessage}}</p>
+              <p class="text-success ms-3" *ngIf="exactMessage == true"><i class="bi bi-check2-all"></i> Exact !</p>
+            </div>
+            </div>
+
+            <div class="bton mt-3" >
+              <button type="submit" class="btn" (click)="addConntact()">Envoyer</button>
             </div>
 
           </div>
@@ -62,4 +85,4 @@
 
   <div class="espace"></div>
 
-<app-footer></app-footer>
+<footer></footer>

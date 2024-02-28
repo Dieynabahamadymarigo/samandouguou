@@ -4,7 +4,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { PanierService } from 'src/app/services/panier/panier.service';
 
 @Component({
-  selector: 'app-profilclient',
+  selector: 'profilclient',
   templateUrl: './profilclient.component.html',
   styleUrls: ['./profilclient.component.css']
 })

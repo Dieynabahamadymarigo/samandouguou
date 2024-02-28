@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommandesdashboardComponent } from './commandesdashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AppModule } from 'src/app/app.module';
 
 describe('CommandesdashboardComponent', () => {
   let component: CommandesdashboardComponent;
@@ -8,7 +10,11 @@ describe('CommandesdashboardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CommandesdashboardComponent]
+      declarations: [CommandesdashboardComponent],
+      imports: [
+        HttpClientModule,
+        AppModule
+      ],
     });
     fixture = TestBed.createComponent(CommandesdashboardComponent);
     component = fixture.componentInstance;
@@ -17,5 +23,6 @@ describe('CommandesdashboardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    
   });
 });

@@ -2,9 +2,10 @@ import { CommandeService } from 'src/app/services/commande/commande.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-dash-livreur',
+  selector: 'dash-livreur',
   templateUrl: './dash-livreur.component.html',
   styleUrls: ['./dash-livreur.component.css']
 })
@@ -89,7 +90,7 @@ export class DashLivreurComponent implements OnInit {
       }
 
   // statut
-statutPourLivreur: string = 'disponible';
+statutPourLivreur: string = 'occupé';
 
 statutLivreur(nouveauStatut: string) {
   this.statutPourLivreur = nouveauStatut;
@@ -149,26 +150,22 @@ listeCommandeUser() {
 
 // commande terminée
 commandeUserTermine(id:number) {
-this.commandeService.commandeTerminer(id).subscribe((response) => {
+  // alert(id)
+  this.commandeService.commandeTerminer(id).subscribe((response) => {
     console.log('commandeterminé', response);
+    this.verifierChamps ('Felicitation','Commande livrée','success')
   });
 }
-
-
-    // statutLivreur(statut:any) {
-    //   console.log('paramStatut', statut);
-    //   this.commandeService.stautLivreur(statut).subscribe(
-    //     response => {
-    //       this.statut=statut;
-    //       console.log('statutObtenuuuu',this.statut);
-
-    //     },
-    //     error => {
-    //       console.error('Erreur ', error);
-    //     }
-    //   );
-    //   }
-
+  // Méthode pour afficher un sweetalert2 apres vérification
+  verifierChamps(title: any, text: any, icon: any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      showConfirmButton:false,
+      timer:2000,
+    });
+  }
     }
 
 

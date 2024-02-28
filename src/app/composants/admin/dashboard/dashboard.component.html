@@ -1,4 +1,4 @@
-<app-headerdashboard></app-headerdashboard>
+<headerdashboard></headerdashboard>
 <!-- catégories -->
 <div class="catégorie">
 
@@ -10,7 +10,7 @@
     </div>
     <div class="nombre">
       <h3>Nombre de packs</h3>
-      <h3>30</h3>
+      <h3>{{tabListesPacks.length}}</h3>
     </div>
     <div class="nombre">
       <h3>Liste des utilissteurs</h3>
@@ -87,56 +87,34 @@
           <button type="button" data-bs-toggle="modal" data-bs-target="#packs">Ajouter</button>
         </div>
         <div class="recherche">
-          <input type="search" placeholder="Recherche" ><i class="bi bi-search"></i>
+          <input type="search" placeholder="Recherche" [(ngModel)]="filterPackValue" (input)="onSearchPack()" >
         </div>
       </div>
 
     <div class="gcarte">
 
-      <div class="card cartepacks" >
+      <div class="card cartepacks" *ngFor="let packs of visiblePackProduits" >
+        <div *ngIf="packs.etatPack==1">
         <div class="contenupacks"></div>
-        <img src="../../../assets/plats/thip dieunne.png" class="img-top imgpacks" alt="...">
+        <img src={{packs.image}} class="img-top imgpacks" alt="...">
         <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Thiep bou dieune </h4>
+          <h4 class="card-title"> Pack : {{ tronquerTexte(packs.nom, 7)}} </h4>
+          <h4 class="card-title"> Nombre : {{packs.nombre }} </h4>
+          <h4 class="card-title"> Legume <i class="bi bi-folder-plus me-3" data-bs-toggle="modal" data-bs-target="#legumes" (click)=" Packclique(packs)" style="cursor: pointer;"></i>
+          <i class="bi bi-card-checklist me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#listeLegumes" (click)=" Packclique(packs)"></i>
+          </h4>
+          <!-- <h4 class="card-title"> Nom : {{packs.nomPacks}} </h4> -->
           <!-- <p>Prix : 300fr</p> -->
         </div>
         <div class="iconproduits">
-          <i class="bi bi-eye-fill me-3"></i>
-          <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i>
+          <i class="bi bi-eye-fill me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#detailPack" (click)="detailMatiere(packs)" ></i>
+          <i class="bi bi-pencil-square me-3" style="cursor: pointer;" (click)="chargerInfosPack(packs)" data-bs-toggle="modal" data-bs-target="#modificationPack"></i>
+          <i class="bi bi-trash-fill me-3" style="cursor: pointer;" (click)="supprimerPack(packs)"></i>
         </div>
         <div class="contenupacks2" ></div>
+      </div>
       </div>
 
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="../../../assets/plats/YASSAG-1-scaled-removebg-preview.png" class="img-top imgpacks" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Yassa poulet </h4>
-          <!-- <p>Prix : 300fr</p> -->
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-eye-fill me-3"></i>
-          <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i>
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
-
-      <div class="card cartepacks" >
-        <div class="contenupacks"></div>
-        <img src="../../../assets/plats/deukhine.png" class="img-top imgpacks" alt="...">
-        <div class="card-body titreproduits">
-          <h4 class="card-title"> Nom : Deukhine </h4>
-          <!-- <p>Prix : 300fr</p> -->
-        </div>
-        <div class="iconproduits">
-          <i class="bi bi-eye-fill me-3"></i>
-          <i class="bi bi-pencil-square me-3"></i>
-          <i class="bi bi-trash-fill me-3"></i>
-        </div>
-        <div class="contenupacks2" ></div>
-      </div>
 
 
 
@@ -144,22 +122,7 @@
 
     <!-- pagination -->
     <div class="iconpagination">
-
-      <div class="chevron">
-        <i class="bi bi-chevron-left"></i>
-      </div>
-      <div class="un">
-        <i class="bi bi-1-square"></i>
-      </div>
-      <div class="deux">
-        <i class="bi bi-2-square"></i>
-      </div>
-      <div class="trois">
-        <i class="bi bi-3-square"></i>
-      </div>
-      <div class="">
-        <i class="bi bi-chevron-right"></i>
-      </div>
+      <button *ngFor="let page of totalPagesPackArray()" (click)="setPagePack(page)"> {{ page }}</button>
     </div>
 
   </div>
@@ -243,30 +206,65 @@
         <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Ajout</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body ">
-        <div class="mb-3 ">
-          <input type="file">
+      <div class="modal-body inputmodal ">
+        <div class="mb-3 " >
+          <label for="" class="me-3">Image :  </label>
+          <input type="text" name="imagePacks" [(ngModel)]="imagePacks" (change)="getFileLocalStorage($event)">
         </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Nom : </label>
-          <input type="text" >
+        <div class="mb-3 " >
+          <label for="" class="me-3">Video :  </label>
+          <input type="text" name="videoPacks" [(ngModel)]="videoPacks" >
         </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Prix : </label>
-          <input type="text">
+        <div class="mb-3 inputmodal" >
+          <label for="" class="me-3">Nom :  </label>
+          <input type="text" name="nomPacks" [(ngModel)]="nomPacks">
         </div>
-        <div class="mb-3 inputmodal">
+        <div class="mb-3 inputmodal" >
           <label for="" class="me-3">Nombre : </label>
-          <input type="number">
-        </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Date : </label>
-          <input type="text">
+          <input type="number" name="nombrePacks" [(ngModel)]="nombrePacks" >
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn ajoutelemnt ">Ajouter</button>
+        <button type="button" class="btn ajoutelemnt" (click)="addNewPack()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal ajout legumes -->
+<div class="modal fade" id="legumes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Ajout</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputmodal" >
+          <label for="" class="me-3">Image :  </label>
+          <input type="text" name="imagePacks" [(ngModel)]="imageLegumes">
+        </div>
+        <div class="mb-3 inputmodal" >
+          <label for="" class="me-3">Nom :  </label>
+          <input type="text" name="nomPacks" [(ngModel)]="nomLegumes">
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prix :  </label>
+          <input type="text" [(ngModel)]="prixLegumes">
+        </div>
+        <div class="mb-3 inputmodal" >
+          <label for="" class="me-3">Nombre : </label>
+          <input type="number" name="nombrePacks" [(ngModel)]="nombreLegumes" >
+        </div>
+        <!-- <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Image : </label>
+          <input type="text">
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn ajoutelemnt" (click)="addNewLegumes()">Ajouter</button>
       </div>
     </div>
   </div>
@@ -315,44 +313,85 @@
   </div>
 </div>
 
-<!-- Modal produits mofidifier -->
-<div class="modal fade" id="modification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal pack detail -->
+<div class="modal fade" id="detailPack" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" >
       <div class="modal-header">
-        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Modification</h1>
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Detail du pack</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body ">
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Nom : </label>
-          <input type="text" name="nomProduit" [(ngModel)]="nomProduit"  >
-        </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Prix :  </label>
-          <input type="text" [(ngModel)]="prix" name="prix" >
-        </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">Nombre : </label>
-          <input type="number" [(ngModel)]="quantiteTotale" name="quantiteTotale" >
-        </div>
-        <div class="mb-3 inputmodal">
-          <label for="" class="me-3">description : </label>
-          <input type="text"  [(ngModel)]="description" name="description" >
-        </div>
-        <div class="mb-3 inputmodal">
-          <!-- <label for="" class="me-3">image :  </label> -->
-        <img src="" class="img-top imglegumesdetail" alt="...">
-          <input type="file" (change)="getFile($event)" name="image" >
-        </div>
-        <!-- <div class="mb-3 inputmodal">
-          <label for="" class="me-3">image : </label>
-          <input type="file"  [(ngModel)]="image" name="image" required>
-        </div> -->
+        <img src={{imagePacks}} class="img-top mt-4 mb-2 imgpacksdetail" alt="...">
+        <h4 class="card-title"> Pack : {{nomPacks}} </h4>
+        <h4 class="card-title"> Nombre : {{nombrePacks}} </h4>
+        <!-- <video src={{videoPacks}} class=" imgpacksdetail mt-4" controls></video> -->
+        <!-- <iframe *ngIf="videoPacks" [src]="getSafeVideoUrl('https://www.youtube.com/embed/videoPacks')" class="mt-4 imgpacksdetail" frameborder="0" allowfullscreen ></iframe> -->
+        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/PqUep3-45NY" frameborder="0" allowfullscreen></iframe> -->
+
+        <!-- <iframe [src]="videoPacks" frameborder="0" allowfullscreen class="imgpacks"></iframe> -->
+
+
+        <!-- <iframe width="560" height="315" src={{videoPacks}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
-        <button type="submit" data-bs-dismiss="modal" (click)="modifierProduit()" class="btn ajoutelemnt ">Modifier</button>
+        <!-- <button type="submit" data-bs-dismiss="modal" (click)="modifierPack()" class="btn ajoutelemnt ">Modifier</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal liste blog article -->
+<div class="modal fade" id="listeLegumes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modalListe" >
+    <div class="modal-content"  >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Liste des legumes </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body " >
+
+        <div class=" table-responsive">
+          <table class="table container ">
+            <thead >
+              <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Image</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Action</th>
+
+                <!-- <th scope="col">Categorie</th> -->
+              </tr>
+            </thead>
+
+            <tbody *ngFor="let legume of tabListesLegumes; let index=index" >
+              <tr *ngIf="legume.etatLegume==1">
+                <th scope="row">{{index+1}}</th>
+                <td> <img src={{legume.image}} class="img-top imglegumesPacks" alt="..."></td>
+                <td><h5>{{tronquerTexte(legume.nom, 9)}}</h5></td>
+                <td><h5>{{legume.prix}}</h5></td>
+                <td><h5>{{tronquerTexte(legume.nombre, 12)}}</h5></td>
+                <td>
+                  <button class="delete">
+                    <i class="bi bi-pencil-square me-2" data-bs-toggle="modal" data-bs-target="#modifierLegume" (click)="chargerInfoLegume(legume)"></i>
+
+                    <i class="bi bi-trash-fill" (click)="supprimerLegume(legume)"></i>
+                  </button>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+         </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
       </div>
     </div>
   </div>
@@ -401,3 +440,115 @@
   </div>
 </div>
 
+<!-- Modal produits mofidifier -->
+<div class="modal fade" id="modification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Modification</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text" name="nomProduit" [(ngModel)]="nomProduit"  >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prix :  </label>
+          <input type="text" [(ngModel)]="prix" name="prix" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nombre : </label>
+          <input type="number" [(ngModel)]="quantiteTotale" name="quantiteTotale" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">description : </label>
+          <input type="text"  [(ngModel)]="description" name="description" >
+        </div>
+        <div class="mb-3 inputmodal">
+        <img src="" class="img-top imglegumesdetail" alt="...">
+          <input type="file" (change)="getFile($event)" name="image" >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" data-bs-dismiss="modal" (click)="modifierProduit()" class="btn ajoutelemnt ">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal pack mofidifier -->
+<div class="modal fade" id="modificationPack" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Modification</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text" name="nomPacks" [(ngModel)]="nomPacks">
+        </div>
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nombre : </label>
+          <input type="number" name="nombrePacks" [(ngModel)]="nombrePacks" >
+        </div>
+        <div class="mb-3 inputmodal">
+        <img src="" class="img-top imglegumesdetail" alt="...">
+          <input type="text" [(ngModel)]="imagePacks" (change)="getFileLocalStorage($event)" name="imagePacks" >
+        </div>
+        <div class="mb-3 inputmodal">
+          <!-- <video src="" class="img-top imglegumesdetail"> -->
+        <!-- <img src="" class="img-top imglegumesdetail" alt="..."> -->
+          <input type="text imglegumesdetail" [(ngModel)]="videoPacks" name="videoPacks" >
+        <!-- </video> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" data-bs-dismiss="modal" (click)="modifierPack()" class="btn ajoutelemnt ">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal modifier legume -->
+<div class="modal fade" id="modifierLegume" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 titremodal" id="exampleModalLabel">Modification</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nom : </label>
+          <input type="text"  [(ngModel)]="nomLegumes" name="nomLegumes" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Nombre : </label>
+          <input type="text" [(ngModel)]="nombreLegumes" name="nombreLegumes" required >
+        </div>
+
+        <div class="mb-3 inputmodal">
+          <label for="" class="me-3">Prix : </label>
+          <input type="text"  [(ngModel)]="prixLegumes" name="prixLegumes" required >
+        </div>
+
+        <div class="mb-3 ">
+          <input type="text" [(ngModel)]="imageLegumes"  name="imageLegumes" required>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fermer " data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn ajoutelemnt " data-bs-dismiss="modal" (click)="modifierLegume()">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>

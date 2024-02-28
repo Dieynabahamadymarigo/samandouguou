@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConditionUtilisateurComponent } from './condition-utilisateur.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ConditionUtilisateurComponent', () => {
   let component: ConditionUtilisateurComponent;
@@ -8,7 +9,8 @@ describe('ConditionUtilisateurComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ConditionUtilisateurComponent]
+      declarations: [ConditionUtilisateurComponent],
+      imports: [HttpClientModule],
     });
     fixture = TestBed.createComponent(ConditionUtilisateurComponent);
     component = fixture.componentInstance;

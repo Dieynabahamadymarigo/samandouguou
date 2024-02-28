@@ -1,4 +1,4 @@
-<app-headerdashboard></app-headerdashboard>
+<headerdashboard></headerdashboard>
 <div class="catégorie">
 
    <!-- button ajouter et search  -->
@@ -173,7 +173,10 @@
                 <td><h5>{{article.titrePost}}</h5></td>
                 <td><h5>{{tronquerTexte(article.description, 12)}}</h5></td>
                 <td><h5 class="delete"><i class="bi bi-eye-fill" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#detailsListeArticle" (click)="getArticle(article)"></i> </h5></td>
-                <td><button class="delete"><i class="bi bi-trash-fill" (click)="supprimerBlogArticle(article.id)"></i> <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierArticle" (click)="chargerInfosProduit(article)"></i></button></td>
+                <td><button class="delete">
+                  <i class="bi bi-trash-fill" (click)="supprimerBlogArticle(article.id)"></i>
+
+                  <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierArticle" (click)="chargerInfosProduit(article)"></i></button></td>
 
                 <!-- <td><h5>{{article.datePost}}</h5></td> -->
                 <!-- <td> <h5> {{article.categorie_blog_id}}</h5></td> -->

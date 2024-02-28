@@ -1,13 +1,13 @@
-<app-headerclient></app-headerclient>
+<headerclient></headerclient>
 <div class="catégorie">
 
   <!-- les différentes catégories -->
-  <!-- <div class="gcategories">
-    <div class="difcategories" (click)=" afficheProduits()">
+  <div class="gcategories">
+    <div class="difcategories" (click)=" afficheCommandeTerminee()">
       <img src="../../../../assets/Vector.png" alt="">
       <h3 style="cursor: pointer;" >Commande validée</h3>
     </div>
-    <div class="difcategories" (click)="affichePacks()">
+    <div class="difcategories" (click)="afficheCommandeEnCours()">
       <img src="../../../../assets/cours.png" alt="">
       <h3 style="cursor: pointer;">Commande en cours</h3>
     </div>
@@ -16,11 +16,51 @@
       <h3 style="cursor: pointer;">Commande annulée </h3>
     </div>
 
-  </div> -->
+  </div>
 
   <div class="catégorie1">
 
-    <div *ngIf="tabProduits">
+    <div *ngIf="tabCommandeTerminee">
+      <!-- button ajouter et search  -->
+      <!-- <div class="gbutton">
+        <div class="ajout me-5">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</button>
+        </div>
+        <div class="recherche">
+          <input type="search" placeholder="Recherche"  [(ngModel)]="filterValue" (input)="onSearch()">
+        </div>
+      </div> -->
+
+      <div class="gcarte container">
+
+        <div class="card cartepacks"  *ngFor="let commande of tabListCommande">
+          <div class="contenupacks"></div>
+          <div class="card-body titreproduits" >
+            <h4 class="card-title"> Commande N° {{commande.numeroCommande}}</h4>
+            <h4 class="card-title">{{commande.adresse_de_livraison}} </h4>
+            <h4 class="card-title">Statut : {{commande.statut}} </h4>
+            <h4 class="card-title">{{commande.dateCommande | date:'shortDate'}} </h4>
+            <!-- <p></p> -->
+          </div>
+
+          <!-- <div class="iconproduits">
+            <i class="bi bi-eye-fill me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#details" ></i>
+            <i class="bi bi-pencil-square me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modification" ></i>
+            <i class="bi bi-trash-fill me-3" style="cursor: pointer;"></i>
+          </div> -->
+          <div class="contenupacks2" ></div>
+        </div>
+
+      </div>
+
+      <div class="iconpagination">
+        <!-- <button *ngFor="let page of totalPagesArray()" (click)="setPage(page)"> {{ page }}</button> -->
+      </div>
+
+    </div>
+
+
+    <div *ngIf="tabPCommandeEnCours">
       <!-- button ajouter et search  -->
       <!-- <div class="gbutton">
         <div class="ajout me-5">
